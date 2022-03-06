@@ -11,7 +11,7 @@ else:
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3(")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3*")
         buf.write("\37\4\2\t\2\4\3\t\3\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\5")
         buf.write("\2\17\n\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\7\3\32\n")
         buf.write("\3\f\3\16\3\35\13\3\3\3\2\3\4\4\2\4\2\4\3\2\b\f\3\2\r")
@@ -50,7 +50,7 @@ class PeaceParser ( Parser ):
                       "Else", "Return", "Function", "Print", "Match", "MatchArrow", 
                       "Any", "Assign", "Amp", "Colon", "Semicolon", "LParen", 
                       "RParen", "LBracket", "RBracket", "WS", "Newline", 
-                      "Identifier" ]
+                      "Identifier", "Digit", "Digits" ]
 
     RULE_statement = 0
     RULE_expression = 1
@@ -96,6 +96,8 @@ class PeaceParser ( Parser ):
     WS=36
     Newline=37
     Identifier=38
+    Digit=39
+    Digits=40
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)

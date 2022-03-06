@@ -47,7 +47,7 @@ RParen: ')';
 LBracket: '{';
 RBracket: '}';
 
-WS : [\t]+ -> skip;
+WS : [ \t]+ -> skip;
 Newline : ('\r' '\n'? | '\n') -> skip;
 
 //Rules
@@ -57,3 +57,5 @@ expression: expression (Add | Subtract | Multiply | Divide | Modulo ) expression
           | Identifier;
 
 Identifier: [a-zA-Z]+;
+Digit: [0-9];
+Digits: Digit+;
