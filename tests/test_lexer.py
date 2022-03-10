@@ -226,5 +226,205 @@ class TestLexer(unittest.TestCase):
         assert(token_text == test_expected_text)
         assert(token_types == test_expected_types)
 
+
+        #17 - 24 
+
+
+
+        #pattern matching tests
+    def test_type_match_token(self):
+        test_input = "match"
+        test_expected_text = ['match']
+        test_expected_types = [25]
+        input_stream = antlr4.InputStream(test_input)
+        lexer = PeaceLexer(input_stream)
+        tokens = lexer.getAllTokens()
+        token_text = list(map(lambda x: x.text, tokens))
+        token_types = list(map(lambda x: x.type, tokens))
+        assert(token_text == test_expected_text)
+        assert(token_types == test_expected_types)
+
+    def test_type_match_arrow_token(self):
+        test_input = "=>"
+        test_expected_text = ['=>']
+        test_expected_types = [26]
+        input_stream = antlr4.InputStream(test_input)
+        lexer = PeaceLexer(input_stream)
+        tokens = lexer.getAllTokens()
+        token_text = list(map(lambda x: x.text, tokens))
+        token_types = list(map(lambda x: x.type, tokens))
+        assert(token_text == test_expected_text)
+        assert(token_types == test_expected_types)
+
+    def test_type_any_token(self):
+        test_input = "_"
+        test_expected_text = ['_']
+        test_expected_types = [27]
+        input_stream = antlr4.InputStream(test_input)
+        lexer = PeaceLexer(input_stream)
+        tokens = lexer.getAllTokens()
+        token_text = list(map(lambda x: x.text, tokens))
+        token_types = list(map(lambda x: x.type, tokens))
+        assert(token_text == test_expected_text)
+        assert(token_types == test_expected_types)
+
+    def test_type_assign_token(self):
+        test_input = "="
+        test_expected_text = ['=']
+        test_expected_types = [28]
+        input_stream = antlr4.InputStream(test_input)
+        lexer = PeaceLexer(input_stream)
+        tokens = lexer.getAllTokens()
+        token_text = list(map(lambda x: x.text, tokens))
+        token_types = list(map(lambda x: x.type, tokens))
+        assert(token_text == test_expected_text)
+        assert(token_types == test_expected_types)
+
+    def test_type_amp_token(self):
+        test_input = "&"
+        test_expected_text = ['&']
+        test_expected_types = [29]
+        input_stream = antlr4.InputStream(test_input)
+        lexer = PeaceLexer(input_stream)
+        tokens = lexer.getAllTokens()
+        token_text = list(map(lambda x: x.text, tokens))
+        token_types = list(map(lambda x: x.type, tokens))
+        assert(token_text == test_expected_text)
+        assert(token_types == test_expected_types)
+
+    def test_type_colon_token(self):
+        test_input = ":"
+        test_expected_text = [':']
+        test_expected_types = [30]
+        input_stream = antlr4.InputStream(test_input)
+        lexer = PeaceLexer(input_stream)
+        tokens = lexer.getAllTokens()
+        token_text = list(map(lambda x: x.text, tokens))
+        token_types = list(map(lambda x: x.type, tokens))
+        assert(token_text == test_expected_text)
+        assert(token_types == test_expected_types)
+
+    def test_type_semicolon_token(self):
+        test_input = ";"
+        test_expected_text = [';']
+        test_expected_types = [31]
+        input_stream = antlr4.InputStream(test_input)
+        lexer = PeaceLexer(input_stream)
+        tokens = lexer.getAllTokens()
+        token_text = list(map(lambda x: x.text, tokens))
+        token_types = list(map(lambda x: x.type, tokens))
+        assert(token_text == test_expected_text)
+        assert(token_types == test_expected_types)
+
+    def test_type_l_paren_token(self):
+        test_input = "("
+        test_expected_text = ['(']
+        test_expected_types = [32]
+        input_stream = antlr4.InputStream(test_input)
+        lexer = PeaceLexer(input_stream)
+        tokens = lexer.getAllTokens()
+        token_text = list(map(lambda x: x.text, tokens))
+        token_types = list(map(lambda x: x.type, tokens))
+        assert(token_text == test_expected_text)
+        assert(token_types == test_expected_types)
+
+    def test_type_r_paren_token(self):
+        test_input = ")"
+        test_expected_text = [')']
+        test_expected_types = [33]
+        input_stream = antlr4.InputStream(test_input)
+        lexer = PeaceLexer(input_stream)
+        tokens = lexer.getAllTokens()
+        token_text = list(map(lambda x: x.text, tokens))
+        token_types = list(map(lambda x: x.type, tokens))
+        assert(token_text == test_expected_text)
+        assert(token_types == test_expected_types)
+
+    def test_type_l_bracket_token(self):
+        test_input = "{"
+        test_expected_text = ['{']
+        test_expected_types = [34]
+        input_stream = antlr4.InputStream(test_input)
+        lexer = PeaceLexer(input_stream)
+        tokens = lexer.getAllTokens()
+        token_text = list(map(lambda x: x.text, tokens))
+        token_types = list(map(lambda x: x.type, tokens))
+        assert(token_text == test_expected_text)
+        assert(token_types == test_expected_types)
+
+    def test_type_r_bracket_token(self):
+        test_input = "}"
+        test_expected_text = ['}']
+        test_expected_types = [35]
+        input_stream = antlr4.InputStream(test_input)
+        lexer = PeaceLexer(input_stream)
+        tokens = lexer.getAllTokens()
+        token_text = list(map(lambda x: x.text, tokens))
+        token_types = list(map(lambda x: x.type, tokens))
+        assert(token_text == test_expected_text)
+        assert(token_types == test_expected_types)
+
+    def test_type_ws_token(self):
+        test_input = ""
+        test_expected_text = ['']
+        test_expected_types = [36]
+        input_stream = antlr4.InputStream(test_input)
+        lexer = PeaceLexer(input_stream)
+        tokens = lexer.getAllTokens()
+        token_text = list(map(lambda x: x.text, tokens))
+        token_types = list(map(lambda x: x.type, tokens))
+        assert(token_text == test_expected_text)
+        assert(token_types == test_expected_types)
+
+    def test_type_new_line_token(self):
+        test_input = " "
+        test_expected_text = [' ']
+        test_expected_types = [37]
+        input_stream = antlr4.InputStream(test_input)
+        lexer = PeaceLexer(input_stream)
+        tokens = lexer.getAllTokens()
+        token_text = list(map(lambda x: x.text, tokens))
+        token_types = list(map(lambda x: x.type, tokens))
+        assert(token_text == test_expected_text)
+        assert(token_types == test_expected_types)
+
+    def test_type_identifier_token(self):
+        test_input = "anTlr"
+        test_expected_text = ['anTlr']
+        test_expected_types = [38]
+        input_stream = antlr4.InputStream(test_input)
+        lexer = PeaceLexer(input_stream)
+        tokens = lexer.getAllTokens()
+        token_text = list(map(lambda x: x.text, tokens))
+        token_types = list(map(lambda x: x.type, tokens))
+        assert(token_text == test_expected_text)
+        assert(token_types == test_expected_types)
+
+    def test_type_digit_token(self):
+        test_input = "9"
+        test_expected_text = ['9']
+        test_expected_types = [39]
+        input_stream = antlr4.InputStream(test_input)
+        lexer = PeaceLexer(input_stream)
+        tokens = lexer.getAllTokens()
+        token_text = list(map(lambda x: x.text, tokens))
+        token_types = list(map(lambda x: x.type, tokens))
+        assert(token_text == test_expected_text)
+        assert(token_types == test_expected_types)
+
+    def test_type_digits_token(self):
+        test_input = "56"
+        test_expected_text = ['56']
+        test_expected_types = [40]
+        input_stream = antlr4.InputStream(test_input)
+        lexer = PeaceLexer(input_stream)
+        tokens = lexer.getAllTokens()
+        token_text = list(map(lambda x: x.text, tokens))
+        token_types = list(map(lambda x: x.type, tokens))
+        assert(token_text == test_expected_text)
+        assert(token_types == test_expected_types)
+    
+
+
 if __name__ == '__main__':
     unittest.main()
