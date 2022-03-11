@@ -22,6 +22,8 @@ NotEqual: '!=';
 
 //Vars
 Let: 'let';
+BoolTrue: 'true';
+BoolFalse: 'false';
 
 //Function Pointers
 Arrow: '->';
@@ -50,12 +52,17 @@ RBracket: '}';
 WS : [ \t]+ -> skip;
 Newline : ('\r' '\n'? | '\n') -> skip;
 
+//Match C-style rules about identifiers (can not start with a digit, allow underscores)
+//TOOD: Possibly allow any non-digit Unicode?
+fragment IdentifierChar: [a-zA-Z_];
+fragment NonZeroDigit: [1-9];
+fragment Digit: [0-9];
+Identifier: IdentifierChar (IdentifierChar | Digit)*;
+Digits: Digit+;
+FloatConst: Digits '.' Digits;
+
 //Rules
 statement: expression Semicolon | Identifier '=' expression Semicolon;
 expression: expression (Add | Subtract | Multiply | Divide | Modulo ) expression
           | expression (LessThan | GreaterThan | LessThanOrEq | GreaterThanOrEq ) expression
           | Identifier;
-
-Identifier: [a-zA-Z]+;
-Digit: [0-9];
-Digits: Digit+;
