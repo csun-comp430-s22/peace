@@ -11,14 +11,14 @@ else:
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3*")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3,")
         buf.write("\37\4\2\t\2\4\3\t\3\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\5")
         buf.write("\2\17\n\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\7\3\32\n")
         buf.write("\3\f\3\16\3\35\13\3\3\3\2\3\4\4\2\4\2\4\3\2\b\f\3\2\r")
-        buf.write("\20\2\37\2\16\3\2\2\2\4\20\3\2\2\2\6\7\5\4\3\2\7\b\7!")
-        buf.write("\2\2\b\17\3\2\2\2\t\n\7(\2\2\n\13\7\36\2\2\13\f\5\4\3")
-        buf.write("\2\f\r\7!\2\2\r\17\3\2\2\2\16\6\3\2\2\2\16\t\3\2\2\2\17")
-        buf.write("\3\3\2\2\2\20\21\b\3\1\2\21\22\7(\2\2\22\33\3\2\2\2\23")
+        buf.write("\20\2\37\2\16\3\2\2\2\4\20\3\2\2\2\6\7\5\4\3\2\7\b\7#")
+        buf.write("\2\2\b\17\3\2\2\2\t\n\7*\2\2\n\13\7 \2\2\13\f\5\4\3\2")
+        buf.write("\f\r\7#\2\2\r\17\3\2\2\2\16\6\3\2\2\2\16\t\3\2\2\2\17")
+        buf.write("\3\3\2\2\2\20\21\b\3\1\2\21\22\7*\2\2\22\33\3\2\2\2\23")
         buf.write("\24\f\5\2\2\24\25\t\2\2\2\25\32\5\4\3\6\26\27\f\4\2\2")
         buf.write("\27\30\t\3\2\2\30\32\5\4\3\5\31\23\3\2\2\2\31\26\3\2\2")
         buf.write("\2\32\35\3\2\2\2\33\31\3\2\2\2\33\34\3\2\2\2\34\5\3\2")
@@ -38,19 +38,20 @@ class PeaceParser ( Parser ):
 
     literalNames = [ "<INVALID>", "'int'", "'float'", "'bool'", "'void'", 
                      "'string'", "'+'", "'-'", "'*'", "'/'", "'%'", "'<'", 
-                     "'>'", "'<='", "'>='", "'=='", "'!='", "'let'", "'->'", 
-                     "'while'", "'if'", "'else'", "'return'", "'func'", 
-                     "'print'", "'match'", "'=>'", "'_'", "'='", "'&'", 
-                     "':'", "';'", "'('", "')'", "'{'", "'}'" ]
+                     "'>'", "'<='", "'>='", "'=='", "'!='", "'let'", "'true'", 
+                     "'false'", "'->'", "'while'", "'if'", "'else'", "'return'", 
+                     "'func'", "'print'", "'match'", "'=>'", "'_'", "'='", 
+                     "'&'", "':'", "';'", "'('", "')'", "'{'", "'}'" ]
 
     symbolicNames = [ "<INVALID>", "Int", "Float", "Bool", "Void", "String", 
                       "Add", "Subtract", "Multiply", "Divide", "Modulo", 
                       "LessThan", "GreaterThan", "LessThanOrEq", "GreaterThanOrEq", 
-                      "Equal", "NotEqual", "Let", "Arrow", "While", "If", 
-                      "Else", "Return", "Function", "Print", "Match", "MatchArrow", 
-                      "Any", "Assign", "Amp", "Colon", "Semicolon", "LParen", 
-                      "RParen", "LBracket", "RBracket", "WS", "Newline", 
-                      "Identifier", "Digit", "Digits" ]
+                      "Equal", "NotEqual", "Let", "BoolTrue", "BoolFalse", 
+                      "Arrow", "While", "If", "Else", "Return", "Function", 
+                      "Print", "Match", "MatchArrow", "Any", "Assign", "Amp", 
+                      "Colon", "Semicolon", "LParen", "RParen", "LBracket", 
+                      "RBracket", "WS", "Newline", "Identifier", "Digits", 
+                      "FloatConst" ]
 
     RULE_statement = 0
     RULE_expression = 1
@@ -75,29 +76,31 @@ class PeaceParser ( Parser ):
     Equal=15
     NotEqual=16
     Let=17
-    Arrow=18
-    While=19
-    If=20
-    Else=21
-    Return=22
-    Function=23
-    Print=24
-    Match=25
-    MatchArrow=26
-    Any=27
-    Assign=28
-    Amp=29
-    Colon=30
-    Semicolon=31
-    LParen=32
-    RParen=33
-    LBracket=34
-    RBracket=35
-    WS=36
-    Newline=37
-    Identifier=38
-    Digit=39
-    Digits=40
+    BoolTrue=18
+    BoolFalse=19
+    Arrow=20
+    While=21
+    If=22
+    Else=23
+    Return=24
+    Function=25
+    Print=26
+    Match=27
+    MatchArrow=28
+    Any=29
+    Assign=30
+    Amp=31
+    Colon=32
+    Semicolon=33
+    LParen=34
+    RParen=35
+    LBracket=36
+    RBracket=37
+    WS=38
+    Newline=39
+    Identifier=40
+    Digits=41
+    FloatConst=42
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
