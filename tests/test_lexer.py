@@ -6,6 +6,7 @@ import antlr4
 sys.path.append("../")
 from antlr.generated.PeaceLexer import PeaceLexer
 
+# TEST HELPER FUNCTION
 def lexer_test(input, expected_token_text, expected_token_types):
     input_stream = antlr4.InputStream(input)
     lexer = PeaceLexer(input_stream)
@@ -16,8 +17,10 @@ def lexer_test(input, expected_token_text, expected_token_types):
         return True
     return False
 
+# ALL TOKEN TEST METHODS
 class TestLexer(unittest.TestCase):
     
+    # SAMPLE TEST
     def test_declare(self):
         test_input = "let x: int = 20;"
         test_expected_text = ['let', 'x', ':', 'int', '=', '20', ';']
@@ -29,198 +32,71 @@ class TestLexer(unittest.TestCase):
 
     # BEGIN TESTS FOR TYPE TOKENS
     def test_type_int_token(self):
-        test_input = "int"
-        test_expected_text = ['int']
-        test_expected_types = [PeaceLexer.Int]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test int type token"""
+        assert(lexer_test("int", ['int'], [PeaceLexer.Int]))
 
     def test_type_float_token(self):
-        test_input = "float"
-        test_expected_text = ['float']
-        test_expected_types = [PeaceLexer.Float]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test float type token"""
+        assert(lexer_test("float", ['float'], [PeaceLexer.Float]))
     
     def test_type_bool_token(self):
-        test_input = "bool"
-        test_expected_text = ['bool']
-        test_expected_types = [PeaceLexer.Bool]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test bool type token"""
+        assert(lexer_test("bool", ['bool'], [PeaceLexer.Bool]))
 
     def test_type_void_token(self):
-        test_input = "void"
-        test_expected_text = ['void']
-        test_expected_types = [PeaceLexer.Void]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test void type token"""
+        assert(lexer_test("void", ['void'], [PeaceLexer.Void]))
 
     def test_type_string_token(self):
-        test_input = "string"
-        test_expected_text = ['string']
-        test_expected_types = [PeaceLexer.String]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test string type token"""
+        assert(lexer_test("string", ['string'], [PeaceLexer.String]))
 
     # BEGIN TESTS FOR OPERATION TOKENS
     def test_operation_add_token(self):
-        test_input = "+"
-        test_expected_text = ['+']
-        test_expected_types = [PeaceLexer.Add]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test equal operation token"""
+        assert(lexer_test("+", ['+'], [PeaceLexer.Add]))
 
     def test_operation_subtract_token(self):
-        test_input = "-"
-        test_expected_text = ['-']
-        test_expected_types = [PeaceLexer.Subtract]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test subtract operation token"""
+        assert(lexer_test("-", ['-'], [PeaceLexer.Subtract]))
 
     def test_operation_multiply_token(self):
-        test_input = "*"
-        test_expected_text = ['*']
-        test_expected_types = [PeaceLexer.Multiply]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test multiply operation token"""
+        assert(lexer_test("*", ['*'], [PeaceLexer.Multiply]))
 
     def test_operation_divide_token(self):
-        test_input = "/"
-        test_expected_text = ['/']
-        test_expected_types = [PeaceLexer.Divide]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test divide operation token"""
+        assert(lexer_test("/", ['/'], [PeaceLexer.Divide]))
 
     def test_operation_modulo_token(self):
-        test_input = "%"
-        test_expected_text = ['%']
-        test_expected_types = [PeaceLexer.Modulo]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test modulo operation token"""
+        assert(lexer_test("%", ['%'], [PeaceLexer.Modulo]))
 
     def test_operation_less_than_token(self):
-        test_input = "<"
-        test_expected_text = ['<']
-        test_expected_types = [PeaceLexer.LessThan]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test less than operation token"""
+        assert(lexer_test("<", ['<'], [PeaceLexer.LessThan]))
 
     def test_operation_greater_than_token(self):
-        test_input = ">"
-        test_expected_text = ['>']
-        test_expected_types = [PeaceLexer.GreaterThan]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
-
+        """Test greater than operation token"""
+        assert(lexer_test(">", ['>'], [PeaceLexer.GreaterThan]))
+        
     def test_operation_less_than_or_equal_token(self):
-        test_input = "<="
-        test_expected_text = ['<=']
-        test_expected_types = [PeaceLexer.LessThanOrEq]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test less than or equal operation token"""
+        assert(lexer_test("<=", ['<='], [PeaceLexer.LessThanOrEq]))
 
     def test_operation_greater_than_or_equal_token(self):
-        test_input = ">="
-        test_expected_text = ['>=']
-        test_expected_types = [PeaceLexer.GreaterThanOrEq]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test greater than or equal operation token"""
+        assert(lexer_test(">=", ['>='], [PeaceLexer.GreaterThanOrEq]))
 
     def test_operation_equal_token(self):
-        test_input = "=="
-        test_expected_text = ['==']
-        test_expected_types = [PeaceLexer.Equal]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test equal operation token"""
+        assert(lexer_test("==", ['=='], [PeaceLexer.Equal]))
 
     def test_operation_not_equal_token(self):
-        test_input = "!="
-        test_expected_text = ['!=']
-        test_expected_types = [PeaceLexer.NotEqual]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test not equal operation token"""
+        assert(lexer_test("!=", ['!='], [PeaceLexer.NotEqual]))
 
+    # BEGIN TESTS FOR KEYWORD TOKENS
     def test_keyword_let(self):
         """Test let keyword token"""
         assert(lexer_test("let", ['let'], [PeaceLexer.Let]))
