@@ -48,6 +48,7 @@ LParen: '(';
 RParen: ')';
 LBracket: '{';
 RBracket: '}';
+DoubleQuote: '"';
 
 WS : [ \t]+ -> skip;
 Newline : ('\r' '\n'? | '\n') -> skip;
