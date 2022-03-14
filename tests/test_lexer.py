@@ -394,6 +394,10 @@ class TestLexer(unittest.TestCase):
         assert(token_text == test_expected_text)
         assert(token_types == test_expected_types)
 
+    def test_double_quote(self):
+        """Test double quote token"""
+        assert(lexer_test('"', ['"'], [PeaceLexer.DoubleQuote]))
+
     def test_type_ws_token(self):
         test_input = " "
         input_stream = antlr4.InputStream(test_input)
