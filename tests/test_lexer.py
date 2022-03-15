@@ -137,138 +137,51 @@ class TestLexer(unittest.TestCase):
         """Test print keyword token"""
         assert(lexer_test("print", ['print'], [PeaceLexer.Print]))
 
-        #pattern matching tests
+        #BEGIN TESTS FOR PATTERN MATCHING TOKENS
     def test_type_match_token(self):
-        test_input = "match"
-        test_expected_text = ['match']
-        test_expected_types = [PeaceLexer.Match]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test print keyword token"""
+        assert(lexer_test("match", ['match'], [PeaceLexer.Match]))
+        
 
     def test_type_match_arrow_token(self):
-        test_input = "=>"
-        test_expected_text = ['=>']
-        test_expected_types = [PeaceLexer.MatchArrow]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test print keyword token"""
+        assert(lexer_test("=>", ['=>'], [PeaceLexer.MatchArrow]))
 
     def test_type_any_token(self):
-        test_input = "_"
-        test_expected_text = ['_']
-        test_expected_types = [PeaceLexer.Any]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test print keyword token"""
+        assert(lexer_test("_", ['_'], [PeaceLexer.Any]))
 
     def test_type_assign_token(self):
-        test_input = "="
-        test_expected_text = ['=']
-        test_expected_types = [PeaceLexer.Assign]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test print keyword token"""
+        assert(lexer_test("=", ['='], [PeaceLexer.Assign]))
 
     def test_type_amp_token(self):
-        test_input = "&"
-        test_expected_text = ['&']
-        test_expected_types = [PeaceLexer.Amp]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test print keyword token"""
+        assert(lexer_test("&", ['&'], [PeaceLexer.Amp]))
 
     def test_type_colon_token(self):
-        test_input = ":"
-        test_expected_text = [':']
-        test_expected_types = [PeaceLexer.Colon]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test print keyword token"""
+        assert(lexer_test(":", [':'], [PeaceLexer.Colon]))
 
     def test_type_semicolon_token(self):
-        test_input = ";"
-        test_expected_text = [';']
-        test_expected_types = [PeaceLexer.Semicolon]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test print keyword token"""
+        assert(lexer_test(";", [';'], [PeaceLexer.Semicolon]))
 
     def test_type_l_paren_token(self):
-        test_input = "("
-        test_expected_text = ['(']
-        test_expected_types = [PeaceLexer.LParen]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test print keyword token"""
+        assert(lexer_test("(", ['('], [PeaceLexer.LParen]))
 
     def test_type_r_paren_token(self):
-        test_input = ")"
-        test_expected_text = [')']
-        test_expected_types = [PeaceLexer.RParen]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test print keyword token"""
+        assert(lexer_test(")", [')'], [PeaceLexer.RParen]))
 
     def test_type_l_bracket_token(self):
-        test_input = "{"
-        test_expected_text = ['{']
-        test_expected_types = [PeaceLexer.LBracket]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test print keyword token"""
+        assert(lexer_test("{", ['{'], [PeaceLexer.LBracket]))
 
     def test_type_r_bracket_token(self):
-        test_input = "}"
-        test_expected_text = ['}']
-        test_expected_types = [PeaceLexer.RBracket]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test print keyword token"""
+        assert(lexer_test("}", ['}'], [PeaceLexer.RBracket]))
 
     def test_double_quote(self):
         """Test double quote token"""
@@ -289,28 +202,12 @@ class TestLexer(unittest.TestCase):
         assert(len(tokens) == 0)
 
     def test_type_identifier_token(self):
-        test_input = "anTlr"
-        test_expected_text = ['anTlr']
-        test_expected_types = [PeaceLexer.Identifier]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test double quote token"""
+        assert(lexer_test('anTlr', ['anTlr'], [PeaceLexer.Identifier]))
 
     def test_type_digits_token(self):
-        test_input = "56"
-        test_expected_text = ['56']
-        test_expected_types = [PeaceLexer.Digits]
-        input_stream = antlr4.InputStream(test_input)
-        lexer = PeaceLexer(input_stream)
-        tokens = lexer.getAllTokens()
-        token_text = list(map(lambda x: x.text, tokens))
-        token_types = list(map(lambda x: x.type, tokens))
-        assert(token_text == test_expected_text)
-        assert(token_types == test_expected_types)
+        """Test double quote token"""
+        assert(lexer_test('56', ['56'], [PeaceLexer.Digits]))
 
     def test_constant_float(self):
         assert(lexer_test("0.12", ['0.12'], [PeaceLexer.FloatConst]))
