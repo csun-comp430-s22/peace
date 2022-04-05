@@ -67,3 +67,14 @@ statement: expression Semicolon | Identifier '=' expression Semicolon;
 expression: expression (Add | Subtract | Multiply | Divide | Modulo ) expression
           | expression (LessThan | GreaterThan | LessThanOrEq | GreaterThanOrEq ) expression
           | Identifier;
+
+type_: ( Int | Bool | Void | String | Identifier ) ;
+case: pattern MatchArrow expression ;
+pattern: Identifier | Any | Identifier LParen pattern RParen;
+parameter: Identifier Colon type_;
+func: type_ Identifier LParen parameter* RParen LBracket statement* RBracket;
+enumdef: ;
+cdef: Identifier LParen type_ RParen;
+program: func;
+
+
