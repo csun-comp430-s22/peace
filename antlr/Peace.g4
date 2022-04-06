@@ -63,7 +63,14 @@ Digits: Digit+;
 FloatConst: Digits '.' Digits;
 
 //Rules
-statement: expression Semicolon | Identifier '=' expression Semicolon;
+statement: expression Semicolon | Identifier '=' expression Semicolon |
+           return expression Semicolon | 
+           return Semicolon | 
+           func LParen expression* RParen Semicolon |
+           expression LParen expression* RParen Semicolon |
+           print LParen expression RParen Semicolon
+           ;
+
 expression: expression (Add | Subtract | Multiply | Divide | Modulo ) expression
           | expression (LessThan | GreaterThan | LessThanOrEq | GreaterThanOrEq ) expression
           | Identifier;
