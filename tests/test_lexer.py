@@ -1,9 +1,10 @@
 from __future__ import unicode_literals
 import sys
+import os
 import unittest
 import antlr4
 
-sys.path.append("../")
+sys.path.append(os.path.dirname(__file__) + "/../")
 from antlr.generated.PeaceLexer import PeaceLexer
 
 # TEST HELPER FUNCTION

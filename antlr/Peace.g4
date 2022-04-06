@@ -63,18 +63,30 @@ Digits: Digit+;
 FloatConst: Digits '.' Digits;
 
 //Rules
-statement: expression Semicolon | Identifier '=' expression Semicolon;
-expression: expression (Add | Subtract | Multiply | Divide | Modulo ) expression
-          | expression (LessThan | GreaterThan | LessThanOrEq | GreaterThanOrEq ) expression
-          | Identifier;
+basetype: ( Int | Bool | Void | String | Identifier ); 
+funcpointertype: LParen basetype Multiply RParen Arrow basetype; 
+atype: basetype | funcpointertype;
 
-type_: ( Int | Bool | Void | String | Identifier ) ;
+expression: Digits |
+            Identifier |
+            expression (Add | Subtract | Multiply | Divide | Modulo ) expression |
+            expression (LessThan | GreaterThan | LessThanOrEq | GreaterThanOrEq ) expression |
+            expression LParen expression* RParen |
+            Amp Identifier
+            ;
+vardec: Let Identifier Colon atype Assign expression;
+statement:  vardec Semicolon |
+            While LParen expression RParen LBracket statement* RBracket Semicolon |
+            If LParen expression RParen LBracket statement* RBracket (Else LBracket statement* RBracket)? Semicolon |
+            Match expression LBracket case* RBracket Semicolon
+            ;
+
 case: pattern MatchArrow expression ;
 pattern: Identifier | Any | Identifier LParen pattern RParen;
-parameter: Identifier Colon type_;
-func: type_ Identifier LParen parameter* RParen LBracket statement* RBracket;
+parameter: Identifier Colon atype;
+func: atype Identifier LParen parameter* RParen LBracket statement* RBracket;
 enumdef: ;
-cdef: Identifier LParen type_ RParen;
+cdef: Identifier LParen atype RParen;
 program: func;
 
 
