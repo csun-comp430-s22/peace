@@ -79,11 +79,11 @@ statement:  vardec Semicolon |
             While LParen expression RParen LBracket statement* RBracket Semicolon |
             If LParen expression RParen LBracket statement* RBracket (Else LBracket statement* RBracket)? Semicolon |
             Match expression LBracket case* RBracket Semicolon |
-            return expression Semicolon | 
-            return Semicolon | 
+            Return expression Semicolon | 
+            Return Semicolon | 
             func LParen expression* RParen Semicolon |
             expression LParen expression* RParen Semicolon |
-            print LParen expression RParen Semicolon
+            Print LParen expression RParen Semicolon
             ;
 
 case: pattern MatchArrow expression ;

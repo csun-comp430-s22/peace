@@ -12,7 +12,7 @@ else:
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3-")
-        buf.write("\u00b1\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\u00d3\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\4\3\4\5\4")
         buf.write("(\n\4\3\5\3\5\3\5\3\5\3\5\5\5/\n\5\3\5\3\5\3\5\3\5\3\5")
@@ -22,16 +22,19 @@ def serializedATN():
         buf.write("\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\7\7c\n\7\f\7\16\7f\13")
         buf.write("\7\3\7\3\7\3\7\3\7\7\7l\n\7\f\7\16\7o\13\7\3\7\5\7r\n")
         buf.write("\7\3\7\3\7\3\7\3\7\3\7\3\7\7\7z\n\7\f\7\16\7}\13\7\3\7")
-        buf.write("\3\7\3\7\5\7\u0082\n\7\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t")
-        buf.write("\3\t\3\t\3\t\5\t\u008f\n\t\3\n\3\n\3\n\3\n\3\13\3\13\3")
-        buf.write("\13\3\13\7\13\u0099\n\13\f\13\16\13\u009c\13\13\3\13\3")
-        buf.write("\13\3\13\7\13\u00a1\n\13\f\13\16\13\u00a4\13\13\3\13\3")
-        buf.write("\13\3\f\3\f\3\r\3\r\3\r\3\r\3\r\3\16\3\16\3\16\2\3\b\17")
-        buf.write("\2\4\6\b\n\f\16\20\22\24\26\30\32\2\5\5\2\3\3\5\7++\3")
-        buf.write("\2\b\f\3\2\r\20\2\u00b6\2\34\3\2\2\2\4\36\3\2\2\2\6\'")
-        buf.write("\3\2\2\2\b.\3\2\2\2\nD\3\2\2\2\f\u0081\3\2\2\2\16\u0083")
-        buf.write("\3\2\2\2\20\u008e\3\2\2\2\22\u0090\3\2\2\2\24\u0094\3")
-        buf.write("\2\2\2\26\u00a7\3\2\2\2\30\u00a9\3\2\2\2\32\u00ae\3\2")
+        buf.write("\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\7\7\u008b")
+        buf.write("\n\7\f\7\16\7\u008e\13\7\3\7\3\7\3\7\3\7\3\7\3\7\7\7\u0096")
+        buf.write("\n\7\f\7\16\7\u0099\13\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3")
+        buf.write("\7\3\7\5\7\u00a4\n\7\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3")
+        buf.write("\t\3\t\3\t\5\t\u00b1\n\t\3\n\3\n\3\n\3\n\3\13\3\13\3\13")
+        buf.write("\3\13\7\13\u00bb\n\13\f\13\16\13\u00be\13\13\3\13\3\13")
+        buf.write("\3\13\7\13\u00c3\n\13\f\13\16\13\u00c6\13\13\3\13\3\13")
+        buf.write("\3\f\3\f\3\r\3\r\3\r\3\r\3\r\3\16\3\16\3\16\2\3\b\17\2")
+        buf.write("\4\6\b\n\f\16\20\22\24\26\30\32\2\5\5\2\3\3\5\7++\3\2")
+        buf.write("\b\f\3\2\r\20\2\u00df\2\34\3\2\2\2\4\36\3\2\2\2\6\'\3")
+        buf.write("\2\2\2\b.\3\2\2\2\nD\3\2\2\2\f\u00a3\3\2\2\2\16\u00a5")
+        buf.write("\3\2\2\2\20\u00b0\3\2\2\2\22\u00b2\3\2\2\2\24\u00b6\3")
+        buf.write("\2\2\2\26\u00c9\3\2\2\2\30\u00cb\3\2\2\2\32\u00d0\3\2")
         buf.write("\2\2\34\35\t\2\2\2\35\3\3\2\2\2\36\37\7$\2\2\37 \5\2\2")
         buf.write("\2 !\7\n\2\2!\"\7%\2\2\"#\7\26\2\2#$\5\2\2\2$\5\3\2\2")
         buf.write("\2%(\5\2\2\2&(\5\4\3\2\'%\3\2\2\2\'&\3\2\2\2(\7\3\2\2")
@@ -43,38 +46,52 @@ def serializedATN():
         buf.write("\2\2?\60\3\2\2\2?\63\3\2\2\2?\66\3\2\2\2@C\3\2\2\2A?\3")
         buf.write("\2\2\2AB\3\2\2\2B\t\3\2\2\2CA\3\2\2\2DE\7\23\2\2EF\7+")
         buf.write("\2\2FG\7\"\2\2GH\5\6\4\2HI\7 \2\2IJ\5\b\5\2J\13\3\2\2")
-        buf.write("\2KL\5\n\6\2LM\7#\2\2M\u0082\3\2\2\2NO\7\27\2\2OP\7$\2")
+        buf.write("\2KL\5\n\6\2LM\7#\2\2M\u00a4\3\2\2\2NO\7\27\2\2OP\7$\2")
         buf.write("\2PQ\5\b\5\2QR\7%\2\2RV\7&\2\2SU\5\f\7\2TS\3\2\2\2UX\3")
         buf.write("\2\2\2VT\3\2\2\2VW\3\2\2\2WY\3\2\2\2XV\3\2\2\2YZ\7\'\2")
-        buf.write("\2Z[\7#\2\2[\u0082\3\2\2\2\\]\7\30\2\2]^\7$\2\2^_\5\b")
+        buf.write("\2Z[\7#\2\2[\u00a4\3\2\2\2\\]\7\30\2\2]^\7$\2\2^_\5\b")
         buf.write("\5\2_`\7%\2\2`d\7&\2\2ac\5\f\7\2ba\3\2\2\2cf\3\2\2\2d")
         buf.write("b\3\2\2\2de\3\2\2\2eg\3\2\2\2fd\3\2\2\2gq\7\'\2\2hi\7")
         buf.write("\31\2\2im\7&\2\2jl\5\f\7\2kj\3\2\2\2lo\3\2\2\2mk\3\2\2")
         buf.write("\2mn\3\2\2\2np\3\2\2\2om\3\2\2\2pr\7\'\2\2qh\3\2\2\2q")
-        buf.write("r\3\2\2\2rs\3\2\2\2st\7#\2\2t\u0082\3\2\2\2uv\7\35\2\2")
+        buf.write("r\3\2\2\2rs\3\2\2\2st\7#\2\2t\u00a4\3\2\2\2uv\7\35\2\2")
         buf.write("vw\5\b\5\2w{\7&\2\2xz\5\16\b\2yx\3\2\2\2z}\3\2\2\2{y\3")
         buf.write("\2\2\2{|\3\2\2\2|~\3\2\2\2}{\3\2\2\2~\177\7\'\2\2\177")
-        buf.write("\u0080\7#\2\2\u0080\u0082\3\2\2\2\u0081K\3\2\2\2\u0081")
-        buf.write("N\3\2\2\2\u0081\\\3\2\2\2\u0081u\3\2\2\2\u0082\r\3\2\2")
-        buf.write("\2\u0083\u0084\5\20\t\2\u0084\u0085\7\36\2\2\u0085\u0086")
-        buf.write("\5\b\5\2\u0086\17\3\2\2\2\u0087\u008f\7+\2\2\u0088\u008f")
-        buf.write("\7\37\2\2\u0089\u008a\7+\2\2\u008a\u008b\7$\2\2\u008b")
-        buf.write("\u008c\5\20\t\2\u008c\u008d\7%\2\2\u008d\u008f\3\2\2\2")
-        buf.write("\u008e\u0087\3\2\2\2\u008e\u0088\3\2\2\2\u008e\u0089\3")
-        buf.write("\2\2\2\u008f\21\3\2\2\2\u0090\u0091\7+\2\2\u0091\u0092")
-        buf.write("\7\"\2\2\u0092\u0093\5\6\4\2\u0093\23\3\2\2\2\u0094\u0095")
-        buf.write("\5\6\4\2\u0095\u0096\7+\2\2\u0096\u009a\7$\2\2\u0097\u0099")
-        buf.write("\5\22\n\2\u0098\u0097\3\2\2\2\u0099\u009c\3\2\2\2\u009a")
-        buf.write("\u0098\3\2\2\2\u009a\u009b\3\2\2\2\u009b\u009d\3\2\2\2")
-        buf.write("\u009c\u009a\3\2\2\2\u009d\u009e\7%\2\2\u009e\u00a2\7")
-        buf.write("&\2\2\u009f\u00a1\5\f\7\2\u00a0\u009f\3\2\2\2\u00a1\u00a4")
-        buf.write("\3\2\2\2\u00a2\u00a0\3\2\2\2\u00a2\u00a3\3\2\2\2\u00a3")
-        buf.write("\u00a5\3\2\2\2\u00a4\u00a2\3\2\2\2\u00a5\u00a6\7\'\2\2")
-        buf.write("\u00a6\25\3\2\2\2\u00a7\u00a8\3\2\2\2\u00a8\27\3\2\2\2")
-        buf.write("\u00a9\u00aa\7+\2\2\u00aa\u00ab\7$\2\2\u00ab\u00ac\5\6")
-        buf.write("\4\2\u00ac\u00ad\7%\2\2\u00ad\31\3\2\2\2\u00ae\u00af\5")
-        buf.write("\24\13\2\u00af\33\3\2\2\2\20\'.;?AVdmq{\u0081\u008e\u009a")
-        buf.write("\u00a2")
+        buf.write("\u0080\7#\2\2\u0080\u00a4\3\2\2\2\u0081\u0082\7\32\2\2")
+        buf.write("\u0082\u0083\5\b\5\2\u0083\u0084\7#\2\2\u0084\u00a4\3")
+        buf.write("\2\2\2\u0085\u0086\7\32\2\2\u0086\u00a4\7#\2\2\u0087\u0088")
+        buf.write("\5\24\13\2\u0088\u008c\7$\2\2\u0089\u008b\5\b\5\2\u008a")
+        buf.write("\u0089\3\2\2\2\u008b\u008e\3\2\2\2\u008c\u008a\3\2\2\2")
+        buf.write("\u008c\u008d\3\2\2\2\u008d\u008f\3\2\2\2\u008e\u008c\3")
+        buf.write("\2\2\2\u008f\u0090\7%\2\2\u0090\u0091\7#\2\2\u0091\u00a4")
+        buf.write("\3\2\2\2\u0092\u0093\5\b\5\2\u0093\u0097\7$\2\2\u0094")
+        buf.write("\u0096\5\b\5\2\u0095\u0094\3\2\2\2\u0096\u0099\3\2\2\2")
+        buf.write("\u0097\u0095\3\2\2\2\u0097\u0098\3\2\2\2\u0098\u009a\3")
+        buf.write("\2\2\2\u0099\u0097\3\2\2\2\u009a\u009b\7%\2\2\u009b\u009c")
+        buf.write("\7#\2\2\u009c\u00a4\3\2\2\2\u009d\u009e\7\34\2\2\u009e")
+        buf.write("\u009f\7$\2\2\u009f\u00a0\5\b\5\2\u00a0\u00a1\7%\2\2\u00a1")
+        buf.write("\u00a2\7#\2\2\u00a2\u00a4\3\2\2\2\u00a3K\3\2\2\2\u00a3")
+        buf.write("N\3\2\2\2\u00a3\\\3\2\2\2\u00a3u\3\2\2\2\u00a3\u0081\3")
+        buf.write("\2\2\2\u00a3\u0085\3\2\2\2\u00a3\u0087\3\2\2\2\u00a3\u0092")
+        buf.write("\3\2\2\2\u00a3\u009d\3\2\2\2\u00a4\r\3\2\2\2\u00a5\u00a6")
+        buf.write("\5\20\t\2\u00a6\u00a7\7\36\2\2\u00a7\u00a8\5\b\5\2\u00a8")
+        buf.write("\17\3\2\2\2\u00a9\u00b1\7+\2\2\u00aa\u00b1\7\37\2\2\u00ab")
+        buf.write("\u00ac\7+\2\2\u00ac\u00ad\7$\2\2\u00ad\u00ae\5\20\t\2")
+        buf.write("\u00ae\u00af\7%\2\2\u00af\u00b1\3\2\2\2\u00b0\u00a9\3")
+        buf.write("\2\2\2\u00b0\u00aa\3\2\2\2\u00b0\u00ab\3\2\2\2\u00b1\21")
+        buf.write("\3\2\2\2\u00b2\u00b3\7+\2\2\u00b3\u00b4\7\"\2\2\u00b4")
+        buf.write("\u00b5\5\6\4\2\u00b5\23\3\2\2\2\u00b6\u00b7\5\6\4\2\u00b7")
+        buf.write("\u00b8\7+\2\2\u00b8\u00bc\7$\2\2\u00b9\u00bb\5\22\n\2")
+        buf.write("\u00ba\u00b9\3\2\2\2\u00bb\u00be\3\2\2\2\u00bc\u00ba\3")
+        buf.write("\2\2\2\u00bc\u00bd\3\2\2\2\u00bd\u00bf\3\2\2\2\u00be\u00bc")
+        buf.write("\3\2\2\2\u00bf\u00c0\7%\2\2\u00c0\u00c4\7&\2\2\u00c1\u00c3")
+        buf.write("\5\f\7\2\u00c2\u00c1\3\2\2\2\u00c3\u00c6\3\2\2\2\u00c4")
+        buf.write("\u00c2\3\2\2\2\u00c4\u00c5\3\2\2\2\u00c5\u00c7\3\2\2\2")
+        buf.write("\u00c6\u00c4\3\2\2\2\u00c7\u00c8\7\'\2\2\u00c8\25\3\2")
+        buf.write("\2\2\u00c9\u00ca\3\2\2\2\u00ca\27\3\2\2\2\u00cb\u00cc")
+        buf.write("\7+\2\2\u00cc\u00cd\7$\2\2\u00cd\u00ce\5\6\4\2\u00ce\u00cf")
+        buf.write("\7%\2\2\u00cf\31\3\2\2\2\u00d0\u00d1\5\24\13\2\u00d1\33")
+        buf.write("\3\2\2\2\22\'.;?AVdmq{\u008c\u0097\u00a3\u00b0\u00bc\u00c4")
         return buf.getvalue()
 
 
@@ -628,8 +645,11 @@ class PeaceParser ( Parser ):
         def LParen(self):
             return self.getToken(PeaceParser.LParen, 0)
 
-        def expression(self):
-            return self.getTypedRuleContext(PeaceParser.ExpressionContext,0)
+        def expression(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(PeaceParser.ExpressionContext)
+            else:
+                return self.getTypedRuleContext(PeaceParser.ExpressionContext,i)
 
 
         def RParen(self):
@@ -670,6 +690,16 @@ class PeaceParser ( Parser ):
                 return self.getTypedRuleContext(PeaceParser.CaseContext,i)
 
 
+        def Return(self):
+            return self.getToken(PeaceParser.Return, 0)
+
+        def func(self):
+            return self.getTypedRuleContext(PeaceParser.FuncContext,0)
+
+
+        def Print(self):
+            return self.getToken(PeaceParser.Print, 0)
+
         def getRuleIndex(self):
             return PeaceParser.RULE_statement
 
@@ -690,17 +720,18 @@ class PeaceParser ( Parser ):
         self.enterRule(localctx, 10, self.RULE_statement)
         self._la = 0 # Token type
         try:
-            self.state = 127
+            self.state = 161
             self._errHandler.sync(self)
-            token = self._input.LA(1)
-            if token in [PeaceParser.Let]:
+            la_ = self._interp.adaptivePredict(self._input,12,self._ctx)
+            if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 73
                 self.vardec()
                 self.state = 74
                 self.match(PeaceParser.Semicolon)
                 pass
-            elif token in [PeaceParser.While]:
+
+            elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 76
                 self.match(PeaceParser.While)
@@ -715,7 +746,7 @@ class PeaceParser ( Parser ):
                 self.state = 84
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PeaceParser.Let) | (1 << PeaceParser.While) | (1 << PeaceParser.If) | (1 << PeaceParser.Match))) != 0):
+                while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PeaceParser.Int) | (1 << PeaceParser.Bool) | (1 << PeaceParser.Void) | (1 << PeaceParser.String) | (1 << PeaceParser.Let) | (1 << PeaceParser.While) | (1 << PeaceParser.If) | (1 << PeaceParser.Return) | (1 << PeaceParser.Print) | (1 << PeaceParser.Match) | (1 << PeaceParser.Amp) | (1 << PeaceParser.LParen) | (1 << PeaceParser.Identifier) | (1 << PeaceParser.Digits))) != 0):
                     self.state = 81
                     self.statement()
                     self.state = 86
@@ -727,7 +758,8 @@ class PeaceParser ( Parser ):
                 self.state = 88
                 self.match(PeaceParser.Semicolon)
                 pass
-            elif token in [PeaceParser.If]:
+
+            elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 90
                 self.match(PeaceParser.If)
@@ -742,7 +774,7 @@ class PeaceParser ( Parser ):
                 self.state = 98
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PeaceParser.Let) | (1 << PeaceParser.While) | (1 << PeaceParser.If) | (1 << PeaceParser.Match))) != 0):
+                while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PeaceParser.Int) | (1 << PeaceParser.Bool) | (1 << PeaceParser.Void) | (1 << PeaceParser.String) | (1 << PeaceParser.Let) | (1 << PeaceParser.While) | (1 << PeaceParser.If) | (1 << PeaceParser.Return) | (1 << PeaceParser.Print) | (1 << PeaceParser.Match) | (1 << PeaceParser.Amp) | (1 << PeaceParser.LParen) | (1 << PeaceParser.Identifier) | (1 << PeaceParser.Digits))) != 0):
                     self.state = 95
                     self.statement()
                     self.state = 100
@@ -762,7 +794,7 @@ class PeaceParser ( Parser ):
                     self.state = 107
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
-                    while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PeaceParser.Let) | (1 << PeaceParser.While) | (1 << PeaceParser.If) | (1 << PeaceParser.Match))) != 0):
+                    while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PeaceParser.Int) | (1 << PeaceParser.Bool) | (1 << PeaceParser.Void) | (1 << PeaceParser.String) | (1 << PeaceParser.Let) | (1 << PeaceParser.While) | (1 << PeaceParser.If) | (1 << PeaceParser.Return) | (1 << PeaceParser.Print) | (1 << PeaceParser.Match) | (1 << PeaceParser.Amp) | (1 << PeaceParser.LParen) | (1 << PeaceParser.Identifier) | (1 << PeaceParser.Digits))) != 0):
                         self.state = 104
                         self.statement()
                         self.state = 109
@@ -776,7 +808,8 @@ class PeaceParser ( Parser ):
                 self.state = 113
                 self.match(PeaceParser.Semicolon)
                 pass
-            elif token in [PeaceParser.Match]:
+
+            elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 115
                 self.match(PeaceParser.Match)
@@ -799,8 +832,83 @@ class PeaceParser ( Parser ):
                 self.state = 125
                 self.match(PeaceParser.Semicolon)
                 pass
-            else:
-                raise NoViableAltException(self)
+
+            elif la_ == 5:
+                self.enterOuterAlt(localctx, 5)
+                self.state = 127
+                self.match(PeaceParser.Return)
+                self.state = 128
+                self.expression(0)
+                self.state = 129
+                self.match(PeaceParser.Semicolon)
+                pass
+
+            elif la_ == 6:
+                self.enterOuterAlt(localctx, 6)
+                self.state = 131
+                self.match(PeaceParser.Return)
+                self.state = 132
+                self.match(PeaceParser.Semicolon)
+                pass
+
+            elif la_ == 7:
+                self.enterOuterAlt(localctx, 7)
+                self.state = 133
+                self.func()
+                self.state = 134
+                self.match(PeaceParser.LParen)
+                self.state = 138
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PeaceParser.Amp) | (1 << PeaceParser.Identifier) | (1 << PeaceParser.Digits))) != 0):
+                    self.state = 135
+                    self.expression(0)
+                    self.state = 140
+                    self._errHandler.sync(self)
+                    _la = self._input.LA(1)
+
+                self.state = 141
+                self.match(PeaceParser.RParen)
+                self.state = 142
+                self.match(PeaceParser.Semicolon)
+                pass
+
+            elif la_ == 8:
+                self.enterOuterAlt(localctx, 8)
+                self.state = 144
+                self.expression(0)
+                self.state = 145
+                self.match(PeaceParser.LParen)
+                self.state = 149
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PeaceParser.Amp) | (1 << PeaceParser.Identifier) | (1 << PeaceParser.Digits))) != 0):
+                    self.state = 146
+                    self.expression(0)
+                    self.state = 151
+                    self._errHandler.sync(self)
+                    _la = self._input.LA(1)
+
+                self.state = 152
+                self.match(PeaceParser.RParen)
+                self.state = 153
+                self.match(PeaceParser.Semicolon)
+                pass
+
+            elif la_ == 9:
+                self.enterOuterAlt(localctx, 9)
+                self.state = 155
+                self.match(PeaceParser.Print)
+                self.state = 156
+                self.match(PeaceParser.LParen)
+                self.state = 157
+                self.expression(0)
+                self.state = 158
+                self.match(PeaceParser.RParen)
+                self.state = 159
+                self.match(PeaceParser.Semicolon)
+                pass
+
 
         except RecognitionException as re:
             localctx.exception = re
@@ -848,11 +956,11 @@ class PeaceParser ( Parser ):
         self.enterRule(localctx, 12, self.RULE_case)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 129
+            self.state = 163
             self.pattern()
-            self.state = 130
+            self.state = 164
             self.match(PeaceParser.MatchArrow)
-            self.state = 131
+            self.state = 165
             self.expression(0)
         except RecognitionException as re:
             localctx.exception = re
@@ -904,30 +1012,30 @@ class PeaceParser ( Parser ):
         localctx = PeaceParser.PatternContext(self, self._ctx, self.state)
         self.enterRule(localctx, 14, self.RULE_pattern)
         try:
-            self.state = 140
+            self.state = 174
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,11,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,13,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 133
+                self.state = 167
                 self.match(PeaceParser.Identifier)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 134
+                self.state = 168
                 self.match(PeaceParser.Any)
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 135
+                self.state = 169
                 self.match(PeaceParser.Identifier)
-                self.state = 136
+                self.state = 170
                 self.match(PeaceParser.LParen)
-                self.state = 137
+                self.state = 171
                 self.pattern()
-                self.state = 138
+                self.state = 172
                 self.match(PeaceParser.RParen)
                 pass
 
@@ -977,11 +1085,11 @@ class PeaceParser ( Parser ):
         self.enterRule(localctx, 16, self.RULE_parameter)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 142
+            self.state = 176
             self.match(PeaceParser.Identifier)
-            self.state = 143
+            self.state = 177
             self.match(PeaceParser.Colon)
-            self.state = 144
+            self.state = 178
             self.atype()
         except RecognitionException as re:
             localctx.exception = re
@@ -1052,37 +1160,37 @@ class PeaceParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 146
+            self.state = 180
             self.atype()
-            self.state = 147
+            self.state = 181
             self.match(PeaceParser.Identifier)
-            self.state = 148
+            self.state = 182
             self.match(PeaceParser.LParen)
-            self.state = 152
+            self.state = 186
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==PeaceParser.Identifier:
-                self.state = 149
+                self.state = 183
                 self.parameter()
-                self.state = 154
+                self.state = 188
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 155
+            self.state = 189
             self.match(PeaceParser.RParen)
-            self.state = 156
+            self.state = 190
             self.match(PeaceParser.LBracket)
-            self.state = 160
+            self.state = 194
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PeaceParser.Let) | (1 << PeaceParser.While) | (1 << PeaceParser.If) | (1 << PeaceParser.Match))) != 0):
-                self.state = 157
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PeaceParser.Int) | (1 << PeaceParser.Bool) | (1 << PeaceParser.Void) | (1 << PeaceParser.String) | (1 << PeaceParser.Let) | (1 << PeaceParser.While) | (1 << PeaceParser.If) | (1 << PeaceParser.Return) | (1 << PeaceParser.Print) | (1 << PeaceParser.Match) | (1 << PeaceParser.Amp) | (1 << PeaceParser.LParen) | (1 << PeaceParser.Identifier) | (1 << PeaceParser.Digits))) != 0):
+                self.state = 191
                 self.statement()
-                self.state = 162
+                self.state = 196
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 163
+            self.state = 197
             self.match(PeaceParser.RBracket)
         except RecognitionException as re:
             localctx.exception = re
@@ -1169,13 +1277,13 @@ class PeaceParser ( Parser ):
         self.enterRule(localctx, 22, self.RULE_cdef)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 167
+            self.state = 201
             self.match(PeaceParser.Identifier)
-            self.state = 168
+            self.state = 202
             self.match(PeaceParser.LParen)
-            self.state = 169
+            self.state = 203
             self.atype()
-            self.state = 170
+            self.state = 204
             self.match(PeaceParser.RParen)
         except RecognitionException as re:
             localctx.exception = re
@@ -1216,7 +1324,7 @@ class PeaceParser ( Parser ):
         self.enterRule(localctx, 24, self.RULE_program)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 172
+            self.state = 206
             self.func()
         except RecognitionException as re:
             localctx.exception = re
