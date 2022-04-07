@@ -78,7 +78,12 @@ vardec: Let Identifier Colon atype Assign expression;
 statement:  vardec Semicolon |
             While LParen expression RParen LBracket statement* RBracket Semicolon |
             If LParen expression RParen LBracket statement* RBracket (Else LBracket statement* RBracket)? Semicolon |
-            Match expression LBracket case* RBracket Semicolon
+            Match expression LBracket case* RBracket Semicolon |
+            return expression Semicolon | 
+            return Semicolon | 
+            func LParen expression* RParen Semicolon |
+            expression LParen expression* RParen Semicolon |
+            print LParen expression RParen Semicolon
             ;
 
 case: pattern MatchArrow expression ;
@@ -88,5 +93,3 @@ func: atype Identifier LParen parameter* RParen LBracket statement* RBracket;
 enumdef: ;
 cdef: Identifier LParen atype RParen;
 program: func;
-
-
