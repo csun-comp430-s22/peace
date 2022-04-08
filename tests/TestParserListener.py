@@ -1,8 +1,11 @@
+from dataclasses import InitVar
+from multiprocessing.pool import INIT
 from antlr.generated.PeaceParser import PeaceParser
 from antlr.generated.PeaceListener import PeaceListener
 
 class TestListener(PeaceListener):
-    rules_visited: list = []
+    def __init__(self):
+        self.rules_visited = []
 
     # Enter a parse tree produced by PeaceParser#basetype.
     def enterBasetype(self, ctx:PeaceParser.BasetypeContext):
@@ -59,11 +62,11 @@ class TestListener(PeaceListener):
 
 
     # Enter a parse tree produced by PeaceParser#case.
-    def enterCase(self, ctx:PeaceParser.CaseContext):
+    def enterCase_(self, ctx:PeaceParser.Case_Context):
         self.rules_visited.append(ctx.getRuleIndex());
 
     # Exit a parse tree produced by PeaceParser#case.
-    def exitCase(self, ctx:PeaceParser.CaseContext):
+    def exitCase_(self, ctx:PeaceParser.Case_Context):
         self.rules_visited.append(ctx.getRuleIndex());
 
 
