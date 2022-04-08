@@ -50,6 +50,7 @@ RParen: ')';
 LBracket: '{';
 RBracket: '}';
 DoubleQuote: '"';
+Comma: ',';
 
 WS : [ \t]+ -> skip;
 Newline : ('\r' '\n'? | '\n') -> skip;
@@ -73,13 +74,15 @@ expression: Digits |
             expression (Add | Subtract | Multiply | Divide | Modulo ) expression |
             expression (LessThan | GreaterThan | LessThanOrEq | GreaterThanOrEq ) expression |
             expression LParen expression* RParen |
+            expression Assign expression |
             Amp Identifier
             ;
 vardec: Let Identifier Colon atype Assign expression;
-statement:  vardec Semicolon |
+statement:  expression Semicolon |
+            vardec Semicolon |
             While LParen expression RParen LBracket statement* RBracket (Semicolon)? |
             If LParen expression RParen LBracket statement* RBracket (Else LBracket statement* RBracket)? (Semicolon)? |
-            Match expression LBracket case_* RBracket (Semicolon)? |
+            Match expression LBracket case_ (Comma case_)* RBracket (Semicolon)? |
             Return expression Semicolon | 
             Return Semicolon | 
             func LParen expression* RParen Semicolon |
@@ -87,8 +90,8 @@ statement:  vardec Semicolon |
             Print LParen expression RParen Semicolon
             ;
 
-case_: pattern MatchArrow expression ;
-pattern: Identifier | Any | Identifier LParen pattern RParen;
+case_: pattern MatchArrow expression;
+pattern: Identifier | Any | Identifier LParen pattern RParen | Digits;
 parameter: Identifier Colon atype;
 func: atype Identifier LParen parameter* RParen LBracket statement* RBracket;
 enumdef: Enum Identifier Assign cdef+ Semicolon;

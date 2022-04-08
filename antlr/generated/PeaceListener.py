@@ -62,12 +62,12 @@ class PeaceListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PeaceParser#case.
-    def enterCase(self, ctx:PeaceParser.CaseContext):
+    # Enter a parse tree produced by PeaceParser#case_.
+    def enterCase_(self, ctx:PeaceParser.Case_Context):
         pass
 
-    # Exit a parse tree produced by PeaceParser#case.
-    def exitCase(self, ctx:PeaceParser.CaseContext):
+    # Exit a parse tree produced by PeaceParser#case_.
+    def exitCase_(self, ctx:PeaceParser.Case_Context):
         pass
 
 
