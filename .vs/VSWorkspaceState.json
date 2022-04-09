@@ -5,6 +5,6 @@
     "\\antlr\\generated",
     "\\tests"
   ],
-  "SelectedNode": "\\tests\\test_lexer.py",
+  "SelectedNode": "\\tests\\TestParser.py",
   "PreviewInSolutionExplorer": false
 }
