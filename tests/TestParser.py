@@ -170,6 +170,46 @@ class TestParser(unittest.TestCase):
         tree = parser.program()
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)
         assert(tree_expected == tree_actual)
+
+    def test_return_exp(self):
+        test_input = "return x;"
+        tree_expected = '(statment return (expression x) ;)'
+        parser = create_parser_for(test_input)
+        tree = parser.statement()
+        tree_actual = Trees.toStringTree(tree, None, PeaceParser)
+        assert(tree_expected == tree_actual)
+
+    def test_return(self):
+        test_input = "return;"
+        tree_expected = '(statment return ;)'
+        parser = create_parser_for(test_input)
+        tree = parser.statement()
+        tree_actual= Trees.toStringTree(tree, None, PeaceParser)
+        assert(tree_expected == tree_actual)
+    
+    #def test_func(self):
+        #test_input = "func(x);"
+        #tree_expected = '(statment func ( (expression x) ) ;)'
+        #parser = create_parser_for(test_input)
+        #tree = parser.statement()
+        #tree_actual = Trees.toStringTree(tree, None, PeaceParser)
+        #assert(tree_expected == tree_actual)
+
+    def test_exp_exp(self):
+        test_input = "x(y);"
+        tree_expected = '(statment expression (expression x) ( (expression y) ) ;)'
+        parser = create_parser_for(test_input)
+        tree = parser.statement()
+        tree_actual = Trees.toStringTree(tree, None, PeaceParser)
+        assert(tree_expected == tree_actual)
+
+    def test_print(self):
+        test_input = "print(ok);"
+        tree_expected = '(statment Print ( (expression ok) ) ;)'
+        parser = create_parser_for(test_input)
+        tree = parser.statement()
+        tree_actual = Trees.toStringTree(tree, None, PeaceParser)
+        assert(tree_expected == tree_actual)
     
 if __name__ == '__main__':
     unittest.main()
