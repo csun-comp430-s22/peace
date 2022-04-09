@@ -87,7 +87,7 @@ class TestListener(PeaceListener):
     def exitParameter(self, ctx:PeaceParser.ParameterContext):
         self.rules_visited.append(ctx.getRuleIndex());
 
-
+    """
     # Enter a parse tree produced by PeaceParser#func.
     def enterFunc(self, ctx:PeaceParser.FuncContext):
         self.rules_visited.append(ctx.getRuleIndex());
@@ -95,6 +95,7 @@ class TestListener(PeaceListener):
     # Exit a parse tree produced by PeaceParser#func.
     def exitFunc(self, ctx:PeaceParser.FuncContext):
         self.rules_visited.append(ctx.getRuleIndex());
+    """
 
 
     # Enter a parse tree produced by PeaceParser#enumdef.

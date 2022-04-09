@@ -1,4 +1,4 @@
-# Generated from c:\Users\nick\Documents\CSUN\COMP430\peace\antlr\Peace.g4 by ANTLR 4.8
+# Generated from d:\Github\Peace\antlr\Peace.g4 by ANTLR 4.8
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .PeaceParser import PeaceParser
@@ -89,21 +89,12 @@ class PeaceListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PeaceParser#func.
-    def enterFunc(self, ctx:PeaceParser.FuncContext):
+    # Enter a parse tree produced by PeaceParser#func_stmt.
+    def enterFunc_stmt(self, ctx:PeaceParser.Func_stmtContext):
         pass
 
-    # Exit a parse tree produced by PeaceParser#func.
-    def exitFunc(self, ctx:PeaceParser.FuncContext):
-        pass
-
-
-    # Enter a parse tree produced by PeaceParser#enumdef.
-    def enterEnumdef(self, ctx:PeaceParser.EnumdefContext):
-        pass
-
-    # Exit a parse tree produced by PeaceParser#enumdef.
-    def exitEnumdef(self, ctx:PeaceParser.EnumdefContext):
+    # Exit a parse tree produced by PeaceParser#func_stmt.
+    def exitFunc_stmt(self, ctx:PeaceParser.Func_stmtContext):
         pass
 
 
@@ -113,6 +104,15 @@ class PeaceListener(ParseTreeListener):
 
     # Exit a parse tree produced by PeaceParser#cdef.
     def exitCdef(self, ctx:PeaceParser.CdefContext):
+        pass
+
+
+    # Enter a parse tree produced by PeaceParser#enumdef.
+    def enterEnumdef(self, ctx:PeaceParser.EnumdefContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#enumdef.
+    def exitEnumdef(self, ctx:PeaceParser.EnumdefContext):
         pass
 
 
