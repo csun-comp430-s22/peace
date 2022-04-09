@@ -162,14 +162,13 @@ class TestParser(unittest.TestCase):
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)
         assert(tree_expected == tree_actual)
 
-    def test_program(self): #issue
-        test_input = "void main() { print(ok); } enum nums = { one: int; }"
-        tree_expected = '(statement (enumdef enum (expression nums) = { (cdef one : (atype (basetype int)) ;) }) '\
+    def test_program(self):
+        test_input = "enum nums = { one: int; } void main() { print(ok); }"
+        tree_expected = '(program (enumdef enum (expression nums) = { (cdef one : (atype (basetype int)) ;) }) '\
                         '(func_stmt (atype (basetype void)) main ( ) { (statement print ( (expression ok) ) ;) }))'
         parser = create_parser_for(test_input)
-        tree = parser.statement()
+        tree = parser.program()
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)
-        print(tree_actual)
         assert(tree_expected == tree_actual)
     
 if __name__ == '__main__':
