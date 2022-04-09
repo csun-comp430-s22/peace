@@ -66,7 +66,7 @@ FloatConst: Digits '.' Digits;
 
 //Rules
 basetype: ( Int | Bool | Void | String | Identifier ); 
-funcpointertype: LParen basetype Multiply RParen Arrow basetype; 
+funcpointertype: LParen basetype Multiply RParen Arrow basetype;
 atype: basetype | funcpointertype;
 
 expression: Digits |
@@ -75,7 +75,8 @@ expression: Digits |
             expression (LessThan | GreaterThan | LessThanOrEq | GreaterThanOrEq ) expression |
             expression LParen expression* RParen |
             expression Assign expression |
-            Amp Identifier
+            Amp Identifier |
+            Enum
             ;
 vardec: Let Identifier Colon atype Assign expression;
 statement:  expression Semicolon |
@@ -85,15 +86,17 @@ statement:  expression Semicolon |
             Match expression LBracket case_ (Comma case_)* RBracket (Semicolon)? |
             Return expression Semicolon | 
             Return Semicolon | 
-            func LParen expression* RParen Semicolon |
             expression LParen expression* RParen Semicolon |
-            Print LParen expression RParen Semicolon
-            ;
+            Print LParen expression RParen Semicolon | 
+            Identifier LParen expression* RParen Semicolon |
+            func_stmt |
+            enumdef;
 
+//func_call: Identifier LParen expression* RParen Semicolon;
 case_: pattern MatchArrow expression;
-pattern: Identifier | Any | Identifier LParen pattern RParen | Digits;
+pattern: Digits | Identifier | Any | Identifier LParen pattern RParen;
 parameter: Identifier Colon atype;
-func: atype Identifier LParen parameter* RParen LBracket statement* RBracket;
-enumdef: Enum Identifier Assign cdef+ Semicolon;
-cdef: Identifier LParen atype RParen;
-program: enumdef* func+;
+func_stmt: atype Identifier LParen parameter* (Comma parameter)* RParen LBracket statement* RBracket (Semicolon)?;
+cdef: Identifier Colon atype Semicolon;
+enumdef: Enum expression Assign LBracket cdef+ RBracket (Semicolon)?;
+program: enumdef* func_stmt+;
