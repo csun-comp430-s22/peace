@@ -88,11 +88,12 @@ statement:  expression Semicolon |
             Return Semicolon | 
             expression LParen expression* RParen Semicolon |
             Print LParen expression RParen Semicolon | 
-            Identifier LParen expression* RParen Semicolon |
+            func_call |
             func_stmt |
             enumdef;
+            
 
-//func_call: Identifier LParen expression* RParen Semicolon;
+func_call: expression LParen expression* RParen Semicolon;
 case_: pattern MatchArrow expression;
 pattern: Digits | Identifier | Any | Identifier LParen pattern RParen;
 parameter: Identifier Colon atype;
