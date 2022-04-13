@@ -62,21 +62,75 @@ class PeaceListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PeaceParser#case_.
-    def enterCase_(self, ctx:PeaceParser.Case_Context):
+    # Enter a parse tree produced by PeaceParser#return_stmt.
+    def enterReturn_stmt(self, ctx:PeaceParser.Return_stmtContext):
         pass
 
-    # Exit a parse tree produced by PeaceParser#case_.
-    def exitCase_(self, ctx:PeaceParser.Case_Context):
+    # Exit a parse tree produced by PeaceParser#return_stmt.
+    def exitReturn_stmt(self, ctx:PeaceParser.Return_stmtContext):
         pass
 
 
-    # Enter a parse tree produced by PeaceParser#pattern.
-    def enterPattern(self, ctx:PeaceParser.PatternContext):
+    # Enter a parse tree produced by PeaceParser#return_nothing.
+    def enterReturn_nothing(self, ctx:PeaceParser.Return_nothingContext):
         pass
 
-    # Exit a parse tree produced by PeaceParser#pattern.
-    def exitPattern(self, ctx:PeaceParser.PatternContext):
+    # Exit a parse tree produced by PeaceParser#return_nothing.
+    def exitReturn_nothing(self, ctx:PeaceParser.Return_nothingContext):
+        pass
+
+
+    # Enter a parse tree produced by PeaceParser#return_exp.
+    def enterReturn_exp(self, ctx:PeaceParser.Return_expContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#return_exp.
+    def exitReturn_exp(self, ctx:PeaceParser.Return_expContext):
+        pass
+
+
+    # Enter a parse tree produced by PeaceParser#print_stmt.
+    def enterPrint_stmt(self, ctx:PeaceParser.Print_stmtContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#print_stmt.
+    def exitPrint_stmt(self, ctx:PeaceParser.Print_stmtContext):
+        pass
+
+
+    # Enter a parse tree produced by PeaceParser#match_stmt.
+    def enterMatch_stmt(self, ctx:PeaceParser.Match_stmtContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#match_stmt.
+    def exitMatch_stmt(self, ctx:PeaceParser.Match_stmtContext):
+        pass
+
+
+    # Enter a parse tree produced by PeaceParser#func_call.
+    def enterFunc_call(self, ctx:PeaceParser.Func_callContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#func_call.
+    def exitFunc_call(self, ctx:PeaceParser.Func_callContext):
+        pass
+
+
+    # Enter a parse tree produced by PeaceParser#match_case.
+    def enterMatch_case(self, ctx:PeaceParser.Match_caseContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#match_case.
+    def exitMatch_case(self, ctx:PeaceParser.Match_caseContext):
+        pass
+
+
+    # Enter a parse tree produced by PeaceParser#match_pattern.
+    def enterMatch_pattern(self, ctx:PeaceParser.Match_patternContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#match_pattern.
+    def exitMatch_pattern(self, ctx:PeaceParser.Match_patternContext):
         pass
 
 

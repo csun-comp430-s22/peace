@@ -65,7 +65,7 @@ Digits: Digit+;
 FloatConst: Digits '.' Digits;
 
 //Rules
-basetype: ( Int | Bool | Void | String | Identifier ); 
+basetype: Int | Bool | Void | String | Identifier; 
 funcpointertype: LParen basetype Multiply RParen Arrow basetype;
 atype: basetype | funcpointertype;
 
@@ -79,24 +79,31 @@ expression: Digits |
             Enum
             ;
 vardec: Let Identifier Colon atype Assign expression;
+
 statement:  expression Semicolon |
             vardec Semicolon |
             While LParen expression RParen LBracket statement* RBracket (Semicolon)? |
             If LParen expression RParen LBracket statement* RBracket (Else LBracket statement* RBracket)? (Semicolon)? |
-            Match expression LBracket case_ (Comma case_)* RBracket (Semicolon)? |
-            Return expression Semicolon | 
-            Return Semicolon | 
-            expression LParen expression* RParen Semicolon |
-            Print LParen expression RParen Semicolon | 
-            Identifier LParen expression* RParen Semicolon |
-            func_stmt |
-            enumdef;
+            match_stmt |
+            return_stmt |
+            print_stmt |
+            func_call;
 
-//func_call: Identifier LParen expression* RParen Semicolon;
-case_: pattern MatchArrow expression;
-pattern: Digits | Identifier | Any | Identifier LParen pattern RParen;
+return_stmt: return_nothing | return_exp;
+return_nothing: Return Semicolon;
+return_exp: Return expression Semicolon;
+
+print_stmt: Print LParen expression RParen Semicolon;
+match_stmt: Match expression LBracket match_case (Comma match_case)* RBracket (Semicolon)? ;
+
+func_call: expression LParen expression* RParen Semicolon;
+
+match_case: match_pattern MatchArrow expression;
+match_pattern: Digits | Identifier | Any | Identifier LParen match_pattern RParen;
+
 parameter: Identifier Colon atype;
 func_stmt: atype Identifier LParen parameter* (Comma parameter)* RParen LBracket statement* RBracket (Semicolon)?;
+
 cdef: Identifier Colon atype Semicolon;
 enumdef: Enum expression Assign LBracket cdef+ RBracket (Semicolon)?;
 program: enumdef* func_stmt+;
