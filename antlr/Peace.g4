@@ -69,28 +69,28 @@ basetype: ( Int | Bool | Void | String | Identifier );
 funcpointertype: LParen basetype Multiply RParen Arrow basetype;
 atype: basetype | funcpointertype;
 
-expression: Digits |
-            Identifier |
-            expression (Add | Subtract | Multiply | Divide | Modulo ) expression |
-            expression (LessThan | GreaterThan | LessThanOrEq | GreaterThanOrEq ) expression |
-            expression LParen expression* RParen |
-            expression Assign expression |
-            Amp Identifier |
-            Enum
+expression: Digits #DigitExpr
+            | Identifier #IdentExpr
+            | expression (Add | Subtract | Multiply | Divide | Modulo ) expression #ArithmeticExpr
+            | expression (LessThan | GreaterThan | LessThanOrEq | GreaterThanOrEq ) expression #CompExpr
+            | expression LParen expression* RParen #FuncPointExpr
+            | expression Assign expression  #AssignExpr
+            | Amp Identifier  #FuncPointCreateExpr
+            | Enum #EnumExpr
             ;
 vardec: Let Identifier Colon atype Assign expression;
-statement:  expression Semicolon |
-            vardec Semicolon |
-            While LParen expression RParen LBracket statement* RBracket (Semicolon)? |
-            If LParen expression RParen LBracket statement* RBracket (Else LBracket statement* RBracket)? (Semicolon)? |
-            Match expression LBracket case_ (Comma case_)* RBracket (Semicolon)? |
-            Return expression Semicolon | 
-            Return Semicolon | 
-            expression LParen expression* RParen Semicolon |
-            Print LParen expression RParen Semicolon | 
-            func_call |
-            func_stmt |
-            enumdef;
+statement:  expression Semicolon    #ExprStmt
+            | vardec Semicolon      #VarDecStmt
+            | While LParen expression RParen LBracket statement* RBracket (Semicolon)?  #WhileStmt
+            | If LParen expression RParen LBracket statement* RBracket (Else LBracket statement* RBracket)? (Semicolon)?    #IfStmt
+            | Match expression LBracket case_ (Comma case_)* RBracket (Semicolon)?  #MatchStmt 
+            | Return expression Semicolon   #ReturnExprStmt 
+            | Return Semicolon  #ReturnStmt 
+            | Print LParen expression RParen Semicolon  #PrintStmt 
+            | func_call #FuncCallStmt 
+            | func_stmt #FuncStmt 
+            | enumdef   #EnumDefStmt
+            ;
             
 
 func_call: expression LParen expression* RParen Semicolon;
