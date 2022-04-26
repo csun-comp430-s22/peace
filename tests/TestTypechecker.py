@@ -27,10 +27,19 @@ def parser_test(tree):
 
 class TestParser(unittest.TestCase):
     def test_arithmetic_expression(self):
-        test_input = "20 + 30"
+        test_input = """
+enum foo {
+    int bar,
+    int baz
+}
+
+void main() {
+    
+}
+        """
         tree_expected = ''
         parser = create_parser_for(test_input)
-        tree = parser.statement()
+        tree = parser.program()
         #assert(tree_expected == tree_actual)
 
 if __name__ == '__main__':

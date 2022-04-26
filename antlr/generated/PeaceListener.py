@@ -215,15 +215,6 @@ class PeaceListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PeaceParser#EnumDefStmt.
-    def enterEnumDefStmt(self, ctx:PeaceParser.EnumDefStmtContext):
-        pass
-
-    # Exit a parse tree produced by PeaceParser#EnumDefStmt.
-    def exitEnumDefStmt(self, ctx:PeaceParser.EnumDefStmtContext):
-        pass
-
-
     # Enter a parse tree produced by PeaceParser#func_call.
     def enterFunc_call(self, ctx:PeaceParser.Func_callContext):
         pass

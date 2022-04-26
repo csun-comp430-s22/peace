@@ -90,7 +90,6 @@ statement:  expression Semicolon    #ExprStmt
             | Print LParen expression RParen Semicolon  #PrintStmt 
             | func_call #FuncCallStmt 
             | func_stmt #FuncStmt 
-            | enumdef   #EnumDefStmt
             ;
             
 
