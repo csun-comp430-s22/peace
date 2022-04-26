@@ -68,10 +68,11 @@ FloatConst: Digits '.' Digits;
 basetype: ( Int | Bool | Void | String | Identifier ); 
 funcpointertype: LParen basetype Multiply RParen Arrow basetype;
 atype: basetype | funcpointertype;
+op: (Add | Subtract | Multiply | Divide | Modulo );
 
 expression: Digits #DigitExpr
             | Identifier #IdentExpr
-            | expression (Add | Subtract | Multiply | Divide | Modulo ) expression #ArithmeticExpr
+            | expression op expression #ArithmeticExpr
             | expression (LessThan | GreaterThan | LessThanOrEq | GreaterThanOrEq ) expression #CompExpr
             | expression LParen expression* RParen #FuncPointExpr
             | expression Assign expression  #AssignExpr

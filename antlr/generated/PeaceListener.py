@@ -35,6 +35,15 @@ class PeaceListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by PeaceParser#op.
+    def enterOp(self, ctx:PeaceParser.OpContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#op.
+    def exitOp(self, ctx:PeaceParser.OpContext):
+        pass
+
+
     # Enter a parse tree produced by PeaceParser#EnumExpr.
     def enterEnumExpr(self, ctx:PeaceParser.EnumExprContext):
         pass
