@@ -53,12 +53,30 @@ class PeaceListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by PeaceParser#BoolExpr.
+    def enterBoolExpr(self, ctx:PeaceParser.BoolExprContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#BoolExpr.
+    def exitBoolExpr(self, ctx:PeaceParser.BoolExprContext):
+        pass
+
+
     # Enter a parse tree produced by PeaceParser#IdentExpr.
     def enterIdentExpr(self, ctx:PeaceParser.IdentExprContext):
         pass
 
     # Exit a parse tree produced by PeaceParser#IdentExpr.
     def exitIdentExpr(self, ctx:PeaceParser.IdentExprContext):
+        pass
+
+
+    # Enter a parse tree produced by PeaceParser#FloatExpr.
+    def enterFloatExpr(self, ctx:PeaceParser.FloatExprContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#FloatExpr.
+    def exitFloatExpr(self, ctx:PeaceParser.FloatExprContext):
         pass
 
 
@@ -98,21 +116,21 @@ class PeaceListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PeaceParser#FuncPointExpr.
-    def enterFuncPointExpr(self, ctx:PeaceParser.FuncPointExprContext):
-        pass
-
-    # Exit a parse tree produced by PeaceParser#FuncPointExpr.
-    def exitFuncPointExpr(self, ctx:PeaceParser.FuncPointExprContext):
-        pass
-
-
     # Enter a parse tree produced by PeaceParser#AssignExpr.
     def enterAssignExpr(self, ctx:PeaceParser.AssignExprContext):
         pass
 
     # Exit a parse tree produced by PeaceParser#AssignExpr.
     def exitAssignExpr(self, ctx:PeaceParser.AssignExprContext):
+        pass
+
+
+    # Enter a parse tree produced by PeaceParser#FuncCallExpr.
+    def enterFuncCallExpr(self, ctx:PeaceParser.FuncCallExprContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#FuncCallExpr.
+    def exitFuncCallExpr(self, ctx:PeaceParser.FuncCallExprContext):
         pass
 
 
@@ -197,30 +215,12 @@ class PeaceListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PeaceParser#FuncCallStmt.
-    def enterFuncCallStmt(self, ctx:PeaceParser.FuncCallStmtContext):
+    # Enter a parse tree produced by PeaceParser#block.
+    def enterBlock(self, ctx:PeaceParser.BlockContext):
         pass
 
-    # Exit a parse tree produced by PeaceParser#FuncCallStmt.
-    def exitFuncCallStmt(self, ctx:PeaceParser.FuncCallStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by PeaceParser#FuncStmt.
-    def enterFuncStmt(self, ctx:PeaceParser.FuncStmtContext):
-        pass
-
-    # Exit a parse tree produced by PeaceParser#FuncStmt.
-    def exitFuncStmt(self, ctx:PeaceParser.FuncStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by PeaceParser#func_call.
-    def enterFunc_call(self, ctx:PeaceParser.Func_callContext):
-        pass
-
-    # Exit a parse tree produced by PeaceParser#func_call.
-    def exitFunc_call(self, ctx:PeaceParser.Func_callContext):
+    # Exit a parse tree produced by PeaceParser#block.
+    def exitBlock(self, ctx:PeaceParser.BlockContext):
         pass
 
 

@@ -71,10 +71,12 @@ atype: basetype | funcpointertype;
 op: (Add | Subtract | Multiply | Divide | Modulo );
 
 expression: Digits #DigitExpr
+            | FloatConst #FloatExpr
             | Identifier #IdentExpr
+            | (BoolTrue | BoolFalse) #BoolExpr
             | expression op expression #ArithmeticExpr
             | expression (LessThan | GreaterThan | LessThanOrEq | GreaterThanOrEq ) expression #CompExpr
-            | expression LParen expression* RParen #FuncPointExpr
+            | expression LParen expression* RParen #FuncCallExpr
             | expression Assign expression  #AssignExpr
             | Amp Identifier  #FuncPointCreateExpr
             | Enum #EnumExpr
@@ -82,22 +84,19 @@ expression: Digits #DigitExpr
 vardec: Let Identifier Colon atype Assign expression;
 statement:  expression Semicolon    #ExprStmt
             | vardec Semicolon      #VarDecStmt
-            | While LParen expression RParen LBracket statement* RBracket (Semicolon)?  #WhileStmt
-            | If LParen expression RParen LBracket statement* RBracket (Else LBracket statement* RBracket)? (Semicolon)?    #IfStmt
+            | While LParen expression RParen block (Semicolon)?  #WhileStmt
+            | If LParen expression RParen block (Else block)? (Semicolon)?    #IfStmt
             | Match expression LBracket case_ (Comma case_)* RBracket (Semicolon)?  #MatchStmt 
             | Return expression Semicolon   #ReturnExprStmt 
             | Return Semicolon  #ReturnStmt 
             | Print LParen expression RParen Semicolon  #PrintStmt 
-            | func_call #FuncCallStmt 
-            | func_stmt #FuncStmt 
             ;
-            
+block: LBracket statement* RBracket;    
 
-func_call: expression LParen expression* RParen Semicolon;
 case_: pattern MatchArrow expression;
 pattern: Digits | Identifier | Any | Identifier LParen pattern RParen;
 parameter: Identifier Colon atype;
-func_stmt: atype Identifier LParen parameter* (Comma parameter)* RParen LBracket statement* RBracket (Semicolon)?;
+func_stmt: atype Identifier LParen parameter (Comma parameter)* block (Semicolon)?;
 cdef: Identifier Colon atype Semicolon;
-enumdef: Enum expression Assign LBracket cdef+ RBracket (Semicolon)?;
+enumdef: Enum Identifier Assign LBracket cdef+ RBracket (Semicolon)?;
 program: enumdef* func_stmt+;
