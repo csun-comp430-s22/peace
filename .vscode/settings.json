@@ -3,7 +3,7 @@
         "mode": "external",
         "language": "Python3",
         "listeners": true,
-        "visitors": false,
+        "visitors": true,
         "outputDir": "generated"
     }
 }
