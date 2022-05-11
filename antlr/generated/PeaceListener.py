@@ -44,15 +44,6 @@ class PeaceListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PeaceParser#EnumExpr.
-    def enterEnumExpr(self, ctx:PeaceParser.EnumExprContext):
-        pass
-
-    # Exit a parse tree produced by PeaceParser#EnumExpr.
-    def exitEnumExpr(self, ctx:PeaceParser.EnumExprContext):
-        pass
-
-
     # Enter a parse tree produced by PeaceParser#BoolExpr.
     def enterBoolExpr(self, ctx:PeaceParser.BoolExprContext):
         pass
@@ -116,21 +107,21 @@ class PeaceListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by PeaceParser#FuncCallOrEnumExpr.
+    def enterFuncCallOrEnumExpr(self, ctx:PeaceParser.FuncCallOrEnumExprContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#FuncCallOrEnumExpr.
+    def exitFuncCallOrEnumExpr(self, ctx:PeaceParser.FuncCallOrEnumExprContext):
+        pass
+
+
     # Enter a parse tree produced by PeaceParser#AssignExpr.
     def enterAssignExpr(self, ctx:PeaceParser.AssignExprContext):
         pass
 
     # Exit a parse tree produced by PeaceParser#AssignExpr.
     def exitAssignExpr(self, ctx:PeaceParser.AssignExprContext):
-        pass
-
-
-    # Enter a parse tree produced by PeaceParser#FuncCallExpr.
-    def enterFuncCallExpr(self, ctx:PeaceParser.FuncCallExprContext):
-        pass
-
-    # Exit a parse tree produced by PeaceParser#FuncCallExpr.
-    def exitFuncCallExpr(self, ctx:PeaceParser.FuncCallExprContext):
         pass
 
 

@@ -29,11 +29,6 @@ class PeaceVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PeaceParser#EnumExpr.
-    def visitEnumExpr(self, ctx:PeaceParser.EnumExprContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by PeaceParser#BoolExpr.
     def visitBoolExpr(self, ctx:PeaceParser.BoolExprContext):
         return self.visitChildren(ctx)
@@ -69,13 +64,13 @@ class PeaceVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PeaceParser#AssignExpr.
-    def visitAssignExpr(self, ctx:PeaceParser.AssignExprContext):
+    # Visit a parse tree produced by PeaceParser#FuncCallOrEnumExpr.
+    def visitFuncCallOrEnumExpr(self, ctx:PeaceParser.FuncCallOrEnumExprContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PeaceParser#FuncCallExpr.
-    def visitFuncCallExpr(self, ctx:PeaceParser.FuncCallExprContext):
+    # Visit a parse tree produced by PeaceParser#AssignExpr.
+    def visitAssignExpr(self, ctx:PeaceParser.AssignExprContext):
         return self.visitChildren(ctx)
 
 

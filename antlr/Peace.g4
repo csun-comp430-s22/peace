@@ -76,10 +76,9 @@ expression: Digits #DigitExpr
             | (BoolTrue | BoolFalse) #BoolExpr
             | expression op expression #ArithmeticExpr
             | expression (LessThan | GreaterThan | LessThanOrEq | GreaterThanOrEq ) expression #CompExpr
-            | expression LParen expression* RParen #FuncCallExpr
+            | expression LParen expression* RParen #FuncCallOrEnumExpr
             | expression Assign expression  #AssignExpr
             | Amp Identifier  #FuncPointCreateExpr
-            | Enum #EnumExpr
             ;
 vardec: Let Identifier Colon atype Assign expression;
 statement:  expression Semicolon    #ExprStmt
@@ -94,9 +93,9 @@ statement:  expression Semicolon    #ExprStmt
 block: LBracket statement* RBracket;    
 
 case_: pattern MatchArrow expression;
-pattern: Digits | Identifier | Any | Identifier LParen pattern RParen;
+pattern: Digits | Identifier | Any | Identifier LParen (Identifier)* RParen;
 parameter: Identifier Colon atype;
 func_stmt: atype Identifier LParen parameter (Comma parameter)* block (Semicolon)?;
-cdef: Identifier Colon atype Semicolon;
-enumdef: Enum Identifier Assign LBracket cdef+ RBracket (Semicolon)?;
+cdef: Identifier Colon atype (Comma atype)* Semicolon;
+enumdef: Enum Identifier LBracket cdef+ RBracket (Semicolon)?;
 program: enumdef* func_stmt+;
