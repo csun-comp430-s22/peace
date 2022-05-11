@@ -3,6 +3,10 @@ from antlr.generated.PeaceParser import PeaceParser
 from antlr.generated.PeaceVisitor import PeaceVisitor
 
 class PeaceType():
+    #Extra "Token" Types for the typechecker since they are not defined in the grammar
+    FUNCTION = 999
+    FUNCTION_POINTER = 998
+
     def __init__(self, token_type, token):
         self.token_type = token_type
         self.token = token
@@ -14,10 +18,19 @@ class PeaceTypecheckError(Exception):
     def __init__(self, message):
         self.message = message
 
+class PeaceTypeNotFoundError(Exception):
+    def __init__(self, message):
+        self.message = message
+
 class PeaceTypechecker(PeaceVisitor):
     def __init__(self) -> None:
         self.type_environments = []
         super().__init__()
+
+    def lookup_type(self, name:str) -> PeaceType:
+        if (self.type_environments and name in self.type_environments[-1]):
+            return self.type_environments[-1][name]
+        raise PeaceTypeNotFoundError("Type not found: " + name)
 
     # Visit a parse tree produced by PeaceParser#basetype.
     def visitBasetype(self, ctx:PeaceParser.BasetypeContext):
@@ -39,11 +52,6 @@ class PeaceTypechecker(PeaceVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PeaceParser#EnumExpr.
-    def visitEnumExpr(self, ctx:PeaceParser.EnumExprContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by PeaceParser#BoolExpr.
     def visitBoolExpr(self, ctx:PeaceParser.BoolExprContext):
         return PeaceType(PeaceParser.Bool, 'bool')
@@ -51,10 +59,10 @@ class PeaceTypechecker(PeaceVisitor):
 
     # Visit a parse tree produced by PeaceParser#IdentExpr.
     def visitIdentExpr(self, ctx:PeaceParser.IdentExprContext):
-        if (self.type_environments and
-            ctx.Identifier().getText() in self.type_environments[-1]):
-            return self.type_environments[-1][ctx.Identifier().getText()]
-        return PeaceType(PeaceParser.Identifier, ctx.Identifier().getText())
+        try:
+            return self.lookup_type(ctx.Identifier().getText())
+        except PeaceTypeNotFoundError:
+            return PeaceType(PeaceParser.Identifier, ctx.Identifier().getText())
 
 
     # Visit a parse tree produced by PeaceParser#FloatExpr.
@@ -94,6 +102,17 @@ class PeaceTypechecker(PeaceVisitor):
 
     # Visit a parse tree produced by PeaceParser#FuncPointCreateExpr.
     def visitFuncPointCreateExpr(self, ctx:PeaceParser.FuncPointCreateExprContext):
+        try:
+            type = self.lookup_type(ctx.Identifier().getText())
+            if (type.token_type != PeaceParser.Func):
+                raise PeaceTypecheckError("Invalid type for function pointer creation: " + type.token)
+            return PeaceType(PeaceParser.FUNCTION_POINTER, type.token)
+        except PeaceTypeNotFoundError:
+            raise PeaceTypecheckError("Invalid type for function pointer creation: " + ctx.Identifier().getText())
+
+
+    # Visit a parse tree produced by PeaceParser#FuncCallOrEnumExpr.
+    def visitFuncCallOrEnumExpr(self, ctx:PeaceParser.FuncCallOrEnumExprContext):
         return self.visitChildren(ctx)
 
 
@@ -104,11 +123,6 @@ class PeaceTypechecker(PeaceVisitor):
         if (l_type != r_type):
             raise PeaceTypecheckError("Assignment type mismatch: " + l_type.token + " and " + r_type.token)
         return l_type
-
-
-    # Visit a parse tree produced by PeaceParser#FuncCallExpr.
-    def visitFuncCallExpr(self, ctx:PeaceParser.FuncCallExprContext):
-        return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PeaceParser#vardec.

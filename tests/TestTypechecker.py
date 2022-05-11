@@ -34,7 +34,7 @@ class TestParser(unittest.TestCase):
 
     def test_arithmetic_expression_floats(self):
         test_input = """
-        3.0 + 100.0
+        3.0 * 100.0
         """
         parser = create_parser_for(test_input)
         tree = parser.expression()
@@ -42,7 +42,7 @@ class TestParser(unittest.TestCase):
 
     def test_arithmetic_expression_mixed(self):
         test_input = """
-        2 + 10.9
+        2 / 10.9
         """
         parser = create_parser_for(test_input)
         tree = parser.expression()
@@ -50,7 +50,7 @@ class TestParser(unittest.TestCase):
 
     def test_arithmetic_expression_invalid(self):
         test_input = """
-        2 + true
+        2 % true
         """
         parser = create_parser_for(test_input)
         tree = parser.expression()
@@ -67,6 +67,17 @@ class TestParser(unittest.TestCase):
         parser = create_parser_for(test_input)
         tree = parser.block()
         typecheck_tree(tree)
+
+    def test_invalid_assign(self):
+        test_input = """
+        {
+            let a: int = true;
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
 
     def test_comparison_expression_ints(self):
         test_input = """
