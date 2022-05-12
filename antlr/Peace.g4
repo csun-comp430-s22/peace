@@ -66,7 +66,7 @@ FloatConst: Digits '.' Digits;
 
 //Rules
 basetype: ( Int | Bool | Void | String | Identifier ); 
-funcpointertype: LParen basetype Multiply RParen Arrow basetype;
+funcpointertype: LParen basetype (Comma basetype)*  RParen Arrow basetype;
 atype: basetype | funcpointertype;
 op: (Add | Subtract | Multiply | Divide | Modulo );
 
@@ -95,7 +95,7 @@ block: LBracket statement* RBracket;
 case_: pattern MatchArrow expression;
 pattern: Digits | Identifier | Any | Identifier LParen (Identifier)* RParen;
 parameter: Identifier Colon atype;
-func_stmt: atype Identifier LParen parameter (Comma parameter)* block (Semicolon)?;
+func_stmt: atype Identifier LParen parameter (Comma parameter)* RParen block (Semicolon)?;
 cdef: Identifier Colon atype (Comma atype)* Semicolon;
 enumdef: Enum Identifier LBracket cdef+ RBracket (Semicolon)?;
 program: enumdef* func_stmt+;
