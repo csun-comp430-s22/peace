@@ -7,9 +7,11 @@ class PeaceType():
     FUNCTION = 999
     FUNCTION_POINTER = 998
 
-    def __init__(self, token_type, token):
+    def __init__(self, token_type: int, token: str, param_types = [], ret_type = None):
         self.token_type = token_type
         self.token = token
+        self.param_types = param_types
+        self.ret_type = ret_type
 
     def __eq__(self, other) -> bool:
         return (self.token_type == other.token_type and self.token == other.token)
@@ -113,7 +115,14 @@ class PeaceTypechecker(PeaceVisitor):
 
     # Visit a parse tree produced by PeaceParser#FuncCallOrEnumExpr.
     def visitFuncCallOrEnumExpr(self, ctx:PeaceParser.FuncCallOrEnumExprContext):
-        return self.visitChildren(ctx)
+        types = ctx.expression()
+        function_type = self.visit(types[0])
+        if (function_type.token_type == PeaceType.FUNCTION or function_type.token_type == PeaceType.ENUM):
+            for index, type in enumerate(types[1:]):
+                if type.token_type != function_type.param_types[index].token_type:
+                    raise PeaceTypecheckError("Invalid param for function call: " + type.token)
+            return type.ret_type
+        raise PeaceTypecheckError("No matching function or enum constructor found: " + function_type.token)
 
 
     # Visit a parse tree produced by PeaceParser#AssignExpr.
