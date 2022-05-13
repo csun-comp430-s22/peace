@@ -1,13 +1,16 @@
 from __future__ import unicode_literals
 import sys
 import os
+from unicodedata import name
 import unittest
 from antlr4 import *
 from antlr4.tree.Trees import Trees
+from pyparsing import ParseSyntaxException
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from antlr.generated.PeaceLexer import PeaceLexer
 from antlr.generated.PeaceParser import PeaceParser
+from antlr.generated.PeaceListener import PeaceListener
 from typechecker.PeaceTypechecker import PeaceTypechecker, PeaceTypecheckError
 
 from TestParserListener import TestListener
@@ -134,6 +137,65 @@ class TestParser(unittest.TestCase):
         tree = parser.block()
         with self.assertRaises(PeaceTypecheckError):
             typecheck_tree(tree)
+
+
+    def test_param(self):
+        print('testing param:\n')
+        test_input = 'someVar: string'
+        parser = create_parser_for(test_input)
+        tree = parser.parameter()
+
+    def test_func_stmt(self):
+        print('testing funcstmt:\n')
+        test_input = 'enum nums { one: int; } void main() { print(ok); }'
+        parser = create_parser_for(test_input)
+        tree = parser.program()
+        typecheck_tree(tree)
+
+    def test_func_stmt_invalid_dup(self):
+        print('testing funcstmt:\n')
+        test_input = 'enum nums { one: int; } void main() { print(ok); } void main() { print (uh); }'
+        parser = create_parser_for(test_input)
+        tree = parser.program()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+    def test_cdef(self):
+        print('testing cdef:\n')
+        test_input = 'enum nums { one: int; } void main() { }'
+        parser = create_parser_for(test_input)
+        tree = parser.program()
+        typecheck_tree(tree)
+
+    def test_cdef_invalid_dup(self):
+        print('testing cdef:\n')
+        test_input = 'enum nums { one: int; one: int;} void main() { }'
+        parser = create_parser_for(test_input)
+        tree = parser.program()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+    def test_enumdef(self):
+        print('testing enumdef:\n')
+        test_input = 'enum nums { one: int; } void main() { }'
+        parser = create_parser_for(test_input)
+        tree = parser.program()
+        typecheck_tree(tree)
+
+    def test_enumdef_invalid_dup(self):
+        print('testing enumdef:\n')
+        test_input = 'enum nums { one: int; } enum nums { two: int; } void main() { }'
+        parser = create_parser_for(test_input)
+        tree = parser.program()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+    def test_program(self):
+        print('testing program:\n')
+        test_input = 'int addTwo() { let c: int = 2 + 2; return c; }'
+        parser = create_parser_for(test_input)
+        tree = parser.program()
+        typecheck_tree(tree)
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,6 +1,10 @@
+from asyncio.windows_events import NULL
 import copy
+from gettext import gettext
+from logging.config import IDENTIFIER
 from antlr.generated.PeaceParser import PeaceParser
 from antlr.generated.PeaceVisitor import PeaceVisitor
+from antlr.generated.PeaceListener import PeaceListener
 
 class PeaceType():
     #Extra "Token" Types for the typechecker since they are not defined in the grammar
@@ -139,6 +143,7 @@ class PeaceTypechecker(PeaceVisitor):
         r_type = self.visit(ctx.expression())
         l_type = PeaceType(ctx.atype().start.type, ctx.atype().getText())
         if (r_type != l_type):
+
             raise PeaceTypecheckError("Variable declaration type mismatch: " + l_type.token + " and " + r_type.token)
         self.type_environments[-1][ctx.Identifier().getText()] =  l_type
 
@@ -210,19 +215,41 @@ class PeaceTypechecker(PeaceVisitor):
 
     # Visit a parse tree produced by PeaceParser#func_stmt.
     def visitFunc_stmt(self, ctx:PeaceParser.Func_stmtContext):
+        func = ctx.Identifier().getText()
+        func_type = ctx.atype().getText()
+        if func not in self.functions:
+            self.functions.update({func: func_type})
+            print(self.functions)
+        elif func in self.functions:
+            raise PeaceTypecheckError("Duplicate function definition: " + func + " already defined.")
+        else:
+            raise PeaceTypecheckError("Enum " + func + "already exists.")
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PeaceParser#cdef.
     def visitCdef(self, ctx:PeaceParser.CdefContext):
-        return self.visitChildren(ctx)
+        cdef = ctx.Identifier().getText()
+        if cdef not in self.cdefs:
+            self.cdefs.append(cdef)
+        elif cdef in self.cdefs:
+            raise PeaceTypecheckError("Duplicate cdef definition: '" + cdef + "' already exists in " + self.enum_flag)
 
 
     # Visit a parse tree produced by PeaceParser#enumdef.
     def visitEnumdef(self, ctx:PeaceParser.EnumdefContext):
+        self.cdefs = []
+        enum = ctx.Identifier().getText()
+        self.enum_flag = enum
+        if enum not in self.enums:
+            self.enums.append(enum)
+        elif enum in self.enums:
+            raise PeaceTypecheckError("Duplicate enum definition: " + enum + " already defined.")
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PeaceParser#program.
     def visitProgram(self, ctx:PeaceParser.ProgramContext):
+        self.enums = []
+        self.functions = {}
         return self.visitChildren(ctx)
