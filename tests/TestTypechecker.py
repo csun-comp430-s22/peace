@@ -1,19 +1,14 @@
-from __future__ import unicode_literals
 import sys
 import os
-from unicodedata import name
 import unittest
 from antlr4 import *
 from antlr4.tree.Trees import Trees
-from pyparsing import ParseSyntaxException
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from antlr.generated.PeaceLexer import PeaceLexer
 from antlr.generated.PeaceParser import PeaceParser
 from antlr.generated.PeaceListener import PeaceListener
 from typechecker.PeaceTypechecker import PeaceTypechecker, PeaceTypecheckError
-
-from TestParserListener import TestListener
 
 # TEST HELPER FUNCTION
 def create_parser_for(input):
