@@ -95,7 +95,7 @@ block: LBracket statement* RBracket;
 case_: pattern MatchArrow expression;
 pattern: Digits | Identifier | Any | Identifier LParen (Identifier)* RParen;
 parameter: Identifier Colon atype;
-func_stmt: atype Identifier LParen parameter (Comma parameter)* RParen block (Semicolon)?;
+func_stmt: atype Identifier LParen (parameter (Comma parameter)*)* RParen block (Semicolon)?;
 cdef: Identifier Colon atype (Comma atype)* Semicolon;
 enumdef: Enum Identifier LBracket cdef+ RBracket (Semicolon)?;
 program: enumdef* func_stmt+;

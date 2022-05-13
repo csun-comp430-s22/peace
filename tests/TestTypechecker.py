@@ -139,22 +139,30 @@ class TestParser(unittest.TestCase):
             typecheck_tree(tree)
 
 
+    def test_case(self):
+        print('testing case:\n')
+        test_input = 'void main() { let x: int = 4; match x { 4 => x = true } }'
+        parser = create_parser_for(test_input)
+        tree = parser.program()
+        typecheck_tree(tree)
+
     def test_param(self):
         print('testing param:\n')
         test_input = 'someVar: string'
         parser = create_parser_for(test_input)
         tree = parser.parameter()
+        typecheck_tree(tree)
 
     def test_func_stmt(self):
         print('testing funcstmt:\n')
-        test_input = 'enum nums { one: int; } void main() { print(ok); }'
+        test_input = 'void main(var: string, num: int) { print(ok); }'
         parser = create_parser_for(test_input)
         tree = parser.program()
         typecheck_tree(tree)
 
     def test_func_stmt_invalid_dup(self):
-        print('testing funcstmt:\n')
-        test_input = 'enum nums { one: int; } void main() { print(ok); } void main() { print (uh); }'
+        print('testing funcstmt invalid:\n')
+        test_input = 'void main() { print(ok); } void main() { print (uh); }'
         parser = create_parser_for(test_input)
         tree = parser.program()
         with self.assertRaises(PeaceTypecheckError):
@@ -168,7 +176,7 @@ class TestParser(unittest.TestCase):
         typecheck_tree(tree)
 
     def test_cdef_invalid_dup(self):
-        print('testing cdef:\n')
+        print('testing cdef invalid:\n')
         test_input = 'enum nums { one: int; one: int;} void main() { }'
         parser = create_parser_for(test_input)
         tree = parser.program()
@@ -183,7 +191,7 @@ class TestParser(unittest.TestCase):
         typecheck_tree(tree)
 
     def test_enumdef_invalid_dup(self):
-        print('testing enumdef:\n')
+        print('testing enumdef invalid:\n')
         test_input = 'enum nums { one: int; } enum nums { two: int; } void main() { }'
         parser = create_parser_for(test_input)
         tree = parser.program()
@@ -192,7 +200,7 @@ class TestParser(unittest.TestCase):
 
     def test_program(self):
         print('testing program:\n')
-        test_input = 'int addTwo() { let c: int = 2 + 2; return c; }'
+        test_input = 'enum anEnum { someNum: int; } int addTwo() { let c: int = 2 + 2; return c; }'
         parser = create_parser_for(test_input)
         tree = parser.program()
         typecheck_tree(tree)
