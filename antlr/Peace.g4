@@ -69,10 +69,12 @@ basetype: ( Int | Bool | Void | String | Identifier );
 funcpointertype: LParen basetype (Comma basetype)*  RParen Arrow basetype;
 atype: basetype | funcpointertype;
 op: (Add | Subtract | Multiply | Divide | Modulo );
+Literal: ;
 
 expression: Digits #DigitExpr
             | FloatConst #FloatExpr
             | Identifier #IdentExpr
+            | Literal #StringLiteral
             | (BoolTrue | BoolFalse) #BoolExpr
             | expression op expression #ArithmeticExpr
             | expression (LessThan | GreaterThan | LessThanOrEq | GreaterThanOrEq ) expression #CompExpr
@@ -92,7 +94,7 @@ statement:  expression Semicolon    #ExprStmt
             ;
 block: LBracket statement* RBracket;    
 
-case_: pattern MatchArrow expression;
+case_: pattern MatchArrow block;
 pattern: Digits | Identifier | Any | Identifier LParen (Identifier)* RParen;
 parameter: Identifier Colon atype;
 func_stmt: atype Identifier LParen (parameter (Comma parameter)*)* RParen block (Semicolon)?;

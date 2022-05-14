@@ -251,11 +251,20 @@ class PeaceTypechecker(PeaceVisitor):
     def visitCase_(self, ctx:PeaceParser.Case_Context):
         #case: pattern => expression
         #x => y = 3
+        # matchstmt
+        #   -casestmt <- current context (think of pos)
+        #       -pattern
+        #       -matcharrow
+        #       -block
+        #           -any statement (type checked 'here' in block)
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PeaceParser#pattern.
     def visitPattern(self, ctx:PeaceParser.PatternContext):
+        #pattern: pattern -> identifier lparen (identifier)* paren
+	    #                      ^ this identifier needs to be a valid enum
+        # not complete
         return self.visitChildren(ctx)
 
 

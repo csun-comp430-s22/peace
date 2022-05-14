@@ -299,16 +299,34 @@ class TestParser(unittest.TestCase):
     
 
 
+
+
+    def test_case_reach_invalid_expression(self):
+        print('testing case:\n')
+        test_input = '{ let x: int = 3; match x { 3 => { x = true; } } }'
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
     def test_case(self):
         print('testing case:\n')
-        test_input = 'void main() { let x: int = 4; match x { 4 => x = true } }'
+        test_input = '{ let x: int = 3; match x { 3 => { x = 4; } } }'
         parser = create_parser_for(test_input)
-        tree = parser.program()
+        tree = parser.block()
         typecheck_tree(tree)
+
+    def test_param_invalid_type(self):
+        print('testing param invalid:\n')
+        test_input = 'someVar: 459hj'
+        parser = create_parser_for(test_input)
+        tree = parser.parameter()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
 
     def test_param(self):
         print('testing param:\n')
-        test_input = 'someVar: string'
+        test_input = 'someVar: int'
         parser = create_parser_for(test_input)
         tree = parser.parameter()
         typecheck_tree(tree)
