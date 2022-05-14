@@ -198,6 +198,7 @@ class TestParser(unittest.TestCase):
         {
             let x: int = 3;
             let y: int = 1;
+            let bar: int = 1;
             match bar { x => y = x, 2 => y = x };
         }
         """
@@ -205,11 +206,11 @@ class TestParser(unittest.TestCase):
         tree = parser.block()
         typecheck_tree(tree)
 
-    def test_MatchStmt_invalid(self): #how to make invalid
+    def test_MatchStmt_invalid(self): 
         test_input = """
         {
             let x: int = 8;
-            let y: int = 1;
+            let y: bool = true;
             match bar { x => y = x, 2 => y = x };
         }
         """
@@ -221,10 +222,10 @@ class TestParser(unittest.TestCase):
     def test_ReturnStmt(self):
         test_input = """
         {
-            let a: int = 1;
+            let a: int = 2;
             let b: int = 1;
             if(a > b) { return; }
-            else { return; }
+            
         }
         """
         parser = create_parser_for(test_input)
@@ -236,8 +237,8 @@ class TestParser(unittest.TestCase):
         {
             let a: int = 1;
             let b: int = 1;
-            if(a > b) { return; }
-            else { return; }
+            if(a > b) { return true; }
+            
         }
         """
         parser = create_parser_for(test_input)
@@ -251,7 +252,7 @@ class TestParser(unittest.TestCase):
             let a: int = 2;
             let b: int = 1;
             if(a > b) { return a; }
-            else { return a; }
+            
         }
         """
         parser = create_parser_for(test_input)
@@ -263,8 +264,8 @@ class TestParser(unittest.TestCase):
         {
             let a: int = 2;
             let b: int = 1;
-            if(a > b) { return y; }
-            else { return y; }
+            if(a > b) { return; }
+            
         }
         """
         parser = create_parser_for(test_input)
@@ -276,17 +277,17 @@ class TestParser(unittest.TestCase):
     def test_PrintStmt(self):
         test_input = """
         {
-            let a: int = 2;
-            let t: bool = true;
-            print( a );
+            let t: int = 2;
+            let tt: bool = true;
             print( t );
+            print( tt );
         }
         """
         parser = create_parser_for(test_input)
         tree = parser.block()
         typecheck_tree(tree)
 
-    def test_PrintStmt_invalid(self): #how to make invalid
+    def test_PrintStmt_invalid(self): 
         test_input = """
         {
             print( a );
