@@ -43,6 +43,7 @@ Newline=42
 Identifier=43
 Digits=44
 FloatConst=45
+Literal=46
 'int'=1
 'float'=2
 'bool'=3

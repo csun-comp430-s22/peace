@@ -71,6 +71,15 @@ class PeaceListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by PeaceParser#StringLiteral.
+    def enterStringLiteral(self, ctx:PeaceParser.StringLiteralContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#StringLiteral.
+    def exitStringLiteral(self, ctx:PeaceParser.StringLiteralContext):
+        pass
+
+
     # Enter a parse tree produced by PeaceParser#ArithmeticExpr.
     def enterArithmeticExpr(self, ctx:PeaceParser.ArithmeticExprContext):
         pass

@@ -44,6 +44,11 @@ class PeaceVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by PeaceParser#StringLiteral.
+    def visitStringLiteral(self, ctx:PeaceParser.StringLiteralContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by PeaceParser#ArithmeticExpr.
     def visitArithmeticExpr(self, ctx:PeaceParser.ArithmeticExprContext):
         return self.visitChildren(ctx)
