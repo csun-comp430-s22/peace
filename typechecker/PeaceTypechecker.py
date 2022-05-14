@@ -33,31 +33,40 @@ class PeaceTypechecker(PeaceVisitor):
         self.type_environments = []
         super().__init__()
 
+    #Helpers
     def lookup_type(self, name:str) -> PeaceType:
         if (self.type_environments and name in self.type_environments[-1]):
             return self.type_environments[-1][name]
         raise PeaceTypeNotFoundError("Type not found: " + name)
 
+    def generate_function_signature(param_types, ret_type) -> str:
+        sig = '('
+        for index, param_type in enumerate(param_types):
+            sig += param_type.token
+            if (index != len(param_types) - 1):
+                sig += ', '
+        sig += ') -> '
+        sig += ret_type.token
+
     # Visit a parse tree produced by PeaceParser#basetype.
     def visitBasetype(self, ctx:PeaceParser.BasetypeContext):
-        return PeaceType(PeaceParser.RULE_basetype, 'basetype')
+        return PeaceType(ctx.start.type, ctx.getText())
 
 
     # Visit a parse tree produced by PeaceParser#funcpointertype.
     def visitFuncpointertype(self, ctx:PeaceParser.FuncpointertypeContext):
-        return PeaceType(PeaceParser.RULE_funcpointertype, 'funcpointertype')
+        return PeaceType(ctx.start.type, ctx.getText())
 
 
     # Visit a parse tree produced by PeaceParser#atype.
     def visitAtype(self, ctx:PeaceParser.AtypeContext):
-        return PeaceType(PeaceParser.RULE_atype, 'atype')
+        return self.visit(ctx.getChild(0))
 
 
     # Visit a parse tree produced by PeaceParser#op.
     def visitOp(self, ctx:PeaceParser.OpContext):   
         return self.visitChildren(ctx)
     
-
 
     # Visit a parse tree produced by PeaceParser#BoolExpr.
     def visitBoolExpr(self, ctx:PeaceParser.BoolExprContext):
@@ -144,7 +153,6 @@ class PeaceTypechecker(PeaceVisitor):
         r_type = self.visit(ctx.expression())
         l_type = PeaceType(ctx.atype().start.type, ctx.atype().getText())
         if (r_type != l_type):
-
             raise PeaceTypecheckError("Variable declaration type mismatch: " + l_type.token + " and " + r_type.token)
         self.type_environments[-1][ctx.Identifier().getText()] =  l_type
 
@@ -157,8 +165,6 @@ class PeaceTypechecker(PeaceVisitor):
     # Visit a parse tree produced by PeaceParser#VarDecStmt.
     def visitVarDecStmt(self, ctx:PeaceParser.VarDecStmtContext):
         return self.visit(ctx.vardec())
-
-
 
 
     # Visit a parse tree produced by PeaceParser#WhileStmt.
@@ -231,10 +237,6 @@ class PeaceTypechecker(PeaceVisitor):
             raise PeaceTypecheckError("Variable declaration type mismatch")
 
 
-
-
-
-
     # Visit a parse tree produced by PeaceParser#block.
     def visitBlock(self, ctx:PeaceParser.BlockContext):
         new_type_environment = dict()
@@ -259,9 +261,7 @@ class PeaceTypechecker(PeaceVisitor):
 
     # Visit a parse tree produced by PeaceParser#parameter.
     def visitParameter(self, ctx:PeaceParser.ParameterContext):
-        print('param child count: ')
-        print(ctx.getChildCount())
-        return self.visitChildren(ctx)
+        return self.visit(ctx.atype())
 
 
     # Visit a parse tree produced by PeaceParser#func_stmt.
@@ -270,9 +270,15 @@ class PeaceTypechecker(PeaceVisitor):
         func_type = ctx.atype().getText()
         if func not in self.funcs_prog_env:
             self.funcs_prog_env.update({func: func_type})
+
+            ret_type = self.visit(ctx.atype())
+            param_types = []
+            for param in ctx.parameter():
+                param_types.append(self.visit(param))
+            signature = self.generate_function_signature(param_types, ret_type)
+            self.type_environments[-1][func] = PeaceType(PeaceParser.Func, signature, param_types, ret_type)
         elif func in self.funcs_prog_env:
             raise PeaceTypecheckError("Duplicate function definition: " + func + " already defined.")
-        #return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PeaceParser#cdef.
