@@ -253,4 +253,9 @@ class PeaceTypechecker(PeaceVisitor):
     def visitProgram(self, ctx:PeaceParser.ProgramContext):
         self.enums_prog_scope = []
         self.funcs_prog_env = {}
+
+        #Global Type Environment
+        new_type_environment = dict()
+        self.type_environments.append(new_type_environment)
+
         self.visitChildren(ctx)
