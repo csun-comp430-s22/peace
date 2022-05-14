@@ -249,19 +249,33 @@ class PeaceTypechecker(PeaceVisitor):
     def visitCase_(self, ctx:PeaceParser.Case_Context):
         #case: pattern => expression
         #x => y = 3
+        # matchstmt
+        #   -casestmt <- current context (think of pos)
+        #       -pattern
+        #       -matcharrow
+        #       -block
+        #           -any statement (type checked 'here' in block)
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PeaceParser#pattern.
     def visitPattern(self, ctx:PeaceParser.PatternContext):
+        #pattern: pattern -> identifier lparen (identifier)* paren
+	    #                      ^ this identifier needs to be a valid enum
+        # not complete
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PeaceParser#parameter.
     def visitParameter(self, ctx:PeaceParser.ParameterContext):
-        print('param child count: ')
-        print(ctx.getChildCount())
-        return self.visitChildren(ctx)
+        #TYPES HARD CODED: BASE TYPES *MUST FIX TO ACCESS THROUGH PEACE*
+        #CUSTOM TYPES HERE FOR ACKNOWLEDGEMENT *NEED TO IMPLEMENT*
+        param_type = ctx.atype().getText()
+        custom_types = []
+        base_types = ['int', 'bool', 'void', 'string']
+        if param_type not in base_types or custom_types:
+            raise PeaceTypecheckError('Invalid variable type ' + param_type + '.')
+        self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PeaceParser#func_stmt.
