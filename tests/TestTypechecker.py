@@ -21,7 +21,7 @@ def typecheck_tree(tree):
     visitor = PeaceTypechecker()
     visitor.visit(tree)
 
-class TestParser(unittest.TestCase):
+class TestTypechecker(unittest.TestCase):
     def test_arithmetic_expression_ints(self):
         test_input = """
         1 + 2
@@ -197,7 +197,10 @@ class TestParser(unittest.TestCase):
             let x: int = 3;
             let y: int = 1;
             let bar: int = 1;
-            match bar { x => y = x, 2 => y = x };
+            match bar {
+                x => { y = x; }, 
+                2 => { y = x; }
+            };
         }
         """
         parser = create_parser_for(test_input)
@@ -209,7 +212,10 @@ class TestParser(unittest.TestCase):
         {
             let x: int = 8;
             let y: bool = true;
-            match bar { x => y = x, 2 => y = x };
+            match bar {
+                x => { y = x; },
+                2 => { y = x; }
+            };
         }
         """
         parser = create_parser_for(test_input)
@@ -230,7 +236,7 @@ class TestParser(unittest.TestCase):
         tree = parser.block()
         typecheck_tree(tree)
 
-    def test_ReturnStmt_invalid(self): #how to make invalid
+    def test_ReturnStmt_invalid(self):
         test_input = """
         {
             let a: int = 1;
@@ -295,10 +301,6 @@ class TestParser(unittest.TestCase):
         tree = parser.block()
         with self.assertRaises(PeaceTypecheckError):
             typecheck_tree(tree)
-
-    
-
-
 
 
     def test_case_reach_invalid_expression(self):
