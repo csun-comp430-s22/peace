@@ -39,7 +39,7 @@ class PeaceTypechecker(PeaceVisitor):
             return self.type_environments[-1][name]
         raise PeaceTypeNotFoundError("Type not found: " + name)
 
-    def generate_function_signature(param_types, ret_type) -> str:
+    def generate_function_signature(self, param_types, ret_type) -> str:
         sig = '('
         for index, param_type in enumerate(param_types):
             sig += param_type.token
@@ -285,7 +285,7 @@ class PeaceTypechecker(PeaceVisitor):
             for param in ctx.parameter():
                 param_types.append(self.visit(param))
             signature = self.generate_function_signature(param_types, ret_type)
-            self.type_environments[-1][func] = PeaceType(PeaceParser.Func, signature, param_types, ret_type)
+            self.type_environments[-1][func] = PeaceType(PeaceType.FUNCTION, signature, param_types, ret_type)
         elif func in self.funcs_prog_env:
             raise PeaceTypecheckError("Duplicate function definition: " + func + " already defined.")
 
