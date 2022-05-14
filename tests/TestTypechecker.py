@@ -157,7 +157,7 @@ class TestParser(unittest.TestCase):
         typecheck_tree(tree)
 
     def test_param_invalid_type(self):
-        print('testing param:\n')
+        print('testing param invalid:\n')
         test_input = 'someVar: 459hj'
         parser = create_parser_for(test_input)
         tree = parser.parameter()
