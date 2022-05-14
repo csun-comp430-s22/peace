@@ -193,6 +193,7 @@ class PeaceTypechecker(PeaceVisitor):
 
     # Visit a parse tree produced by PeaceParser#MatchStmt.
     def visitMatchStmt(self, ctx:PeaceParser.MatchStmtContext):
+        self.visitChildren(ctx)
         l_type = self.visit(ctx.expression())
         if (l_type == PeaceType(PeaceParser.Int, 'int')):
             return l_type
