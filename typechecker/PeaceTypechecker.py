@@ -61,7 +61,11 @@ class PeaceTypechecker(PeaceVisitor):
 
     # Visit a parse tree produced by PeaceParser#atype.
     def visitAtype(self, ctx:PeaceParser.AtypeContext):
-        return self.visit(ctx.getChild(0))
+        type = self.visit(ctx.getChild(0))
+        # Catch invalid identifiers here
+        if (type is None):
+            raise PeaceTypecheckError("Invalid type: " + ctx.getText())
+        return type;
 
 
     # Visit a parse tree produced by PeaceParser#op.
@@ -205,7 +209,6 @@ class PeaceTypechecker(PeaceVisitor):
     # Visit a parse tree produced by PeaceParser#ReturnExprStmt.
     def visitReturnExprStmt(self, ctx:PeaceParser.ReturnExprStmtContext):
         given_type = self.visit(ctx.expression())
-        print("given_type: " + given_type.token)
         if (self.ret_type != given_type):
             raise PeaceTypecheckError("Expected return type: " + self.ret_type.token + " but got: " + given_type.token)
 
@@ -264,7 +267,15 @@ class PeaceTypechecker(PeaceVisitor):
 
     # Visit a parse tree produced by PeaceParser#parameter.
     def visitParameter(self, ctx:PeaceParser.ParameterContext):
-        return self.visit(ctx.atype())
+        type = self.visit(ctx.atype())
+        # If we have a custom type as a param we need to check it's valid
+        # in this scope
+        if (type.token_type == PeaceParser.Identifier):
+            try:
+                self.lookup_type(type.token)
+            except PeaceTypeNotFoundError:
+                raise PeaceTypecheckError("Invalid parameter type: " + type.token)
+        return type
 
 
     # Visit a parse tree produced by PeaceParser#func_stmt.
