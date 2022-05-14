@@ -40,22 +40,23 @@ class PeaceTypechecker(PeaceVisitor):
 
     # Visit a parse tree produced by PeaceParser#basetype.
     def visitBasetype(self, ctx:PeaceParser.BasetypeContext):
-        return self.visitChildren(ctx)
+        return PeaceType(PeaceParser.RULE_basetype, 'basetype')
 
 
     # Visit a parse tree produced by PeaceParser#funcpointertype.
     def visitFuncpointertype(self, ctx:PeaceParser.FuncpointertypeContext):
-        return self.visitChildren(ctx)
+        return PeaceType(PeaceParser.RULE_funcpointertype, 'funcpointertype')
 
 
     # Visit a parse tree produced by PeaceParser#atype.
     def visitAtype(self, ctx:PeaceParser.AtypeContext):
-        return self.visitChildren(ctx)
+        return PeaceType(PeaceParser.RULE_atype, 'atype')
 
 
     # Visit a parse tree produced by PeaceParser#op.
-    def visitOp(self, ctx:PeaceParser.OpContext):
+    def visitOp(self, ctx:PeaceParser.OpContext):   
         return self.visitChildren(ctx)
+    
 
 
     # Visit a parse tree produced by PeaceParser#BoolExpr.
@@ -158,34 +159,80 @@ class PeaceTypechecker(PeaceVisitor):
         return self.visit(ctx.vardec())
 
 
+
+
     # Visit a parse tree produced by PeaceParser#WhileStmt.
     def visitWhileStmt(self, ctx:PeaceParser.WhileStmtContext):
-        return self.visitChildren(ctx)
+        l_type = self.visit(ctx.expression())
+        r_type = PeaceType(PeaceParser.Bool, 'bool')
+        if (l_type != r_type):
+            raise PeaceTypecheckError("Variable declaration type mismatch: " + l_type.token + " and " + r_type.token)
+        return r_type
+        
 
 
     # Visit a parse tree produced by PeaceParser#IfStmt.
     def visitIfStmt(self, ctx:PeaceParser.IfStmtContext):
-        return self.visitChildren(ctx)
+        l_type = self.visit(ctx.expression())
+        r_type = PeaceType(PeaceParser.Bool, 'bool')
+        if (l_type != r_type):
+            raise PeaceTypecheckError("Variable declaration type mismatch: " + l_type.token + " and " + r_type.token)
+        return r_type
 
 
     # Visit a parse tree produced by PeaceParser#MatchStmt.
     def visitMatchStmt(self, ctx:PeaceParser.MatchStmtContext):
-        return self.visitChildren(ctx)
+        l_type = self.visit(ctx.expression())
+        if (l_type == PeaceType(PeaceParser.Int, 'int')):
+            return l_type
+        elif (l_type == PeaceType(PeaceParser.Bool, 'bool')):
+            return l_type
+        elif (l_type == PeaceType(PeaceParser.String, 'string')):
+            return l_type
+        elif (l_type == PeaceType(PeaceParser.Float, 'float')):
+            return l_type
+        else:
+            raise PeaceTypecheckError("Variable declaration type mismatch")
 
 
     # Visit a parse tree produced by PeaceParser#ReturnExprStmt.
     def visitReturnExprStmt(self, ctx:PeaceParser.ReturnExprStmtContext):
-        return self.visitChildren(ctx)
+        l_type = self.visit(ctx.expression())
+        r_type = self.type_environment
+        if (l_type == r_type):
+            return r_type
+        else:
+            raise PeaceTypecheckError("Variable declaration type mismatch: " + l_type.token + " and " + r_type.token)
 
 
     # Visit a parse tree produced by PeaceParser#ReturnStmt.
     def visitReturnStmt(self, ctx:PeaceParser.ReturnStmtContext):
-        return self.visitChildren(ctx)
+        l_type = self.visit(ctx.expression())
+        r_type = self.type_environment
+        if (l_type == r_type):
+            return r_type
+        else:
+            raise PeaceTypecheckError("Variable declaration type mismatch: " + l_type.token + " and " + r_type.token)
+
 
 
     # Visit a parse tree produced by PeaceParser#PrintStmt.
     def visitPrintStmt(self, ctx:PeaceParser.PrintStmtContext):
-        return self.visitChildren(ctx)
+        l_type = self.visit(ctx.expression())
+        if (l_type == PeaceType(PeaceParser.Int, 'int')):
+            return l_type
+        elif (l_type == PeaceType(PeaceParser.Bool, 'bool')):
+            return l_type
+        elif (l_type == PeaceType(PeaceParser.String, 'string')):
+            return l_type
+        elif (l_type == PeaceType(PeaceParser.Float, 'float')):
+            return l_type
+        else:
+            raise PeaceTypecheckError("Variable declaration type mismatch")
+
+
+
+
 
 
     # Visit a parse tree produced by PeaceParser#block.

@@ -132,6 +132,171 @@ class TestParser(unittest.TestCase):
         tree = parser.block()
         with self.assertRaises(PeaceTypecheckError):
             typecheck_tree(tree)
+    
+    def test_WhileStmt(self):
+        test_input = """
+        {
+            let x: int = 0;
+            let y: int = 1;
+            while (x < 1) { y = 2; }
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        typecheck_tree(tree)
+
+    def test_WhileStmt_invalid(self):
+        test_input = """
+        {
+             let y: int = 0;
+            let x: bool = true;
+            while (x < 1) { y = 2; }
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+    def test_IfStmt(self):
+        test_input = """
+        {
+            let x: int = 2;
+            let y: int = 1;
+            let baz: int = 1;
+            let foo: int = 2;
+            let bar: int = 1;
+            if (foo >= bar) { baz = x; }
+            if (foo <= bar) { baz = x; } else { baz = y; }
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        typecheck_tree(tree)
+
+    def test_IfStmt_invalid(self):
+        test_input = """
+        {
+            let x: int = 2;
+            let y: int = 1;
+            let baz: int = 1;
+            let foo: bool = true;
+            let bar: int = 1;
+            if (foo >= bar) { baz = x; }
+            if (foo <= bar) { baz = x; } else { baz = y; }
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+    def test_MatchStmt(self):
+        test_input = """
+        {
+            let x: int = 3;
+            let y: int = 1;
+            let bar: int = 1;
+            match bar { x => y = x, 2 => y = x };
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        typecheck_tree(tree)
+
+    def test_MatchStmt_invalid(self): 
+        test_input = """
+        {
+            let x: int = 8;
+            let y: bool = true;
+            match bar { x => y = x, 2 => y = x };
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+    def test_ReturnStmt(self):
+        test_input = """
+        {
+            let a: int = 2;
+            let b: int = 1;
+            if(a > b) { return; }
+            
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        typecheck_tree(tree)
+
+    def test_ReturnStmt_invalid(self): #how to make invalid
+        test_input = """
+        {
+            let a: int = 1;
+            let b: int = 1;
+            if(a > b) { return true; }
+            
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+    def test_ReturnExprStmt(self):
+        test_input = """
+        {
+            let a: int = 2;
+            let b: int = 1;
+            if(a > b) { return a; }
+            
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        typecheck_tree(tree)
+
+    def test_ReturnExprStmt_invalid(self): #how to make invalid
+        test_input = """
+        {
+            let a: int = 2;
+            let b: int = 1;
+            if(a > b) { return; }
+            
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+
+    def test_PrintStmt(self):
+        test_input = """
+        {
+            let t: int = 2;
+            let tt: bool = true;
+            print( t );
+            print( tt );
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        typecheck_tree(tree)
+
+    def test_PrintStmt_invalid(self): 
+        test_input = """
+        {
+            print( a );
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+    
 
 
     def test_case(self):
