@@ -225,55 +225,49 @@ class TestTypechecker(unittest.TestCase):
 
     def test_ReturnStmt(self):
         test_input = """
+        void main()
         {
-            let a: int = 2;
-            let b: int = 1;
-            if(a > b) { return; }
-            
+            return;
         }
         """
         parser = create_parser_for(test_input)
-        tree = parser.block()
+        tree = parser.program()
         typecheck_tree(tree)
 
     def test_ReturnStmt_invalid(self):
         test_input = """
+        void main()
         {
-            let a: int = 1;
-            let b: int = 1;
-            if(a > b) { return true; }
-            
+            return true;
         }
         """
         parser = create_parser_for(test_input)
-        tree = parser.block()
+        tree = parser.program()
         with self.assertRaises(PeaceTypecheckError):
             typecheck_tree(tree)
 
     def test_ReturnExprStmt(self):
         test_input = """
+        int main()
         {
-            let a: int = 2;
-            let b: int = 1;
-            if(a > b) { return a; }
-            
+            let a: int = 2 + 3;
+            return a;
         }
         """
         parser = create_parser_for(test_input)
-        tree = parser.block()
+        tree = parser.program()
         typecheck_tree(tree)
 
     def test_ReturnExprStmt_invalid(self): #how to make invalid
         test_input = """
+        bool main()
         {
-            let a: int = 2;
-            let b: int = 1;
-            if(a > b) { return; }
-            
+            let foo: int = 2;
+            return foo;
         }
         """
         parser = create_parser_for(test_input)
-        tree = parser.block()
+        tree = parser.program()
         with self.assertRaises(PeaceTypecheckError):
             typecheck_tree(tree)
 

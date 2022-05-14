@@ -31,6 +31,7 @@ class PeaceTypeNotFoundError(Exception):
 class PeaceTypechecker(PeaceVisitor):
     def __init__(self) -> None:
         self.type_environments = []
+        self.ret_type = PeaceType(PeaceParser.Void, 'void')
         super().__init__()
 
     #Helpers
@@ -203,23 +204,16 @@ class PeaceTypechecker(PeaceVisitor):
 
     # Visit a parse tree produced by PeaceParser#ReturnExprStmt.
     def visitReturnExprStmt(self, ctx:PeaceParser.ReturnExprStmtContext):
-        l_type = self.visit(ctx.expression())
-        r_type = self.type_environment
-        if (l_type == r_type):
-            return r_type
-        else:
-            raise PeaceTypecheckError("Variable declaration type mismatch: " + l_type.token + " and " + r_type.token)
+        given_type = self.visit(ctx.expression())
+        print("given_type: " + given_type.token)
+        if (self.ret_type != given_type):
+            raise PeaceTypecheckError("Expected return type: " + self.ret_type.token + " but got: " + given_type.token)
 
 
     # Visit a parse tree produced by PeaceParser#ReturnStmt.
     def visitReturnStmt(self, ctx:PeaceParser.ReturnStmtContext):
-        l_type = self.visit(ctx.expression())
-        r_type = self.type_environment
-        if (l_type == r_type):
-            return r_type
-        else:
-            raise PeaceTypecheckError("Variable declaration type mismatch: " + l_type.token + " and " + r_type.token)
-
+        if (self.ret_type != PeaceType(PeaceParser.Void, 'void')):
+            raise PeaceTypecheckError("Expected return type: " + self.ret_type.token)
 
 
     # Visit a parse tree produced by PeaceParser#PrintStmt.
@@ -280,12 +274,16 @@ class PeaceTypechecker(PeaceVisitor):
         if func not in self.funcs_prog_env:
             self.funcs_prog_env.update({func: func_type})
 
-            ret_type = self.visit(ctx.atype())
+            # Set return type for current function as an instance var
+            # It's a easy way to typecheck return statements in the function
+            # block. We'll also store the ret type in the global type env
+            # to typecheck function calls in a different way
+            self.ret_type = self.visit(ctx.atype())
             param_types = []
             for param in ctx.parameter():
                 param_types.append(self.visit(param))
-            signature = self.generate_function_signature(param_types, ret_type)
-            self.type_environments[-1][func] = PeaceType(PeaceType.FUNCTION, signature, param_types, ret_type)
+            signature = self.generate_function_signature(param_types, self.ret_type)
+            self.type_environments[-1][func] = PeaceType(PeaceType.FUNCTION, signature, param_types, self.ret_type)
 
             self.visit(ctx.block())
         elif func in self.funcs_prog_env:
