@@ -130,3 +130,6 @@ dmypy.json
 
 # Antlr4 VS Code Extension
 .antlr
+
+.vs/*.sqlite
+.vs/peace
