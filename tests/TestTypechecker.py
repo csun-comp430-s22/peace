@@ -208,7 +208,7 @@ class TestParser(unittest.TestCase):
     def test_MatchStmt_invalid(self): #how to make invalid
         test_input = """
         {
-            let x: bool = false;
+            let x: int = 8;
             let y: int = 1;
             match bar { x => y = x, 2 => y = x };
         }
@@ -276,8 +276,10 @@ class TestParser(unittest.TestCase):
     def test_PrintStmt(self):
         test_input = """
         {
-            let a: int = 1;
+            let a: int = 2;
+            let t: bool = true;
             print( a );
+            print( t );
         }
         """
         parser = create_parser_for(test_input)

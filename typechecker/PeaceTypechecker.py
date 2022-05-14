@@ -36,22 +36,23 @@ class PeaceTypechecker(PeaceVisitor):
 
     # Visit a parse tree produced by PeaceParser#basetype.
     def visitBasetype(self, ctx:PeaceParser.BasetypeContext):
-        return self.visitChildren(ctx)
+        return PeaceType(PeaceParser.RULE_basetype, 'basetype')
 
 
     # Visit a parse tree produced by PeaceParser#funcpointertype.
     def visitFuncpointertype(self, ctx:PeaceParser.FuncpointertypeContext):
-        return self.visitChildren(ctx)
+        return PeaceType(PeaceParser.RULE_funcpointertype, 'funcpointertype')
 
 
     # Visit a parse tree produced by PeaceParser#atype.
     def visitAtype(self, ctx:PeaceParser.AtypeContext):
-        return self.visitChildren(ctx)
+        return PeaceType(PeaceParser.RULE_atype, 'atype')
 
 
     # Visit a parse tree produced by PeaceParser#op.
-    def visitOp(self, ctx:PeaceParser.OpContext):
+    def visitOp(self, ctx:PeaceParser.OpContext):   
         return self.visitChildren(ctx)
+    
 
 
     # Visit a parse tree produced by PeaceParser#BoolExpr.
@@ -158,19 +159,19 @@ class PeaceTypechecker(PeaceVisitor):
     # Visit a parse tree produced by PeaceParser#WhileStmt.
     def visitWhileStmt(self, ctx:PeaceParser.WhileStmtContext):
         l_type = self.visit(ctx.expression())
-        r_type = self.visit(ctx.expression())
+        r_type = PeaceType(PeaceParser.Bool, 'bool')
         if (l_type != r_type):
             raise PeaceTypecheckError("Variable declaration type mismatch: " + l_type.token + " and " + r_type.token)
-        return PeaceType(PeaceParser.Bool, 'bool')
+        return r_type
 
 
     # Visit a parse tree produced by PeaceParser#IfStmt.
     def visitIfStmt(self, ctx:PeaceParser.IfStmtContext):
         l_type = self.visit(ctx.expression())
-        r_type = self.visit(ctx.expression())
+        r_type = PeaceType(PeaceParser.Bool, 'bool')
         if (l_type != r_type):
             raise PeaceTypecheckError("Variable declaration type mismatch: " + l_type.token + " and " + r_type.token)
-        return PeaceType(PeaceParser.Bool, 'bool')
+        return r_type
 
 
     # Visit a parse tree produced by PeaceParser#MatchStmt.
@@ -179,7 +180,7 @@ class PeaceTypechecker(PeaceVisitor):
         r_type = self.visit(ctx.expression())
         if (l_type != r_type):
             raise PeaceTypecheckError("Variable declaration type mismatch: " + l_type.token + " and " + r_type.token)
-        return l_type
+        return r_type
 
 
     # Visit a parse tree produced by PeaceParser#ReturnExprStmt.
@@ -187,7 +188,7 @@ class PeaceTypechecker(PeaceVisitor):
         l_type = self.visit(ctx.expression())
         r_type = self.type_environment
         if (l_type == r_type):
-            return _type
+            return r_type
         else:
             raise PeaceTypecheckError("Variable declaration type mismatch: " + l_type.token + " and " + r_type.token)
 
@@ -206,10 +207,11 @@ class PeaceTypechecker(PeaceVisitor):
     # Visit a parse tree produced by PeaceParser#PrintStmt.
     def visitPrintStmt(self, ctx:PeaceParser.PrintStmtContext):
         l_type = self.visit(ctx.expression())
-        r_type = self.visit(ctx.expression())
-        if (l_type != r_type):
+        r_type = PeaceType(PeaceParser.Int 'int')
+        if (l_type == r_type):
+            return r_type
+        else:
             raise PeaceTypecheckError("Variable declaration type mismatch: " + l_type.token + " and " + r_type.token)
-        return l_type
 
 
 
