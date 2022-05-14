@@ -304,7 +304,6 @@ class TestTypechecker(unittest.TestCase):
 
 
     def test_case_reach_invalid_expression(self):
-        print('testing case:\n')
         test_input = '{ let x: int = 3; match x { 3 => { x = true; } } }'
         parser = create_parser_for(test_input)
         tree = parser.block()
@@ -312,14 +311,12 @@ class TestTypechecker(unittest.TestCase):
             typecheck_tree(tree)
 
     def test_case(self):
-        print('testing case:\n')
         test_input = '{ let x: int = 3; match x { 3 => { x = 4; } } }'
         parser = create_parser_for(test_input)
         tree = parser.block()
         typecheck_tree(tree)
 
     def test_param_invalid_type(self):
-        print('testing param invalid:\n')
         test_input = 'someVar: 459hj'
         parser = create_parser_for(test_input)
         tree = parser.parameter()
@@ -327,21 +324,18 @@ class TestTypechecker(unittest.TestCase):
             typecheck_tree(tree)
 
     def test_param(self):
-        print('testing param:\n')
         test_input = 'someVar: int'
         parser = create_parser_for(test_input)
         tree = parser.parameter()
         typecheck_tree(tree)
 
     def test_func_stmt(self):
-        print('testing funcstmt:\n')
-        test_input = 'void main(var: string, num: int) { print(ok); }'
+        test_input = 'void main(var: string, num: int) { print(10); }'
         parser = create_parser_for(test_input)
         tree = parser.program()
         typecheck_tree(tree)
 
     def test_func_stmt_invalid_dup(self):
-        print('testing funcstmt invalid:\n')
         test_input = 'void main() { print(ok); } void main() { print (uh); }'
         parser = create_parser_for(test_input)
         tree = parser.program()
@@ -349,14 +343,12 @@ class TestTypechecker(unittest.TestCase):
             typecheck_tree(tree)
 
     def test_cdef(self):
-        print('testing cdef:\n')
         test_input = 'enum nums { one: int; } void main() { }'
         parser = create_parser_for(test_input)
         tree = parser.program()
         typecheck_tree(tree)
 
     def test_cdef_invalid_dup(self):
-        print('testing cdef invalid:\n')
         test_input = 'enum nums { one: int; one: int;} void main() { }'
         parser = create_parser_for(test_input)
         tree = parser.program()
@@ -364,14 +356,12 @@ class TestTypechecker(unittest.TestCase):
             typecheck_tree(tree)
 
     def test_enumdef(self):
-        print('testing enumdef:\n')
         test_input = 'enum nums { one: int; } void main() { }'
         parser = create_parser_for(test_input)
         tree = parser.program()
         typecheck_tree(tree)
 
     def test_enumdef_invalid_dup(self):
-        print('testing enumdef invalid:\n')
         test_input = 'enum nums { one: int; } enum nums { two: int; } void main() { }'
         parser = create_parser_for(test_input)
         tree = parser.program()
@@ -379,12 +369,11 @@ class TestTypechecker(unittest.TestCase):
             typecheck_tree(tree)
 
     def test_program(self):
-        print('testing program:\n')
         test_input = 'enum anEnum { someNum: int; } int addTwo() { let c: int = 2 + 2; return c; }'
         parser = create_parser_for(test_input)
         tree = parser.program()
         typecheck_tree(tree)
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(verbosity=2)
     

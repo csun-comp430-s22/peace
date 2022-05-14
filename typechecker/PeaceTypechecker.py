@@ -286,6 +286,8 @@ class PeaceTypechecker(PeaceVisitor):
                 param_types.append(self.visit(param))
             signature = self.generate_function_signature(param_types, ret_type)
             self.type_environments[-1][func] = PeaceType(PeaceType.FUNCTION, signature, param_types, ret_type)
+
+            self.visit(ctx.block())
         elif func in self.funcs_prog_env:
             raise PeaceTypecheckError("Duplicate function definition: " + func + " already defined.")
 
