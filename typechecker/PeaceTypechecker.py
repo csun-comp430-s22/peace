@@ -159,16 +159,11 @@ class PeaceTypechecker(PeaceVisitor):
     # Visit a parse tree produced by PeaceParser#WhileStmt.
     def visitWhileStmt(self, ctx:PeaceParser.WhileStmtContext):
         l_type = self.visit(ctx.expression())
-        if (l_type == PeaceType(PeaceParser.Int, 'int')):
-            return l_type
-        elif (l_type == PeaceType(PeaceParser.Bool, 'bool')):
-            return l_type
-        elif (l_type == PeaceType(PeaceParser.String, 'string')):
-            return l_type
-        elif (l_type == PeaceType(PeaceParser.Float, 'float')):
-            return l_type
-        else:
-            raise PeaceTypecheckError("Variable declaration type mismatch")
+        r_type = PeaceType(PeaceParser.Bool, 'bool')
+        if (l_type != r_type):
+            raise PeaceTypecheckError("Variable declaration type mismatch: " + l_type.token + " and " + r_type.token)
+        return r_type
+        
 
 
     # Visit a parse tree produced by PeaceParser#IfStmt.
@@ -183,10 +178,16 @@ class PeaceTypechecker(PeaceVisitor):
     # Visit a parse tree produced by PeaceParser#MatchStmt.
     def visitMatchStmt(self, ctx:PeaceParser.MatchStmtContext):
         l_type = self.visit(ctx.expression())
-        r_type = PeaceType(PeaceParser.Int, 'int')
-        if (l_type != r_type):
-            raise PeaceTypecheckError("Variable declaration type mismatch: " + l_type.token + " and " + r_type.token)
-        return r_type
+        if (l_type == PeaceType(PeaceParser.Int, 'int')):
+            return l_type
+        elif (l_type == PeaceType(PeaceParser.Bool, 'bool')):
+            return l_type
+        elif (l_type == PeaceType(PeaceParser.String, 'string')):
+            return l_type
+        elif (l_type == PeaceType(PeaceParser.Float, 'float')):
+            return l_type
+        else:
+            raise PeaceTypecheckError("Variable declaration type mismatch")
 
 
     # Visit a parse tree produced by PeaceParser#ReturnExprStmt.
