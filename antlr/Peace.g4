@@ -54,6 +54,8 @@ Comma: ',';
 
 WS : [ \t]+ -> skip;
 Newline : ('\r' '\n'? | '\n') -> skip;
+Line_Comment: '//' .*? '\r'? '\n' -> skip;
+Comment: '/*' .*? '*/' -> skip;
 
 //Match C-style rules about identifiers (can not start with a digit, allow underscores)
 //TOOD: Possibly allow any non-digit Unicode?
@@ -63,18 +65,19 @@ fragment Digit: [0-9];
 Identifier: IdentifierChar (IdentifierChar | Digit)*;
 Digits: Digit+;
 FloatConst: Digits '.' Digits;
+StringLiteral: '"' .*? '"' ;
+
 
 //Rules
 basetype: ( Int | Bool | Void | String | Identifier ); 
 funcpointertype: LParen basetype (Comma basetype)*  RParen Arrow basetype;
 atype: basetype | funcpointertype;
 op: (Add | Subtract | Multiply | Divide | Modulo );
-Literal: ;
 
 expression: Digits #DigitExpr
             | FloatConst #FloatExpr
             | Identifier #IdentExpr
-            | Literal #StringLiteral
+            | StringLiteral #StringLiteralExpr
             | (BoolTrue | BoolFalse) #BoolExpr
             | expression op expression #ArithmeticExpr
             | expression (LessThan | GreaterThan | LessThanOrEq | GreaterThanOrEq ) expression #CompExpr

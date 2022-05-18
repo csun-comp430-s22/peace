@@ -26,6 +26,22 @@ def parser_test(tree):
     return listener.rules_visited
 
 class TestParser(unittest.TestCase):
+    def test_string_literal(self):
+        test_input = 'print("hi this is me");'
+        tree_expected = '(statement print ( (expression "hi this is me") ) ;)'
+        parser = create_parser_for(test_input)
+        tree = parser.statement()
+        tree_actual = Trees.toStringTree(tree, None, PeaceParser)
+        assert(tree_expected == tree_actual)
+
+    def test_comment(self):
+        test_input = '/*print("hi this is me");*/ print("hi");'
+        tree_expected = '(statement print ( (expression "hi") ) ;)'
+        parser = create_parser_for(test_input)
+        tree = parser.statement()
+        tree_actual = Trees.toStringTree(tree, None, PeaceParser)
+        assert(tree_expected == tree_actual)
+
     def test_function_pointer(self):
         test_input = "let foo: (int*) -> bool = bar;"
         tree_expected = '(statement (vardec let foo : (atype (funcpointertype ( (basetype int) * ) -> (basetype bool))) = (expression bar)) ;)'
