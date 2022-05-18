@@ -43,12 +43,15 @@ class TestParser(unittest.TestCase):
         assert(tree_expected == tree_actual)
 
     def test_function_pointer(self):
+        #line 1:13 extraneous input '*' expecting {')', ','}
+        print('start func pointer')
         test_input = "let foo: (int*) -> bool = bar;"
         tree_expected = '(statement (vardec let foo : (atype (funcpointertype ( (basetype int) * ) -> (basetype bool))) = (expression bar)) ;)'
         parser = create_parser_for(test_input)
         tree = parser.statement()
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)
         assert(tree_expected == tree_actual)
+        print('end func pointer')
 
     def test_var_declare(self):
         test_input = "let x: int = 20;"
@@ -68,124 +71,110 @@ class TestParser(unittest.TestCase):
 
     def test_while(self):
         test_input = "while (x < 1) { y = 2; }"
-        tree_expected = '(statement while ( (expression (expression x) < (expression 1)) ) '\
-                            '{ (statement (expression (expression y) = (expression 2)) ;) })'
+        tree_expected = '(statement while ( (expression (expression x) < (expression 1)) ) (block { (statement (expression (expression y) = (expression 2)) ;) }))'
         parser = create_parser_for(test_input)
         tree = parser.statement()
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)
         assert(tree_expected == tree_actual)
 
     def test_if(self):
-        test_input = "if (foo >= bar) { baz = x; }"
-        tree_expected = '(statement if ( (expression (expression foo) >= (expression bar)) ) '\
-                            '{ (statement (expression (expression baz) = (expression x)) ;) })'
+        test_input = "if (foo >= bar) { }"
+        tree_expected = '(statement if((expression(expression foo) >= (expression bar))) (block { }))'
         parser = create_parser_for(test_input)
         tree = parser.statement()
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)
-        assert(tree_expected == tree_actual)
+        assert(tree_expected.replace(" ", "") == tree_actual.replace(" ", ""))
 
     def test_if_else(self):
-        test_input = "if (foo >= bar) { baz = x; } else { baz = y; }"
-        tree_expected = '(statement if ( (expression (expression foo) >= (expression bar)) ) '\
-                            '{ (statement (expression (expression baz) = (expression x)) ;) } '\
-                            'else { (statement (expression (expression baz) = (expression y)) ;) })'
+        test_input = "if (foo >= bar) { } else { }"
+        tree_expected = '(statement if((expression(expression foo) >= (expression bar))) (block { }) else (block { }))'
         parser = create_parser_for(test_input)
         tree = parser.statement()
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)
-        assert(tree_expected == tree_actual)
+        assert(tree_expected.replace(" ", "") == tree_actual.replace(" ", ""))
 
     def test_match(self):
-        test_input = "match bar { x => y = x, 2 => y = x };"
-        tree_expected = '(statement match (expression bar) { (case_ (pattern x) => (expression (expression y) = (expression x))) , '\
-                                                            '(case_ (pattern 2) => (expression (expression y) = (expression x))) } ;)'
+        test_input = "match x { 3 => { } };"
+        tree_expected = '(statement match (expression x) { (case_ (pattern 3) => (block { }))};)'
         parser = create_parser_for(test_input)
         tree = parser.statement()
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)
-        assert(tree_expected == tree_actual)
+        assert(tree_expected.replace(" ", "") == tree_actual.replace(" ", ""))
 
     
     def test_case_(self):
-        test_input = "match x {4 => y = 4}" # case: 4 matcharrow exp
-        tree_expected = "(statement match (expression x) { (case_ (pattern 4) => (expression (expression y) = (expression 4))) })"
+        test_input = "match x { 4 => {} }" 
+        tree_expected = "(statement match (expression x) {(case_ (pattern 4) => (block {})) })"
         parser = create_parser_for(test_input)
         tree = parser.statement()
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)
-        assert(tree_expected == tree_actual)
+        assert(tree_expected.replace(" ", "") == tree_actual.replace(" ", ""))
 
     def test_case_multiple(self):
-        test_input = "match x {1 => y = 4, 2 => y = 5, 3 => y = 6}" # case: 4 matcharrow exp
-        tree_expected = '(statement match (expression x) { (case_ (pattern 1) => (expression (expression y) = (expression 4))) , '\
-                                                          '(case_ (pattern 2) => (expression (expression y) = (expression 5))) , '\
-                                                          '(case_ (pattern 3) => (expression (expression y) = (expression 6))) })'
+        test_input = "match x { 4 => {}, 5 => {}, 6 => {} }"
+        tree_expected = '(statement match (expression x) {(case_ (pattern 4) => (block{})), (case_ (pattern 5) => (block{})), (case_ (pattern 6) => (block{})) })'
         parser = create_parser_for(test_input)
         tree = parser.statement()
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)
-        assert(tree_expected == tree_actual)
+        assert(tree_expected.replace(" ", "") == tree_actual.replace(" ", ""))
 
     def test_pattern(self):
-        test_input = "match toMatch {pie => toMatch = pie, 4 => toMatch = 4}" # pattern: pie and 4 before matcharrow
-        tree_expected = '(statement match (expression toMatch) { (case_ (pattern pie) => (expression (expression toMatch) = (expression pie))) , '\
-                                                                '(case_ (pattern 4) => (expression (expression toMatch) = (expression 4))) })'
+        test_input = 'caseVar => { }'
+        tree_expected = '(case_ (pattern caseVar) => (block { }) )'
         parser = create_parser_for(test_input)
-        tree = parser.statement()
+        tree = parser.case_()
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)
-        assert(tree_expected == tree_actual)
+        assert(tree_expected.replace(" ", "") == tree_actual.replace(" ", ""))
 
     # https://github.com/antlr/antlr4/issues/118 antlr4 open bug for mismatched input <eof>, safe for now
     # https://stackoverflow.com/questions/17844248/when-is-eof-needed-in-antlr-4
     def test_parameter(self):
-        test_input = "bool someFunc(indicator: bool) {}" # param: indicator: bool (name: type)
-        tree_expected = '(statement (func_stmt (atype (basetype bool)) someFunc ( (parameter indicator : (atype (basetype bool))) ) { }))'
+        test_input = 'void testParam(aBool: bool) { }'
+        tree_expected = '(func_stmt(atype(basetype void)) testParam((parameter aBool: (atype(basetype bool)))) (block {}))'
         parser = create_parser_for(test_input)
-        tree = parser.statement()
+        tree = parser.func_stmt()
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)
-        assert(tree_expected == tree_actual)
+        assert(tree_expected.replace(" ", "") == tree_actual.replace(" ", ""))
 
     def test_parameter_multiple(self):
-        test_input = "void person(name: string, age: int) {}" # param: name, age
-        tree_expected = '(statement (func_stmt (atype (basetype void)) person ( (parameter name : (atype (basetype string))) , '\
-                            '(parameter age : (atype (basetype int))) ) { }))'
+        test_input = 'void testParams(aBool: bool, anInt: int, aString: string) { }'
+        tree_expected = '(func_stmt(atype(basetype void)) testParams((parameter aBool: (atype(basetype bool))), (parameter anInt: (atype(basetype int))), (parameter aString: (atype(basetype string)))) (block{}))'
         parser = create_parser_for(test_input)
-        tree = parser.statement()
+        tree = parser.func_stmt()
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)
-        assert(tree_expected == tree_actual)
+        assert(tree_expected.replace(" ", "") == tree_actual.replace(" ", ""))
 
     def test_func_stmt(self):
-        test_input = "int addition(num1: int, num2: int) { let sum: int = num1 + num2; }" # function creation
-        tree_expected = '(statement (func_stmt (atype (basetype int)) addition ( (parameter num1 : (atype (basetype int))) , '\
-                                                                                '(parameter num2 : (atype (basetype int))) ) '\
-                            '{ (statement (vardec let sum : (atype (basetype int)) = (expression (expression num1) + (expression num2))) ;) }))'
+        test_input = "void printLine(line: string) { print(line); }"
+        tree_expected = '(func_stmt (atype(basetype void)) printLine((parameter line: (atype(basetype string)))) (block {(statement print((expression line));) }))'
         parser = create_parser_for(test_input)
-        tree = parser.statement()
+        tree = parser.func_stmt()
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)
-        assert(tree_expected == tree_actual)
+        assert(tree_expected.replace(" ", "") == tree_actual.replace(" ", ""))
 
     def test_enumdef(self):
-        test_input = "enum cars = { ford: string; }" # enum creation and cdef creation
-        tree_expected = '(statement (enumdef enum (expression cars) = { (cdef ford : (atype (basetype string)) ;) }))'
+        test_input = "enum cars { ford: string; }" # enum creation and cdef creation
+        tree_expected = '(enumdef enum cars { (cdef ford: (atype(basetype string));) })'
         parser = create_parser_for(test_input)
-        tree = parser.statement()
+        tree = parser.enumdef()
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)
-        assert(tree_expected == tree_actual)
+        assert(tree_expected.replace(" ", "") == tree_actual.replace(" ", ""))
 
     def test_enumdef_multiple_cdef(self):
-        test_input = "enum colors = { blue: int; green: int; violet: int; }" # enum creation and cdef creation
-        tree_expected = '(statement (enumdef enum (expression colors) = { (cdef blue : (atype (basetype int)) ;) '\
-                                                                         '(cdef green : (atype (basetype int)) ;) '\
-                                                                         '(cdef violet : (atype (basetype int)) ;) }))'
+        test_input = "enum favThings { colors: string, string; food: string; nums: int; }" # enum creation and cdef creation
+        tree_expected = '(enumdef enum favThings { (cdef colors: (atype(basetype string)), (atype(basetype string));) (cdef food: (atype(basetype string));) (cdef nums: (atype(basetype int)); )})'
         parser = create_parser_for(test_input)
-        tree = parser.statement()
+        tree = parser.enumdef()
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)
-        assert(tree_expected == tree_actual)
+        assert(tree_expected.replace(" ", "") == tree_actual.replace(" ", ""))
 
     def test_program(self):
-        test_input = "enum nums = { one: int; } void main() { print(ok); }"
-        tree_expected = '(program (enumdef enum (expression nums) = { (cdef one : (atype (basetype int)) ;) }) '\
-                        '(func_stmt (atype (basetype void)) main ( ) { (statement print ( (expression ok) ) ;) }))'
+        test_input = 'void main() { print("ok"); }'
+        tree_expected = '(program(func_stmt(atype(basetype void)) main()(block{(statement print((expression "ok"));)})))'
         parser = create_parser_for(test_input)
         tree = parser.program()
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)
-        assert(tree_expected == tree_actual)
+        assert(tree_expected.replace(" ", "") == tree_actual.replace(" ", ""))
 
     def test_return_exp(self):
         test_input = "return x;"

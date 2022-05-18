@@ -65,7 +65,7 @@ fragment Digit: [0-9];
 Identifier: IdentifierChar (IdentifierChar | Digit)*;
 Digits: Digit+;
 FloatConst: Digits '.' Digits;
-StringLiteral: '"' .*? '"' ;
+StringLiteral: '"' .*? '"' | '\'' .*? '\'' ;
 
 
 //Rules
