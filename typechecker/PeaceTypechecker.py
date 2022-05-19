@@ -89,6 +89,12 @@ class PeaceTypechecker(PeaceVisitor):
     # Visit a parse tree produced by PeaceParser#FloatExpr.
     def visitFloatExpr(self, ctx:PeaceParser.FloatExprContext):
         return PeaceType(PeaceParser.Float, 'float')
+        
+
+    # Visit a parse tree produced by PeaceParser#StringLiteralExpr.
+    def visitStringLiteralExpr(self, ctx:PeaceParser.StringLiteralExprContext):
+        return PeaceType(PeaceParser.String, 'string')
+
 
     # Visit a parse tree produced by PeaceParser#ArithmeticExpr.
     def visitArithmeticExpr(self, ctx:PeaceParser.ArithmeticExprContext):

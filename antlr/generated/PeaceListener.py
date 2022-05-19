@@ -1,4 +1,4 @@
-# Generated from d:\Github\Peace\antlr\Peace.g4 by ANTLR 4.8
+# Generated from c:\Users\nick\Documents\CSUN\COMP430\peace\antlr\Peace.g4 by ANTLR 4.8
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .PeaceParser import PeaceParser
@@ -71,21 +71,21 @@ class PeaceListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PeaceParser#StringLiteral.
-    def enterStringLiteral(self, ctx:PeaceParser.StringLiteralContext):
-        pass
-
-    # Exit a parse tree produced by PeaceParser#StringLiteral.
-    def exitStringLiteral(self, ctx:PeaceParser.StringLiteralContext):
-        pass
-
-
     # Enter a parse tree produced by PeaceParser#ArithmeticExpr.
     def enterArithmeticExpr(self, ctx:PeaceParser.ArithmeticExprContext):
         pass
 
     # Exit a parse tree produced by PeaceParser#ArithmeticExpr.
     def exitArithmeticExpr(self, ctx:PeaceParser.ArithmeticExprContext):
+        pass
+
+
+    # Enter a parse tree produced by PeaceParser#StringLiteralExpr.
+    def enterStringLiteralExpr(self, ctx:PeaceParser.StringLiteralExprContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#StringLiteralExpr.
+    def exitStringLiteralExpr(self, ctx:PeaceParser.StringLiteralExprContext):
         pass
 
 

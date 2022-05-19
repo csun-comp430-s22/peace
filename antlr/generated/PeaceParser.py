@@ -1,4 +1,4 @@
-# Generated from d:\Github\Peace\antlr\Peace.g4 by ANTLR 4.8
+# Generated from c:\Users\nick\Documents\CSUN\COMP430\peace\antlr\Peace.g4 by ANTLR 4.8
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -11,7 +11,7 @@ else:
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\60")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\62")
         buf.write("\u00ed\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\3\2\3\2\3\3\3\3\3\3\3\3\7\3")
@@ -35,7 +35,7 @@ def serializedATN():
         buf.write("\u00e0\n\17\3\20\7\20\u00e3\n\20\f\20\16\20\u00e6\13\20")
         buf.write("\3\20\6\20\u00e9\n\20\r\20\16\20\u00ea\3\20\2\3\n\21\2")
         buf.write("\4\6\b\n\f\16\20\22\24\26\30\32\34\36\2\6\5\2\3\3\5\7")
-        buf.write("--\3\2\t\r\3\2\25\26\3\2\16\21\2\u0102\2 \3\2\2\2\4\"")
+        buf.write("//\3\2\t\r\3\2\25\26\3\2\16\21\2\u0102\2 \3\2\2\2\4\"")
         buf.write("\3\2\2\2\6\61\3\2\2\2\b\63\3\2\2\2\n=\3\2\2\2\fW\3\2\2")
         buf.write("\2\16\u0093\3\2\2\2\20\u0095\3\2\2\2\22\u009e\3\2\2\2")
         buf.write("\24\u00ae\3\2\2\2\26\u00b0\3\2\2\2\30\u00b4\3\2\2\2\32")
@@ -45,47 +45,47 @@ def serializedATN():
         buf.write("*(\3\2\2\2+,\7&\2\2,-\7\27\2\2-.\5\2\2\2.\5\3\2\2\2/\62")
         buf.write("\5\2\2\2\60\62\5\4\3\2\61/\3\2\2\2\61\60\3\2\2\2\62\7")
         buf.write("\3\2\2\2\63\64\t\3\2\2\64\t\3\2\2\2\65\66\b\6\1\2\66>")
-        buf.write("\7.\2\2\67>\7/\2\28>\7-\2\29>\7\60\2\2:>\t\4\2\2;<\7\"")
-        buf.write("\2\2<>\7-\2\2=\65\3\2\2\2=\67\3\2\2\2=8\3\2\2\2=9\3\2")
-        buf.write("\2\2=:\3\2\2\2=;\3\2\2\2>T\3\2\2\2?@\f\7\2\2@A\5\b\5\2")
-        buf.write("AB\5\n\6\bBS\3\2\2\2CD\f\6\2\2DE\t\5\2\2ES\5\n\6\7FG\f")
-        buf.write("\4\2\2GH\7!\2\2HS\5\n\6\5IJ\f\5\2\2JN\7%\2\2KM\5\n\6\2")
-        buf.write("LK\3\2\2\2MP\3\2\2\2NL\3\2\2\2NO\3\2\2\2OQ\3\2\2\2PN\3")
-        buf.write("\2\2\2QS\7&\2\2R?\3\2\2\2RC\3\2\2\2RF\3\2\2\2RI\3\2\2")
-        buf.write("\2SV\3\2\2\2TR\3\2\2\2TU\3\2\2\2U\13\3\2\2\2VT\3\2\2\2")
-        buf.write("WX\7\24\2\2XY\7-\2\2YZ\7#\2\2Z[\5\6\4\2[\\\7!\2\2\\]\5")
-        buf.write("\n\6\2]\r\3\2\2\2^_\5\n\6\2_`\7$\2\2`\u0094\3\2\2\2ab")
-        buf.write("\5\f\7\2bc\7$\2\2c\u0094\3\2\2\2de\7\30\2\2ef\7%\2\2f")
-        buf.write("g\5\n\6\2gh\7&\2\2hj\5\20\t\2ik\7$\2\2ji\3\2\2\2jk\3\2")
-        buf.write("\2\2k\u0094\3\2\2\2lm\7\31\2\2mn\7%\2\2no\5\n\6\2op\7")
-        buf.write("&\2\2ps\5\20\t\2qr\7\32\2\2rt\5\20\t\2sq\3\2\2\2st\3\2")
-        buf.write("\2\2tv\3\2\2\2uw\7$\2\2vu\3\2\2\2vw\3\2\2\2w\u0094\3\2")
-        buf.write("\2\2xy\7\36\2\2yz\5\n\6\2z{\7\'\2\2{\u0080\5\22\n\2|}")
-        buf.write("\7*\2\2}\177\5\22\n\2~|\3\2\2\2\177\u0082\3\2\2\2\u0080")
-        buf.write("~\3\2\2\2\u0080\u0081\3\2\2\2\u0081\u0083\3\2\2\2\u0082")
-        buf.write("\u0080\3\2\2\2\u0083\u0085\7(\2\2\u0084\u0086\7$\2\2\u0085")
-        buf.write("\u0084\3\2\2\2\u0085\u0086\3\2\2\2\u0086\u0094\3\2\2\2")
-        buf.write("\u0087\u0088\7\33\2\2\u0088\u0089\5\n\6\2\u0089\u008a")
-        buf.write("\7$\2\2\u008a\u0094\3\2\2\2\u008b\u008c\7\33\2\2\u008c")
-        buf.write("\u0094\7$\2\2\u008d\u008e\7\35\2\2\u008e\u008f\7%\2\2")
-        buf.write("\u008f\u0090\5\n\6\2\u0090\u0091\7&\2\2\u0091\u0092\7")
-        buf.write("$\2\2\u0092\u0094\3\2\2\2\u0093^\3\2\2\2\u0093a\3\2\2")
-        buf.write("\2\u0093d\3\2\2\2\u0093l\3\2\2\2\u0093x\3\2\2\2\u0093")
-        buf.write("\u0087\3\2\2\2\u0093\u008b\3\2\2\2\u0093\u008d\3\2\2\2")
-        buf.write("\u0094\17\3\2\2\2\u0095\u0099\7\'\2\2\u0096\u0098\5\16")
-        buf.write("\b\2\u0097\u0096\3\2\2\2\u0098\u009b\3\2\2\2\u0099\u0097")
-        buf.write("\3\2\2\2\u0099\u009a\3\2\2\2\u009a\u009c\3\2\2\2\u009b")
-        buf.write("\u0099\3\2\2\2\u009c\u009d\7(\2\2\u009d\21\3\2\2\2\u009e")
-        buf.write("\u009f\5\24\13\2\u009f\u00a0\7\37\2\2\u00a0\u00a1\5\20")
-        buf.write("\t\2\u00a1\23\3\2\2\2\u00a2\u00af\7.\2\2\u00a3\u00af\7")
-        buf.write("-\2\2\u00a4\u00af\7 \2\2\u00a5\u00a6\7-\2\2\u00a6\u00aa")
-        buf.write("\7%\2\2\u00a7\u00a9\7-\2\2\u00a8\u00a7\3\2\2\2\u00a9\u00ac")
-        buf.write("\3\2\2\2\u00aa\u00a8\3\2\2\2\u00aa\u00ab\3\2\2\2\u00ab")
-        buf.write("\u00ad\3\2\2\2\u00ac\u00aa\3\2\2\2\u00ad\u00af\7&\2\2")
-        buf.write("\u00ae\u00a2\3\2\2\2\u00ae\u00a3\3\2\2\2\u00ae\u00a4\3")
-        buf.write("\2\2\2\u00ae\u00a5\3\2\2\2\u00af\25\3\2\2\2\u00b0\u00b1")
-        buf.write("\7-\2\2\u00b1\u00b2\7#\2\2\u00b2\u00b3\5\6\4\2\u00b3\27")
-        buf.write("\3\2\2\2\u00b4\u00b5\5\6\4\2\u00b5\u00b6\7-\2\2\u00b6")
+        buf.write("\7\60\2\2\67>\7\61\2\28>\7/\2\29>\7\62\2\2:>\t\4\2\2;")
+        buf.write("<\7\"\2\2<>\7/\2\2=\65\3\2\2\2=\67\3\2\2\2=8\3\2\2\2=")
+        buf.write("9\3\2\2\2=:\3\2\2\2=;\3\2\2\2>T\3\2\2\2?@\f\7\2\2@A\5")
+        buf.write("\b\5\2AB\5\n\6\bBS\3\2\2\2CD\f\6\2\2DE\t\5\2\2ES\5\n\6")
+        buf.write("\7FG\f\4\2\2GH\7!\2\2HS\5\n\6\5IJ\f\5\2\2JN\7%\2\2KM\5")
+        buf.write("\n\6\2LK\3\2\2\2MP\3\2\2\2NL\3\2\2\2NO\3\2\2\2OQ\3\2\2")
+        buf.write("\2PN\3\2\2\2QS\7&\2\2R?\3\2\2\2RC\3\2\2\2RF\3\2\2\2RI")
+        buf.write("\3\2\2\2SV\3\2\2\2TR\3\2\2\2TU\3\2\2\2U\13\3\2\2\2VT\3")
+        buf.write("\2\2\2WX\7\24\2\2XY\7/\2\2YZ\7#\2\2Z[\5\6\4\2[\\\7!\2")
+        buf.write("\2\\]\5\n\6\2]\r\3\2\2\2^_\5\n\6\2_`\7$\2\2`\u0094\3\2")
+        buf.write("\2\2ab\5\f\7\2bc\7$\2\2c\u0094\3\2\2\2de\7\30\2\2ef\7")
+        buf.write("%\2\2fg\5\n\6\2gh\7&\2\2hj\5\20\t\2ik\7$\2\2ji\3\2\2\2")
+        buf.write("jk\3\2\2\2k\u0094\3\2\2\2lm\7\31\2\2mn\7%\2\2no\5\n\6")
+        buf.write("\2op\7&\2\2ps\5\20\t\2qr\7\32\2\2rt\5\20\t\2sq\3\2\2\2")
+        buf.write("st\3\2\2\2tv\3\2\2\2uw\7$\2\2vu\3\2\2\2vw\3\2\2\2w\u0094")
+        buf.write("\3\2\2\2xy\7\36\2\2yz\5\n\6\2z{\7\'\2\2{\u0080\5\22\n")
+        buf.write("\2|}\7*\2\2}\177\5\22\n\2~|\3\2\2\2\177\u0082\3\2\2\2")
+        buf.write("\u0080~\3\2\2\2\u0080\u0081\3\2\2\2\u0081\u0083\3\2\2")
+        buf.write("\2\u0082\u0080\3\2\2\2\u0083\u0085\7(\2\2\u0084\u0086")
+        buf.write("\7$\2\2\u0085\u0084\3\2\2\2\u0085\u0086\3\2\2\2\u0086")
+        buf.write("\u0094\3\2\2\2\u0087\u0088\7\33\2\2\u0088\u0089\5\n\6")
+        buf.write("\2\u0089\u008a\7$\2\2\u008a\u0094\3\2\2\2\u008b\u008c")
+        buf.write("\7\33\2\2\u008c\u0094\7$\2\2\u008d\u008e\7\35\2\2\u008e")
+        buf.write("\u008f\7%\2\2\u008f\u0090\5\n\6\2\u0090\u0091\7&\2\2\u0091")
+        buf.write("\u0092\7$\2\2\u0092\u0094\3\2\2\2\u0093^\3\2\2\2\u0093")
+        buf.write("a\3\2\2\2\u0093d\3\2\2\2\u0093l\3\2\2\2\u0093x\3\2\2\2")
+        buf.write("\u0093\u0087\3\2\2\2\u0093\u008b\3\2\2\2\u0093\u008d\3")
+        buf.write("\2\2\2\u0094\17\3\2\2\2\u0095\u0099\7\'\2\2\u0096\u0098")
+        buf.write("\5\16\b\2\u0097\u0096\3\2\2\2\u0098\u009b\3\2\2\2\u0099")
+        buf.write("\u0097\3\2\2\2\u0099\u009a\3\2\2\2\u009a\u009c\3\2\2\2")
+        buf.write("\u009b\u0099\3\2\2\2\u009c\u009d\7(\2\2\u009d\21\3\2\2")
+        buf.write("\2\u009e\u009f\5\24\13\2\u009f\u00a0\7\37\2\2\u00a0\u00a1")
+        buf.write("\5\20\t\2\u00a1\23\3\2\2\2\u00a2\u00af\7\60\2\2\u00a3")
+        buf.write("\u00af\7/\2\2\u00a4\u00af\7 \2\2\u00a5\u00a6\7/\2\2\u00a6")
+        buf.write("\u00aa\7%\2\2\u00a7\u00a9\7/\2\2\u00a8\u00a7\3\2\2\2\u00a9")
+        buf.write("\u00ac\3\2\2\2\u00aa\u00a8\3\2\2\2\u00aa\u00ab\3\2\2\2")
+        buf.write("\u00ab\u00ad\3\2\2\2\u00ac\u00aa\3\2\2\2\u00ad\u00af\7")
+        buf.write("&\2\2\u00ae\u00a2\3\2\2\2\u00ae\u00a3\3\2\2\2\u00ae\u00a4")
+        buf.write("\3\2\2\2\u00ae\u00a5\3\2\2\2\u00af\25\3\2\2\2\u00b0\u00b1")
+        buf.write("\7/\2\2\u00b1\u00b2\7#\2\2\u00b2\u00b3\5\6\4\2\u00b3\27")
+        buf.write("\3\2\2\2\u00b4\u00b5\5\6\4\2\u00b5\u00b6\7/\2\2\u00b6")
         buf.write("\u00c1\7%\2\2\u00b7\u00bc\5\26\f\2\u00b8\u00b9\7*\2\2")
         buf.write("\u00b9\u00bb\5\26\f\2\u00ba\u00b8\3\2\2\2\u00bb\u00be")
         buf.write("\3\2\2\2\u00bc\u00ba\3\2\2\2\u00bc\u00bd\3\2\2\2\u00bd")
@@ -94,12 +94,12 @@ def serializedATN():
         buf.write("\2\2\2\u00c2\u00c4\3\2\2\2\u00c3\u00c1\3\2\2\2\u00c4\u00c5")
         buf.write("\7&\2\2\u00c5\u00c7\5\20\t\2\u00c6\u00c8\7$\2\2\u00c7")
         buf.write("\u00c6\3\2\2\2\u00c7\u00c8\3\2\2\2\u00c8\31\3\2\2\2\u00c9")
-        buf.write("\u00ca\7-\2\2\u00ca\u00cb\7#\2\2\u00cb\u00d0\5\6\4\2\u00cc")
+        buf.write("\u00ca\7/\2\2\u00ca\u00cb\7#\2\2\u00cb\u00d0\5\6\4\2\u00cc")
         buf.write("\u00cd\7*\2\2\u00cd\u00cf\5\6\4\2\u00ce\u00cc\3\2\2\2")
         buf.write("\u00cf\u00d2\3\2\2\2\u00d0\u00ce\3\2\2\2\u00d0\u00d1\3")
         buf.write("\2\2\2\u00d1\u00d3\3\2\2\2\u00d2\u00d0\3\2\2\2\u00d3\u00d4")
         buf.write("\7$\2\2\u00d4\33\3\2\2\2\u00d5\u00d6\7\b\2\2\u00d6\u00d7")
-        buf.write("\7-\2\2\u00d7\u00d9\7\'\2\2\u00d8\u00da\5\32\16\2\u00d9")
+        buf.write("\7/\2\2\u00d7\u00d9\7\'\2\2\u00d8\u00da\5\32\16\2\u00d9")
         buf.write("\u00d8\3\2\2\2\u00da\u00db\3\2\2\2\u00db\u00d9\3\2\2\2")
         buf.write("\u00db\u00dc\3\2\2\2\u00dc\u00dd\3\2\2\2\u00dd\u00df\7")
         buf.write("(\2\2\u00de\u00e0\7$\2\2\u00df\u00de\3\2\2\2\u00df\u00e0")
@@ -140,7 +140,8 @@ class PeaceParser ( Parser ):
                       "Print", "Match", "MatchArrow", "Any", "Assign", "Amp", 
                       "Colon", "Semicolon", "LParen", "RParen", "LBracket", 
                       "RBracket", "DoubleQuote", "Comma", "WS", "Newline", 
-                      "Identifier", "Digits", "FloatConst", "Literal" ]
+                      "Line_Comment", "Comment", "Identifier", "Digits", 
+                      "FloatConst", "StringLiteral" ]
 
     RULE_basetype = 0
     RULE_funcpointertype = 1
@@ -205,10 +206,12 @@ class PeaceParser ( Parser ):
     Comma=40
     WS=41
     Newline=42
-    Identifier=43
-    Digits=44
-    FloatConst=45
-    Literal=46
+    Line_Comment=43
+    Comment=44
+    Identifier=45
+    Digits=46
+    FloatConst=47
+    StringLiteral=48
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -586,30 +589,6 @@ class PeaceParser ( Parser ):
                 return visitor.visitChildren(self)
 
 
-    class StringLiteralContext(ExpressionContext):
-
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a PeaceParser.ExpressionContext
-            super().__init__(parser)
-            self.copyFrom(ctx)
-
-        def Literal(self):
-            return self.getToken(PeaceParser.Literal, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterStringLiteral" ):
-                listener.enterStringLiteral(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitStringLiteral" ):
-                listener.exitStringLiteral(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitStringLiteral" ):
-                return visitor.visitStringLiteral(self)
-            else:
-                return visitor.visitChildren(self)
-
-
     class ArithmeticExprContext(ExpressionContext):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a PeaceParser.ExpressionContext
@@ -637,6 +616,30 @@ class PeaceParser ( Parser ):
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitArithmeticExpr" ):
                 return visitor.visitArithmeticExpr(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+    class StringLiteralExprContext(ExpressionContext):
+
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a PeaceParser.ExpressionContext
+            super().__init__(parser)
+            self.copyFrom(ctx)
+
+        def StringLiteral(self):
+            return self.getToken(PeaceParser.StringLiteral, 0)
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterStringLiteralExpr" ):
+                listener.enterStringLiteralExpr(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitStringLiteralExpr" ):
+                listener.exitStringLiteralExpr(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitStringLiteralExpr" ):
+                return visitor.visitStringLiteralExpr(self)
             else:
                 return visitor.visitChildren(self)
 
@@ -825,12 +828,12 @@ class PeaceParser ( Parser ):
                 self.state = 54
                 self.match(PeaceParser.Identifier)
                 pass
-            elif token in [PeaceParser.Literal]:
-                localctx = PeaceParser.StringLiteralContext(self, localctx)
+            elif token in [PeaceParser.StringLiteral]:
+                localctx = PeaceParser.StringLiteralExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
                 self.state = 55
-                self.match(PeaceParser.Literal)
+                self.match(PeaceParser.StringLiteral)
                 pass
             elif token in [PeaceParser.BoolTrue, PeaceParser.BoolFalse]:
                 localctx = PeaceParser.BoolExprContext(self, localctx)
@@ -924,7 +927,7 @@ class PeaceParser ( Parser ):
                         self.state = 76
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
-                        while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PeaceParser.BoolTrue) | (1 << PeaceParser.BoolFalse) | (1 << PeaceParser.Amp) | (1 << PeaceParser.Identifier) | (1 << PeaceParser.Digits) | (1 << PeaceParser.FloatConst) | (1 << PeaceParser.Literal))) != 0):
+                        while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PeaceParser.BoolTrue) | (1 << PeaceParser.BoolFalse) | (1 << PeaceParser.Amp) | (1 << PeaceParser.Identifier) | (1 << PeaceParser.Digits) | (1 << PeaceParser.FloatConst) | (1 << PeaceParser.StringLiteral))) != 0):
                             self.state = 73
                             self.expression(0)
                             self.state = 78
@@ -1516,7 +1519,7 @@ class PeaceParser ( Parser ):
             self.state = 151
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PeaceParser.Let) | (1 << PeaceParser.BoolTrue) | (1 << PeaceParser.BoolFalse) | (1 << PeaceParser.While) | (1 << PeaceParser.If) | (1 << PeaceParser.Return) | (1 << PeaceParser.Print) | (1 << PeaceParser.Match) | (1 << PeaceParser.Amp) | (1 << PeaceParser.Identifier) | (1 << PeaceParser.Digits) | (1 << PeaceParser.FloatConst) | (1 << PeaceParser.Literal))) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PeaceParser.Let) | (1 << PeaceParser.BoolTrue) | (1 << PeaceParser.BoolFalse) | (1 << PeaceParser.While) | (1 << PeaceParser.If) | (1 << PeaceParser.Return) | (1 << PeaceParser.Print) | (1 << PeaceParser.Match) | (1 << PeaceParser.Amp) | (1 << PeaceParser.Identifier) | (1 << PeaceParser.Digits) | (1 << PeaceParser.FloatConst) | (1 << PeaceParser.StringLiteral))) != 0):
                 self.state = 148
                 self.statement()
                 self.state = 153

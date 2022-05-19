@@ -1,4 +1,4 @@
-# Generated from d:\Github\Peace\antlr\Peace.g4 by ANTLR 4.8
+# Generated from c:\Users\nick\Documents\CSUN\COMP430\peace\antlr\Peace.g4 by ANTLR 4.8
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .PeaceParser import PeaceParser
@@ -44,13 +44,13 @@ class PeaceVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PeaceParser#StringLiteral.
-    def visitStringLiteral(self, ctx:PeaceParser.StringLiteralContext):
+    # Visit a parse tree produced by PeaceParser#ArithmeticExpr.
+    def visitArithmeticExpr(self, ctx:PeaceParser.ArithmeticExprContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PeaceParser#ArithmeticExpr.
-    def visitArithmeticExpr(self, ctx:PeaceParser.ArithmeticExprContext):
+    # Visit a parse tree produced by PeaceParser#StringLiteralExpr.
+    def visitStringLiteralExpr(self, ctx:PeaceParser.StringLiteralExprContext):
         return self.visitChildren(ctx)
 
 
