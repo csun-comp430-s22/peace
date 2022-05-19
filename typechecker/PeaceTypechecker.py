@@ -238,7 +238,7 @@ class PeaceTypechecker(PeaceVisitor):
         elif (l_type == PeaceType(PeaceParser.Float, 'float')):
             return l_type
         else:
-            raise PeaceTypecheckError("Variable declaration type mismatch")
+            raise PeaceTypecheckError("Unsupported type for print: " + l_type.token)
 
 
     # Visit a parse tree produced by PeaceParser#block.
