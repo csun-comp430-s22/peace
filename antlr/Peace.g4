@@ -69,7 +69,7 @@ StringLiteral: '"' .*? '"' | '\'' .*? '\'' ;
 
 
 //Rules
-basetype: ( Int | Bool | Void | String | Identifier ); 
+basetype: ( Int | Float | Bool | Void | String | Identifier ); 
 funcpointertype: LParen basetype (Comma basetype)*  RParen Arrow basetype;
 atype: basetype | funcpointertype;
 op: (Add | Subtract | Multiply | Divide | Modulo );
@@ -81,7 +81,7 @@ expression: Digits #DigitExpr
             | (BoolTrue | BoolFalse) #BoolExpr
             | expression op expression #ArithmeticExpr
             | expression (LessThan | GreaterThan | LessThanOrEq | GreaterThanOrEq ) expression #CompExpr
-            | expression LParen expression* RParen #FuncCallOrEnumExpr
+            | expression LParen (expression (Comma expression)*)* RParen #FuncCallOrEnumExpr
             | expression Assign expression  #AssignExpr
             | Amp Identifier  #FuncPointCreateExpr
             ;
@@ -103,7 +103,7 @@ pattern: Digits                                     #DigitPattern
          | StringLiteral                            #StringPattern
          | Identifier                               #IdentifierPattern 
          | Any                                      #AnyPattern
-         | Identifier LParen (Identifier)* RParen   #ConstructorPattern
+         | Identifier LParen (Identifier (Comma Identifier)*)* RParen   #ConstructorPattern
          ;
 parameter: Identifier Colon atype;
 func_stmt: atype Identifier LParen (parameter (Comma parameter)*)* RParen block (Semicolon)?;

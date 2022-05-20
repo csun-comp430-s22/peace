@@ -41,6 +41,13 @@ class PeaceTypechecker(PeaceVisitor):
             return self.type_environments[-1][name]
         raise PeaceTypeNotFoundError("Type not found: " + name)
 
+    def append_type_environment(self):
+        new_type_environment = dict()
+        if (self.type_environments):
+            new_type_environment = copy.deepcopy(self.type_environments[-1])
+        self.type_environments.append(new_type_environment)
+
+
     def generate_function_signature(self, param_types, ret_type) -> str:
         sig = '('
         for index, param_type in enumerate(param_types):
@@ -141,13 +148,14 @@ class PeaceTypechecker(PeaceVisitor):
 
     # Visit a parse tree produced by PeaceParser#FuncCallOrEnumExpr.
     def visitFuncCallOrEnumExpr(self, ctx:PeaceParser.FuncCallOrEnumExprContext):
-        types = ctx.expression()
-        function_type = self.visit(types[0])
+        expressions = ctx.expression()
+        function_type = self.visit(expressions[0])
         if (function_type.token_type == PeaceType.FUNCTION or function_type.token_type == PeaceType.ENUM_CONSTRUCTOR):
-            for index, type in enumerate(types[1:]):
+            for index, exp in enumerate(expressions[1:]):
+                type = self.visit(exp)
                 if type.token_type != function_type.param_types[index].token_type:
                     raise PeaceTypecheckError("Invalid param " + index + " for function/constructor call: " + type.token)
-            return type.ret_type
+            return function_type.ret_type
 
         raise PeaceTypecheckError("No matching function or enum constructor found: " + function_type.token)
 
@@ -165,8 +173,13 @@ class PeaceTypechecker(PeaceVisitor):
     def visitVardec(self, ctx:PeaceParser.VardecContext):
         r_type = self.visit(ctx.expression())
         l_type = PeaceType(ctx.atype().start.type, ctx.atype().getText())
+        if (ctx.atype().start.type == PeaceParser.Identifier):
+            try:
+                l_type = self.lookup_type(ctx.atype().getText())
+            except PeaceTypeNotFoundError:
+                raise PeaceTypecheckError("Trying to declare invalid type: " + ctx.atype().getText())
         if (r_type != l_type):
-            raise PeaceTypecheckError("Variable declaration type mismatch: " + l_type.token + " and " + r_type.token)
+            raise PeaceTypecheckError("Variable declaration type mismatch: " + str(l_type.token_type) + " and " + str(r_type.token_type))
         self.type_environments[-1][ctx.Identifier().getText()] =  l_type
 
 
@@ -201,10 +214,9 @@ class PeaceTypechecker(PeaceVisitor):
 
     # Visit a parse tree produced by PeaceParser#MatchStmt.
     def visitMatchStmt(self, ctx:PeaceParser.MatchStmtContext):
-        self.visitChildren(ctx)
         # Don't need the types here, just need to visit the children
         # but the code generator might care about the types
-        match_on_type = self.visit(ctx.expression())
+        self.match_on_type = self.visit(ctx.expression())
         for case in ctx.case_():
             case_type = self.visit(case)
 
@@ -218,9 +230,13 @@ class PeaceTypechecker(PeaceVisitor):
         #       -matcharrow
         #       -block
         #           -any statement (type checked 'here' in block)
-        # match is a statement, so we do not need to worry about return types
+        # Each case can introduce temp variables so we need to add their
+        # types so tha the child block can be type checked
+        self.append_type_environment();
+        ret_type = self.visit(ctx.pattern()) 
         self.visit(ctx.block())
-        return self.visit(ctx.pattern())
+        self.type_environments.pop()
+        return ret_type
 
 
     # Visit a parse tree produced by PeaceParser#DigitPattern.
@@ -241,9 +257,9 @@ class PeaceTypechecker(PeaceVisitor):
     # Visit a parse tree produced by PeaceParser#IdentifierPattern.
     def visitIdentifierPattern(self, ctx:PeaceParser.IdentifierPatternContext):
         # This pattern is used to pass the value of the expression we're matching
-        # to the block so technically it has the same type but that check will 
-        # have to live on the match statement
-        return PeaceType(PeaceParser.Identifier, ctx.Identifier().getText());
+        # to the block so it has the same type 
+        self.type_environments[-1][ctx.Identifier().getText()] =  self.match_on_type
+        return self.match_on_type
 
 
     # Visit a parse tree produced by PeaceParser#AnyPattern.
@@ -255,7 +271,14 @@ class PeaceTypechecker(PeaceVisitor):
     # Visit a parse tree produced by PeaceParser#ConstructorPattern.
     def visitConstructorPattern(self, ctx:PeaceParser.ConstructorPatternContext):
         try:
-            type = self.lookup_type(ctx.Identifier(0).getText())
+            identifiers = list(map(lambda x: x.getText(), ctx.Identifier()))
+            cons_type = self.lookup_type(identifiers[0])
+            if len(identifiers) - 1 == len(cons_type.param_types):
+                for index, identifier in enumerate(identifiers[1:]):
+                    param_type = cons_type.param_types[index]
+                    self.type_environments[-1][identifier] =  param_type
+            else:
+                raise PeaceTypecheckError("Constructor pattern missing required params")
         except PeaceTypeNotFoundError:
             raise PeaceTypecheckError("Invalid type for constructor pattern: " + ctx.Identifier().getText())
 
@@ -290,10 +313,7 @@ class PeaceTypechecker(PeaceVisitor):
 
     # Visit a parse tree produced by PeaceParser#block.
     def visitBlock(self, ctx:PeaceParser.BlockContext):
-        new_type_environment = dict()
-        if (self.type_environments):
-            new_type_environment = copy.deepcopy(self.type_environments[-1])
-        self.type_environments.append(new_type_environment)
+        self.append_type_environment()
         self.visitChildren(ctx)
         self.type_environments.pop()
 
@@ -342,7 +362,7 @@ class PeaceTypechecker(PeaceVisitor):
             params = []
             for atype in ctx.atype():
                 params.append(self.visit(atype))
-            self.type_environments[-1][cdef] =  PeaceType(PeaceType.ENUM_CONSTRUCTOR, cdef, params)
+            self.type_environments[-1][cdef] =  PeaceType(PeaceType.ENUM_CONSTRUCTOR, cdef, params, self.type_environments[-1][self.enum_flag])
         elif cdef in self.cdefs:
             raise PeaceTypecheckError("Duplicate cdef definition: '" + cdef + "' already exists in '" + self.enum_flag + "'.")
 

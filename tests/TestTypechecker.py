@@ -193,18 +193,25 @@ class TestTypechecker(unittest.TestCase):
 
     def test_MatchStmt(self):
         test_input = """
+        enum ColorType {
+            RGB8: int, int, int;
+            RGBA8: int, int, int, int;
+            HSVF: float, float, float; 
+        }
+
+        void main()
         {
-            let x: int = 3;
-            let y: int = 1;
-            let bar: int = 1;
-            match bar {
-                x => { y = x; }, 
-                2 => { y = x; }
+            let darkgreen: ColorType = RGB8(128, 128, 128);
+            let sum: int = 0;
+            match darkgreen {
+                RGB8(r, g, b) => { sum = r + g + b; }, 
+                RGBA8(r, g, b, a) => { sum = r * a + g * a + b * a; }, 
+                _ => { print("Only RGB(A)8 supported"); }
             };
         }
         """
         parser = create_parser_for(test_input)
-        tree = parser.block()
+        tree = parser.program()
         typecheck_tree(tree)
 
     def test_MatchStmt_invalid(self): 
