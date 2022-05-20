@@ -2,9 +2,9 @@ from asyncio.windows_events import NULL
 import copy
 from gettext import gettext
 from logging.config import IDENTIFIER
-from antlr.generated.PeaceParser import PeaceParser
-from antlr.generated.PeaceVisitor import PeaceVisitor
-from antlr.generated.PeaceListener import PeaceListener
+from peace.antlr.generated.PeaceParser import PeaceParser
+from peace.antlr.generated.PeaceVisitor import PeaceVisitor
+from peace.antlr.generated.PeaceListener import PeaceListener
 
 class PeaceType():
     #Extra "Token" Types for the typechecker since they are not defined in the grammar
@@ -128,10 +128,16 @@ class PeaceTypechecker(PeaceVisitor):
     def visitCompExpr(self, ctx:PeaceParser.CompExprContext):
         l_type = self.visit(ctx.expression(0))
         r_type = self.visit(ctx.expression(1))
-        if (l_type.token_type != PeaceParser.Int and l_type.token_type != PeaceParser.Float):
-            raise PeaceTypecheckError("Invalid type for comparison: " + l_type.token)
-        if (r_type.token_type != PeaceParser.Int and r_type.token_type != PeaceParser.Float):
-            raise PeaceTypecheckError("Invalid type for comparison: " + r_type.token)
+        if (ctx.Equal() or ctx.NotEqual()):
+            if (l_type.token_type != PeaceParser.Int 
+                and l_type.token_type != PeaceParser.Float
+                and l_type.token_type != PeaceParser.String):
+                raise PeaceTypecheckError("Invalid types for comparison: " + l_type.token + ", " + r_type.token)
+        else:
+            if (l_type.token_type != PeaceParser.Int and l_type.token_type != PeaceParser.Float):
+                raise PeaceTypecheckError("Invalid type for comparison: " + l_type.token)
+            if (r_type.token_type != PeaceParser.Int and r_type.token_type != PeaceParser.Float):
+                raise PeaceTypecheckError("Invalid type for comparison: " + r_type.token)
         return PeaceType(PeaceParser.Bool, 'bool')
 
 
@@ -179,7 +185,7 @@ class PeaceTypechecker(PeaceVisitor):
             except PeaceTypeNotFoundError:
                 raise PeaceTypecheckError("Trying to declare invalid type: " + ctx.atype().getText())
         if (r_type != l_type):
-            raise PeaceTypecheckError("Variable declaration type mismatch: " + str(l_type.token_type) + " and " + str(r_type.token_type))
+            raise PeaceTypecheckError("Variable declaration type mismatch: " + l_type.token + " and " + r_type.token)
         self.type_environments[-1][ctx.Identifier().getText()] =  l_type
 
 
@@ -328,6 +334,7 @@ class PeaceTypechecker(PeaceVisitor):
                 self.lookup_type(type.token)
             except PeaceTypeNotFoundError:
                 raise PeaceTypecheckError("Invalid parameter type: " + type.token)
+        self.type_environments[-1][ctx.Identifier().getText()] = type
         return type
 
 

@@ -6,9 +6,9 @@ from antlr4 import *
 from antlr4.tree.Trees import Trees
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from antlr.generated.PeaceLexer import PeaceLexer
-from antlr.generated.PeaceParser import PeaceParser
-from antlr.generated.PeaceListener import PeaceListener
+from peace.antlr.generated.PeaceLexer import PeaceLexer
+from peace.antlr.generated.PeaceParser import PeaceParser
+from peace.antlr.generated.PeaceListener import PeaceListener
 
 from TestParserListener import TestListener
 
@@ -44,8 +44,7 @@ class TestParser(unittest.TestCase):
 
     def test_function_pointer(self):
         #line 1:13 extraneous input '*' expecting {')', ','}
-        print('start func pointer')
-        test_input = "let foo: (int*) -> bool = bar;"
+        test_input = "let foo: (int) -> bool = bar;"
         tree_expected = '(statement (vardec let foo : (atype (funcpointertype ( (basetype int) * ) -> (basetype bool))) = (expression bar)) ;)'
         parser = create_parser_for(test_input)
         tree = parser.statement()

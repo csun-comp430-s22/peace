@@ -1,7 +1,7 @@
 from dataclasses import InitVar
 from multiprocessing.pool import INIT
-from antlr.generated.PeaceParser import PeaceParser
-from antlr.generated.PeaceListener import PeaceListener
+from peace.antlr.generated.PeaceParser import PeaceParser
+from peace.antlr.generated.PeaceListener import PeaceListener
 
 class TestListener(PeaceListener):
     def __init__(self):

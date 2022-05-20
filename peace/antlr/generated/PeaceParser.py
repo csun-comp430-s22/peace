@@ -1,4 +1,4 @@
-# Generated from c:\Users\nick\Documents\CSUN\COMP430\peace\antlr\Peace.g4 by ANTLR 4.8
+# Generated from c:\Users\nick\Documents\CSUN\COMP430\peace\peace\antlr\Peace.g4 by ANTLR 4.8
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -37,7 +37,7 @@ def serializedATN():
         buf.write("\7\20\u00f3\n\20\f\20\16\20\u00f6\13\20\3\20\6\20\u00f9")
         buf.write("\n\20\r\20\16\20\u00fa\3\20\2\3\n\21\2\4\6\b\n\f\16\20")
         buf.write("\22\24\26\30\32\34\36\2\6\4\2\3\7//\3\2\t\r\3\2\25\26")
-        buf.write("\3\2\16\21\2\u0116\2 \3\2\2\2\4\"\3\2\2\2\6\61\3\2\2\2")
+        buf.write("\3\2\16\23\2\u0116\2 \3\2\2\2\4\"\3\2\2\2\6\61\3\2\2\2")
         buf.write("\b\63\3\2\2\2\n=\3\2\2\2\f^\3\2\2\2\16\u009a\3\2\2\2\20")
         buf.write("\u009c\3\2\2\2\22\u00a5\3\2\2\2\24\u00be\3\2\2\2\26\u00c0")
         buf.write("\3\2\2\2\30\u00c4\3\2\2\2\32\u00d9\3\2\2\2\34\u00e5\3")
@@ -700,6 +700,10 @@ class PeaceParser ( Parser ):
             return self.getToken(PeaceParser.LessThanOrEq, 0)
         def GreaterThanOrEq(self):
             return self.getToken(PeaceParser.GreaterThanOrEq, 0)
+        def Equal(self):
+            return self.getToken(PeaceParser.Equal, 0)
+        def NotEqual(self):
+            return self.getToken(PeaceParser.NotEqual, 0)
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterCompExpr" ):
@@ -910,7 +914,7 @@ class PeaceParser ( Parser ):
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
                         self.state = 66
                         _la = self._input.LA(1)
-                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PeaceParser.LessThan) | (1 << PeaceParser.GreaterThan) | (1 << PeaceParser.LessThanOrEq) | (1 << PeaceParser.GreaterThanOrEq))) != 0)):
+                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PeaceParser.LessThan) | (1 << PeaceParser.GreaterThan) | (1 << PeaceParser.LessThanOrEq) | (1 << PeaceParser.GreaterThanOrEq) | (1 << PeaceParser.Equal) | (1 << PeaceParser.NotEqual))) != 0)):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)

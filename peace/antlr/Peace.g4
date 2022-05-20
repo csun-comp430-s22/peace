@@ -80,7 +80,7 @@ expression: Digits #DigitExpr
             | StringLiteral #StringLiteralExpr
             | (BoolTrue | BoolFalse) #BoolExpr
             | expression op expression #ArithmeticExpr
-            | expression (LessThan | GreaterThan | LessThanOrEq | GreaterThanOrEq ) expression #CompExpr
+            | expression (LessThan | GreaterThan | LessThanOrEq | GreaterThanOrEq | Equal | NotEqual ) expression #CompExpr
             | expression LParen (expression (Comma expression)*)* RParen #FuncCallOrEnumExpr
             | expression Assign expression  #AssignExpr
             | Amp Identifier  #FuncPointCreateExpr

@@ -5,7 +5,7 @@ import unittest
 import antlr4
 
 sys.path.append(os.path.dirname(__file__) + "/../")
-from antlr.generated.PeaceLexer import PeaceLexer
+from peace.antlr.generated.PeaceLexer import PeaceLexer
 
 # TEST HELPER FUNCTION
 def lexer_test(input, expected_token_text, expected_token_types):

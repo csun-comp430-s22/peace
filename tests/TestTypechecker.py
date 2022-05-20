@@ -5,10 +5,9 @@ from antlr4 import *
 from antlr4.tree.Trees import Trees
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from antlr.generated.PeaceLexer import PeaceLexer
-from antlr.generated.PeaceParser import PeaceParser
-from antlr.generated.PeaceListener import PeaceListener
-from typechecker.PeaceTypechecker import PeaceTypechecker, PeaceTypecheckError
+from peace.antlr.generated.PeaceLexer import PeaceLexer
+from peace.antlr.generated.PeaceParser import PeaceParser
+from peace.typechecker.PeaceTypechecker import PeaceTypechecker, PeaceTypecheckError
 
 # TEST HELPER FUNCTION
 def create_parser_for(input):
