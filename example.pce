@@ -1,0 +1,24 @@
+enum ColorType {
+    RGB8: int, int, int;
+    RGBA8: int, int, int, int;
+    HSVF: float, float, float; 
+}
+
+ColorType rescale(val: string)
+{
+    if (val == "Red")
+    {
+        
+    }
+}
+
+void main()
+{
+    let darkgreen: ColorType = RGB8(128, 128, 128);
+    let sum: int = 0;
+    match darkgreen {
+        RGB8(r, g, b) => { sum = r + g + b; }, 
+        RGBA8(r, g, b, a) => { sum = r * a + g * a + b * a; }, 
+        _ => { print("Only RGB(A)8 supported"); }
+    };
+}
