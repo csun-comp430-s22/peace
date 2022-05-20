@@ -134,8 +134,33 @@ class PeaceVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PeaceParser#pattern.
-    def visitPattern(self, ctx:PeaceParser.PatternContext):
+    # Visit a parse tree produced by PeaceParser#DigitPattern.
+    def visitDigitPattern(self, ctx:PeaceParser.DigitPatternContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PeaceParser#FloatPattern.
+    def visitFloatPattern(self, ctx:PeaceParser.FloatPatternContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PeaceParser#StringPattern.
+    def visitStringPattern(self, ctx:PeaceParser.StringPatternContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PeaceParser#IdentifierPattern.
+    def visitIdentifierPattern(self, ctx:PeaceParser.IdentifierPatternContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PeaceParser#AnyPattern.
+    def visitAnyPattern(self, ctx:PeaceParser.AnyPatternContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PeaceParser#ConstructorPattern.
+    def visitConstructorPattern(self, ctx:PeaceParser.ConstructorPatternContext):
         return self.visitChildren(ctx)
 
 

@@ -98,7 +98,13 @@ statement:  expression Semicolon    #ExprStmt
 block: LBracket statement* RBracket;    
 
 case_: pattern MatchArrow block;
-pattern: Digits | Identifier | Any | Identifier LParen (Identifier)* RParen;
+pattern: Digits                                     #DigitPattern 
+         | FloatConst                               #FloatPattern
+         | StringLiteral                            #StringPattern
+         | Identifier                               #IdentifierPattern 
+         | Any                                      #AnyPattern
+         | Identifier LParen (Identifier)* RParen   #ConstructorPattern
+         ;
 parameter: Identifier Colon atype;
 func_stmt: atype Identifier LParen (parameter (Comma parameter)*)* RParen block (Semicolon)?;
 cdef: Identifier Colon atype (Comma atype)* Semicolon;

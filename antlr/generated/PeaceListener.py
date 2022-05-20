@@ -233,12 +233,57 @@ class PeaceListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by PeaceParser#pattern.
-    def enterPattern(self, ctx:PeaceParser.PatternContext):
+    # Enter a parse tree produced by PeaceParser#DigitPattern.
+    def enterDigitPattern(self, ctx:PeaceParser.DigitPatternContext):
         pass
 
-    # Exit a parse tree produced by PeaceParser#pattern.
-    def exitPattern(self, ctx:PeaceParser.PatternContext):
+    # Exit a parse tree produced by PeaceParser#DigitPattern.
+    def exitDigitPattern(self, ctx:PeaceParser.DigitPatternContext):
+        pass
+
+
+    # Enter a parse tree produced by PeaceParser#FloatPattern.
+    def enterFloatPattern(self, ctx:PeaceParser.FloatPatternContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#FloatPattern.
+    def exitFloatPattern(self, ctx:PeaceParser.FloatPatternContext):
+        pass
+
+
+    # Enter a parse tree produced by PeaceParser#StringPattern.
+    def enterStringPattern(self, ctx:PeaceParser.StringPatternContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#StringPattern.
+    def exitStringPattern(self, ctx:PeaceParser.StringPatternContext):
+        pass
+
+
+    # Enter a parse tree produced by PeaceParser#IdentifierPattern.
+    def enterIdentifierPattern(self, ctx:PeaceParser.IdentifierPatternContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#IdentifierPattern.
+    def exitIdentifierPattern(self, ctx:PeaceParser.IdentifierPatternContext):
+        pass
+
+
+    # Enter a parse tree produced by PeaceParser#AnyPattern.
+    def enterAnyPattern(self, ctx:PeaceParser.AnyPatternContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#AnyPattern.
+    def exitAnyPattern(self, ctx:PeaceParser.AnyPatternContext):
+        pass
+
+
+    # Enter a parse tree produced by PeaceParser#ConstructorPattern.
+    def enterConstructorPattern(self, ctx:PeaceParser.ConstructorPatternContext):
+        pass
+
+    # Exit a parse tree produced by PeaceParser#ConstructorPattern.
+    def exitConstructorPattern(self, ctx:PeaceParser.ConstructorPatternContext):
         pass
 
 
