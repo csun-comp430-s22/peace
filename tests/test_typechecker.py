@@ -45,7 +45,16 @@ class TestTypechecker(unittest.TestCase):
         tree = parser.expression()
         typecheck_tree(tree)
 
-    def test_arithmetic_expression_invalid(self):
+    def test_arithmetic_expression_left_invalid(self):
+        test_input = """
+        false % 3.14
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.expression()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+    def test_arithmetic_expression_right_invalid(self):
         test_input = """
         2 % true
         """
@@ -100,9 +109,27 @@ class TestTypechecker(unittest.TestCase):
         tree = parser.expression()
         typecheck_tree(tree)
 
-    def test_comparison_expression_invalid(self):
+    def test_comparison_expression_left_invalid(self):
         test_input = """
         foo <= 2
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.expression()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+    def test_comparison_expression_right_invalid(self):
+        test_input = """
+        5 <= "5"
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.expression()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+    def test_comparison_expression_equal_invalid(self):
+        test_input = """
+        foo == 2
         """
         parser = create_parser_for(test_input)
         tree = parser.expression()
@@ -220,6 +247,22 @@ class TestTypechecker(unittest.TestCase):
             let y: bool = true;
             match bar {
                 x => { y = x; },
+                2 => { y = x; }
+            };
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+    def test_MatchStmt_Cdef_invalid(self): 
+        test_input = """
+        {
+            let x: int = 8;
+            let y: bool = true;
+            match bar {
+                Foo(x) => { y = x; },
                 2 => { y = x; }
             };
         }
@@ -347,6 +390,22 @@ class TestTypechecker(unittest.TestCase):
         parser = create_parser_for(test_input)
         tree = parser.program()
         typecheck_tree(tree)
+
+
+    def test_func_pointer_type_invalid(self):
+        test_input = 'void main(var: string, num: int) { let sumptr: (int, int) -> int = &var; sumptr(10, 20); }'
+        parser = create_parser_for(test_input)
+        tree = parser.program()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+
+    def test_func_pointer_missing_invalid(self):
+        test_input = 'void main(var: string, num: int) { let sumptr: (int, int) -> int = &sum; sumptr(10, 20); }'
+        parser = create_parser_for(test_input)
+        tree = parser.program()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
 
     def test_cdef(self):
         test_input = 'enum nums { one: int; } void main() { }'

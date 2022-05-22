@@ -286,7 +286,7 @@ class PeaceTypechecker(PeaceVisitor):
             else:
                 raise PeaceTypecheckError("Constructor pattern missing required params")
         except PeaceTypeNotFoundError:
-            raise PeaceTypecheckError("Invalid type for constructor pattern: " + ctx.Identifier().getText())
+            raise PeaceTypecheckError("Invalid type for constructor pattern: " + ctx.Identifier(0).getText())
 
 
     # Visit a parse tree produced by PeaceParser#ReturnExprStmt.
