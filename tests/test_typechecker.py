@@ -342,6 +342,12 @@ class TestTypechecker(unittest.TestCase):
         with self.assertRaises(PeaceTypecheckError):
             typecheck_tree(tree)
 
+    def test_func_pointer(self):
+        test_input = 'int add(x: int, y: int) { return x + y; }; void main(var: string, num: int) { let addptr: (int, int) -> int = &add; addptr(10, 20); }'
+        parser = create_parser_for(test_input)
+        tree = parser.program()
+        typecheck_tree(tree)
+
     def test_cdef(self):
         test_input = 'enum nums { one: int; } void main() { }'
         parser = create_parser_for(test_input)
