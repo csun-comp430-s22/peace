@@ -158,7 +158,20 @@ class TestTypechecker(unittest.TestCase):
         tree = parser.block()
         with self.assertRaises(PeaceTypecheckError):
             typecheck_tree(tree)
+
+
+    def test_declare_invalid(self):
+        test_input = """
+        {
+            let a: bar = 1;
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
     
+
     def test_WhileStmt(self):
         test_input = """
         {
@@ -306,6 +319,27 @@ class TestTypechecker(unittest.TestCase):
         with self.assertRaises(PeaceTypecheckError):
             typecheck_tree(tree)
 
+
+    def test_MatchStmt_Cdef_missin_param(self): 
+        test_input = """
+        enum Bar {
+            Foo: int, int;
+            Baz: string;
+        }
+
+        void main()
+        {
+            let x: int = 8;
+            match bar {
+                Foo(x) => { x = x * x; },
+            };
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.program()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
     def test_ReturnStmt(self):
         test_input = """
         void main()
@@ -372,8 +406,10 @@ class TestTypechecker(unittest.TestCase):
         {
             let t: int = 2;
             let tt: bool = true;
+            let ttt: float = 1.1;
             print( t );
             print( tt );
+            print( ttt );
         }
         """
         parser = create_parser_for(test_input)
@@ -405,12 +441,21 @@ class TestTypechecker(unittest.TestCase):
         tree = parser.block()
         typecheck_tree(tree)
 
-    def test_param_invalid_type(self):
+    def test_param_invalid_identifier(self):
         test_input = 'someVar: 459hj'
         parser = create_parser_for(test_input)
         tree = parser.parameter()
         with self.assertRaises(PeaceTypecheckError):
             typecheck_tree(tree)
+
+
+    def test_param_invalid_type(self):
+        test_input = 'someVar: list'
+        parser = create_parser_for(test_input)
+        tree = parser.parameter()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
 
     def test_param(self):
         test_input = 'someVar: int'
@@ -425,7 +470,7 @@ class TestTypechecker(unittest.TestCase):
         typecheck_tree(tree)
 
     def test_func_stmt_invalid_dup(self):
-        test_input = 'void main() { print(ok); } void main() { print (uh); }'
+        test_input = 'void main() { print("ok"); } void main() { print ("uh"); }'
         parser = create_parser_for(test_input)
         tree = parser.program()
         with self.assertRaises(PeaceTypecheckError):
@@ -448,6 +493,22 @@ class TestTypechecker(unittest.TestCase):
 
     def test_func_pointer_missing_invalid(self):
         test_input = 'void main(var: string, num: int) { let sumptr: (int, int) -> int = &sum; sumptr(10, 20); }'
+        parser = create_parser_for(test_input)
+        tree = parser.program()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+
+    def test_func_call_invalid_param(self):
+        test_input = 'int foo(a: int, b: float) { return a * b; } void main() { foo("ten"); }'
+        parser = create_parser_for(test_input)
+        tree = parser.program()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+
+    def test_func_call_no_matching(self):
+        test_input = 'void main() { foo(10); }'
         parser = create_parser_for(test_input)
         tree = parser.program()
         with self.assertRaises(PeaceTypecheckError):
