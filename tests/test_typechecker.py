@@ -256,6 +256,40 @@ class TestTypechecker(unittest.TestCase):
         with self.assertRaises(PeaceTypecheckError):
             typecheck_tree(tree)
 
+
+    def test_MatchStmt_float_invalid(self): 
+        test_input = """
+        {
+            let x: int = 8;
+            let y: bool = true;
+            match bar {
+                9.9 => { y = x; },
+                2 => { y = x; }
+            };
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+
+    def test_MatchStmt_string_invalid(self): 
+        test_input = """
+        {
+            let x: int = 8;
+            let y: bool = true;
+            match bar {
+                "cheers" => { y = x; },
+                2 => { y = x; }
+            };
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
     def test_MatchStmt_Cdef_invalid(self): 
         test_input = """
         {
@@ -288,6 +322,18 @@ class TestTypechecker(unittest.TestCase):
         void main()
         {
             return true;
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.program()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+    def test_ReturnStmt_missing_invalid(self):
+        test_input = """
+        int main()
+        {
+            return;
         }
         """
         parser = create_parser_for(test_input)
