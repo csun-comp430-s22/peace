@@ -10,7 +10,7 @@ from peace.antlr.generated.PeaceLexer import PeaceLexer
 from peace.antlr.generated.PeaceParser import PeaceParser
 from peace.antlr.generated.PeaceListener import PeaceListener
 
-from TestParserListener import TestListener
+from tests.TParserListener import TParserListener
 
 # TEST HELPER FUNCTION
 def create_parser_for(input):
@@ -20,7 +20,7 @@ def create_parser_for(input):
     return PeaceParser(stream)
 
 def parser_test(tree):
-    listener = TestListener()
+    listener = TParserListener()
     walker = ParseTreeWalker()
     walker.walk(listener, tree)
     return listener.rules_visited
@@ -45,7 +45,7 @@ class TestParser(unittest.TestCase):
     def test_function_pointer(self):
         #line 1:13 extraneous input '*' expecting {')', ','}
         test_input = "let foo: (int) -> bool = bar;"
-        tree_expected = '(statement (vardec let foo : (atype (funcpointertype ( (basetype int) * ) -> (basetype bool))) = (expression bar)) ;)'
+        tree_expected = '(statement (vardec let foo : (atype (funcpointertype ( (basetype int) ) -> (basetype bool))) = (expression bar)) ;)'
         parser = create_parser_for(test_input)
         tree = parser.statement()
         tree_actual = Trees.toStringTree(tree, None, PeaceParser)

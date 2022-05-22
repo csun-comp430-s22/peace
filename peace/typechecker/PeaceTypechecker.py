@@ -334,7 +334,8 @@ class PeaceTypechecker(PeaceVisitor):
                 self.lookup_type(type.token)
             except PeaceTypeNotFoundError:
                 raise PeaceTypecheckError("Invalid parameter type: " + type.token)
-        self.type_environments[-1][ctx.Identifier().getText()] = type
+        if (self.type_environments):
+            self.type_environments[-1][ctx.Identifier().getText()] = type
         return type
 
 
