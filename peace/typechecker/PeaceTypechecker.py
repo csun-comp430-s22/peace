@@ -158,9 +158,8 @@ class PeaceTypechecker(PeaceVisitor):
             for index, exp in enumerate(expressions[1:]):
                 type = self.visit(exp)
                 if type.token_type != function_type.param_types[index].token_type:
-                    raise PeaceTypecheckError("Invalid param " + index + " for function/constructor call: " + type.token)
+                    raise PeaceTypecheckError("Invalid param " + str(index) + " for function/constructor call: " + type.token)
             return function_type.ret_type
-
         raise PeaceTypecheckError("No matching function or enum constructor found: " + expressions[0].getText())
 
 

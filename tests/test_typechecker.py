@@ -197,6 +197,20 @@ class TestTypechecker(unittest.TestCase):
         with self.assertRaises(PeaceTypecheckError):
             typecheck_tree(tree)
 
+
+    def test_WhileStmt_arbitrary_expression(self):
+        test_input = """
+        {
+            let y: float = 3.14;
+            while (y) { y = 2.0; }
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
+
     def test_IfStmt(self):
         test_input = """
         {
@@ -229,6 +243,20 @@ class TestTypechecker(unittest.TestCase):
         tree = parser.block()
         with self.assertRaises(PeaceTypecheckError):
             typecheck_tree(tree)
+
+
+    def test_IfStmt_arbitrary_invalid(self):
+        test_input = """
+        {
+            let a: string = "foo";
+            if (a) { a = "bar"; }
+        }
+        """
+        parser = create_parser_for(test_input)
+        tree = parser.block()
+        with self.assertRaises(PeaceTypecheckError):
+            typecheck_tree(tree)
+
 
     def test_MatchStmt(self):
         test_input = """
@@ -500,7 +528,7 @@ class TestTypechecker(unittest.TestCase):
 
 
     def test_func_call_invalid_param(self):
-        test_input = 'int foo(a: int, b: float) { return a * b; } void main() { foo("ten"); }'
+        test_input = 'int foo(a: int, b: float) { return a; } void main() { foo("ten"); }'
         parser = create_parser_for(test_input)
         tree = parser.program()
         with self.assertRaises(PeaceTypecheckError):
@@ -514,11 +542,13 @@ class TestTypechecker(unittest.TestCase):
         with self.assertRaises(PeaceTypecheckError):
             typecheck_tree(tree)
 
+
     def test_cdef(self):
         test_input = 'enum nums { one: int; } void main() { }'
         parser = create_parser_for(test_input)
         tree = parser.program()
         typecheck_tree(tree)
+
 
     def test_cdef_invalid_dup(self):
         test_input = 'enum nums { one: int; one: int;} void main() { }'
@@ -526,6 +556,7 @@ class TestTypechecker(unittest.TestCase):
         tree = parser.program()
         with self.assertRaises(PeaceTypecheckError):
             typecheck_tree(tree)
+
 
     def test_enumdef(self):
         test_input = 'enum nums { one: int; } void main() { }'
